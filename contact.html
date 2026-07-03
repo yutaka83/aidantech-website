@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact Us — Aidan Technologies</title>
+<meta name="description" content="Get in touch with Aidan Technologies — office address, phone numbers, email and an online contact form." />
+<link rel="icon" href="assets/img/misc/logo.png" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body data-page="contact" data-depth="">
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="site-header"></div>
+
+<main id="main">
+  <section class="page-hero" id="top">
+    <div class="container">
+      <p class="breadcrumb"><a href="index.html">Home</a> / Contact</p>
+      <p class="eyebrow">Get In Touch</p>
+      <h1>Contact Us<mark style="background:none;color:var(--color-primary);">.</mark></h1>
+      <p>We'll inspire and assist you.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--2" style="align-items:start;">
+        <div>
+          <h2 style="font-size:var(--text-2xl); margin-bottom: var(--space-4);">Information</h2>
+
+          <div class="info-row">
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#icon-map-pin"></use></svg></span>
+            <div>
+              <h3>Office Address</h3>
+              <p>Aidan Technologies Sdn Bhd<br />100-1, Jalan 2/23A, Taman Danau Kota,<br />53300 Setapak, Kuala Lumpur, Malaysia</p>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#icon-phone"></use></svg></span>
+            <div>
+              <h3>Call Us</h3>
+              <p><a href="tel:+60132946282">+6013-294 6282</a> (Ali Abid)<br />
+                 <a href="tel:+60164420459">+6016-442 0459</a> (Kasman)<br />
+                 <a href="tel:+60112164064">+6011-2164 0604</a> (Syabil)</p>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#icon-mail"></use></svg></span>
+            <div>
+              <h3>Email</h3>
+              <p><a href="mailto:sales@aidan.com.my">sales@aidan.com.my</a> / <a href="mailto:product@aidan.com.my">product@aidan.com.my</a></p>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#icon-external-link"></use></svg></span>
+            <div>
+              <h3>Website</h3>
+              <p><a href="https://aidantech.com/" target="_blank" rel="noopener">https://aidantech.com/</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 style="font-size:var(--text-xl);">Leave Your Info</h2>
+          <p style="color:var(--color-muted); margin-top:var(--space-2);">* all required fields</p>
+
+          <form class="form-grid" style="margin-top: var(--space-5);" id="contact-form" novalidate>
+            <div class="form-grid form-grid--2">
+              <div class="field">
+                <label for="name">Name *</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+              <div class="field">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+              <div class="field">
+                <label for="organisation">Organisation Name *</label>
+                <input type="text" id="organisation" name="organisation" required />
+              </div>
+              <div class="field">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" required />
+              </div>
+            </div>
+            <div class="field">
+              <label for="subject">Subject *</label>
+              <input type="text" id="subject" name="subject" required />
+            </div>
+            <div class="field">
+              <label for="message">Your Message</label>
+              <textarea id="message" name="message"></textarea>
+            </div>
+            <button class="btn btn--primary btn--block" type="submit">
+              Send
+              <svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#icon-send"></use></svg>
+            </button>
+            <p class="form-note" id="form-status" role="status"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/main.js"></script>
+<script>
+  document.getElementById("contact-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var status = document.getElementById("form-status");
+    var subject = encodeURIComponent(document.getElementById("subject").value || "Website enquiry");
+    var body = encodeURIComponent(
+      "Name: " + document.getElementById("name").value +
+      "\nOrganisation: " + document.getElementById("organisation").value +
+      "\nPhone: " + document.getElementById("phone").value +
+      "\nEmail: " + document.getElementById("email").value +
+      "\n\n" + document.getElementById("message").value
+    );
+    window.location.href = "mailto:sales@aidan.com.my?subject=" + subject + "&body=" + body;
+    status.textContent = "Opening your email client to send this message to sales@aidan.com.my…";
+  });
+</script>
+</body>
+</html>
