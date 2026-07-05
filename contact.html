@@ -68,6 +68,8 @@
           <p style="color:var(--color-muted); margin-top:var(--space-2);">* all required fields</p>
 
           <form class="form-grid" style="margin-top: var(--space-5);" id="contact-form" novalidate>
+            <input type="hidden" name="_subject" value="New enquiry from Aidan Technologies website" />
+            <input type="hidden" name="_template" value="table" />
             <div class="form-grid form-grid--2">
               <div class="field">
                 <label for="name">Name *</label>
@@ -109,20 +111,56 @@
 <div id="site-footer"></div>
 <script src="assets/js/main.js"></script>
 <script>
-  document.getElementById("contact-form").addEventListener("submit", function (e) {
-    e.preventDefault();
+  (function () {
+    var form = document.getElementById("contact-form");
     var status = document.getElementById("form-status");
-    var subject = encodeURIComponent(document.getElementById("subject").value || "Website enquiry");
-    var body = encodeURIComponent(
-      "Name: " + document.getElementById("name").value +
-      "\nOrganisation: " + document.getElementById("organisation").value +
-      "\nPhone: " + document.getElementById("phone").value +
-      "\nEmail: " + document.getElementById("email").value +
-      "\n\n" + document.getElementById("message").value
-    );
-    window.location.href = "mailto:sales@aidan.com.my?subject=" + subject + "&body=" + body;
-    status.textContent = "Opening your email client to send this message to sales@aidan.com.my…";
-  });
+    var endpoint = "https://formsubmit.co/ajax/sales@yopmail.com";
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      var btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      status.style.color = "";
+      status.textContent = "Sending…";
+
+      fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          name: document.getElementById("name").value,
+          email: document.getElementById("email").value,
+          organisation: document.getElementById("organisation").value,
+          phone: document.getElementById("phone").value,
+          subject: document.getElementById("subject").value,
+          message: document.getElementById("message").value,
+          _subject: "New enquiry from Aidan Technologies website",
+          _template: "table"
+        })
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (data && (data.success === "true" || data.success === true)) {
+            status.style.color = "var(--color-success)";
+            status.textContent = "Thank you! Your message has been sent.";
+            form.reset();
+          } else {
+            status.style.color = "var(--color-primary)";
+            status.textContent = (data && data.message) ||
+              "Almost there — please confirm the address once to activate delivery.";
+          }
+        })
+        .catch(function () {
+          status.style.color = "var(--color-danger)";
+          status.textContent = "Sorry, something went wrong. Please email us directly at sales@aidan.com.my.";
+        })
+        .then(function () { btn.disabled = false; });
+    });
+  })();
 </script>
 </body>
 </html>
