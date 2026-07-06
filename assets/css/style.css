@@ -342,10 +342,16 @@ p {
 /* ==========================================================================
    Site header
    ========================================================================== */
-.site-header {
+/* The header partial is injected into #site-header, so the wrapper
+   must be the sticky element — position:sticky only sticks within its
+   parent's bounds, and .site-header fills its wrapper exactly. */
+#site-header {
   position: sticky;
   top: 0;
   z-index: 100;
+}
+
+.site-header {
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: saturate(180%) blur(12px);
   border-bottom: 1px solid var(--color-border);
