@@ -832,12 +832,14 @@ p {
 }
 
 .team-photo {
-  width: 100%;
+  width: 100px;
+  height: 100px;
+  max-width: 100%;
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--color-surface-soft);
-  margin-bottom: var(--space-4);
+  margin: 0 auto var(--space-4);
 }
 
 .team-photo img {
