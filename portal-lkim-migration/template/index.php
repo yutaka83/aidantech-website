@@ -40,14 +40,17 @@ $siteTitle = $this->params->get('siteTitle') ?: $sitename;
 $splask = $this->params->get('splaskAttribute', 'data-splask') ?: 'data-splask';
 
 // Cassiopeia's compiled CSS is the base; the LKIM layer sits on top of it.
-$wa->usePreset('template.cassiopeia.' . ($this->direction === 'rtl' ? 'rtl' : 'ltr'))
-    ->useStyle('template.active.language')
-    ->registerAndUseStyle('template.lkim', 'templates/site/lkim/css/lkim.css', ['version' => 'auto'])
-    ->registerAndUseScript('template.lkim', 'templates/site/lkim/js/lkim.js', ['version' => 'auto'], ['defer' => true])
-    ->useStyle('template.user')
-    ->useScript('template.user');
+// Both are declared in joomla.asset.json and used by name — registering a
+// relative path inline does not resolve for a child template, and the asset
+// is then dropped without warning.
+$direction = $this->direction === 'rtl' ? 'rtl' : 'ltr';
 
-$wa->registerStyle('template.active', '', [], [], ['template.cassiopeia.' . ($this->direction === 'rtl' ? 'rtl' : 'ltr')]);
+$wa->usePreset('template.cassiopeia.' . $direction)
+    ->useStyle('template.active.language')
+    ->useStyle('template.lkim.' . $direction)
+    ->useScript('template.lkim');
+
+$wa->registerStyle('template.active', '', [], [], ['template.cassiopeia.' . $direction]);
 
 // Defer Font Awesome so it does not block first paint.
 $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');

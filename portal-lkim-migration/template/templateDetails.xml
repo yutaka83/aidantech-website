@@ -12,6 +12,7 @@
 	<inheritable>0</inheritable>
 	<files>
 		<filename>index.php</filename>
+		<filename>joomla.asset.json</filename>
 		<filename>templateDetails.xml</filename>
 		<folder>html</folder>
 	</files>

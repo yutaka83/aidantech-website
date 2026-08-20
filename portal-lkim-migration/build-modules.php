@@ -193,7 +193,9 @@ $newsParams = fn(int $catId, int $count, string $layout) => json_encode([
     'article_ordering'          => 'a.created',
     'article_ordering_direction' => 'DESC',
     'article_grouping'          => 'none',
-    'item_heading'              => 3,
+    // The layout interpolates this straight into the tag, so it needs the tag
+    // name - a bare 3 renders a literal "<3 class=..." in the output.
+    'item_heading'              => 'h3',
     'item_title'                => 1,
     'link_titles'               => 1,
     'show_date'                 => 1,

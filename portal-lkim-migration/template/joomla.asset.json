@@ -1,0 +1,36 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "lkim",
+  "version": "1.0.0",
+  "description": "Assets for the LKIM portal template. URIs resolve against media/templates/site/lkim/.",
+  "license": "GPL-2.0-or-later",
+  "assets": [
+    {
+      "name": "template.lkim.ltr",
+      "description": "The LKIM presentation layer, loaded on top of Cassiopeia's compiled CSS.",
+      "type": "style",
+      "uri": "lkim.css",
+      "dependencies": [
+        "template.cassiopeia.ltr"
+      ]
+    },
+    {
+      "name": "template.lkim.rtl",
+      "description": "As above, for right-to-left languages.",
+      "type": "style",
+      "uri": "lkim.css",
+      "dependencies": [
+        "template.cassiopeia.rtl"
+      ]
+    },
+    {
+      "name": "template.lkim",
+      "description": "Accessibility controls, mobile navigation, back-to-top and the visitor counter.",
+      "type": "script",
+      "uri": "lkim.js",
+      "attributes": {
+        "defer": true
+      }
+    }
+  ]
+}
