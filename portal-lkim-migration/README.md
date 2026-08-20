@@ -1,0 +1,140 @@
+# portal-lkim migration toolkit
+
+Scripts that built **portal-lkim** — a Joomla 6 rebuild of
+[lkim.gov.my](https://www.lkim.gov.my) (Lembaga Kemajuan Ikan Malaysia).
+
+The source site runs WordPress + Elementor + Max Mega Menu behind LiteSpeed and
+exposes an unauthenticated REST API, so the migration harvests structured JSON
+rather than scraping HTML, then unwraps Elementor's markup into clean article
+bodies.
+
+Everything here is **re-runnable and idempotent**. Imported items carry their
+source id in the article metadata; generated menus and modules carry a
+`lkim:<key>` note. Re-running updates in place instead of duplicating.
+
+---
+
+## Target
+
+| | |
+|---|---|
+| Docroot | `C:\Users\hiday\Herd\portal-lkim` |
+| URL | `https://portal-lkim.test` (Herd) |
+| Joomla | 6.1.3 |
+| PHP | 8.4 (`C:\Users\hiday\.config\herd\bin\php84\php.exe`) |
+| Database | MySQL 8.4 @ `127.0.0.1:3306`, `portal_lkim`, prefix `lkim_` |
+| Admin | `https://portal-lkim.test/administrator` — user `lkimadmin` |
+| Languages | Bahasa Melayu (default, unprefixed) · English at `/en/` via Falang |
+
+`php` is not on PATH by default. Prefix commands with:
+
+```bash
+export PATH="/c/Users/hiday/.config/herd/bin/php84:$PATH"
+```
+
+---
+
+## Pipeline
+
+Run in this order. Each step prints a summary and writes CSV reports to
+`reports/`.
+
+| # | Script | What it does |
+|---|---|---|
+| 1 | `harvest.php` | Pulls pages, posts, media, categories and tags from the source REST API into `data/*.jsonl`. |
+| 1b | `harvest-media.php` | Re-fetches the media collection ordered by id. WordPress pages media by date, and equal timestamps make that ordering unstable; this pass is deterministic. |
+| 2 | `scrape-menu.php [path] [out]` | Reads the rendered Max Mega Menu out of the HTML — the WP menus endpoint needs auth. Run twice: `/ menu.json` and `/en/ menu-en.json`. |
+| 3 | `build-map.php` | Resolves every source item to a Joomla category, a language, and its menu position. Writes `data/resolved.json`. |
+| 4 | `plan-media.php` | Decides where each file belongs in `images/`, filed by the category of the article that references it. Writes `data/media-plan.json`. |
+| 5 | `fetch-media.php` | Downloads the planned files straight into the docroot. Resumable via `data/media-manifest.jsonl`. |
+| 6 | `import.php` | Creates the category tree and imports Malay articles. `--lang=en` imports the standalone English pages, `--dry-run` reports only, `--limit=N` for a smoke test. |
+| 7 | `build-menus.php` | Rebuilds `mainmenu`, `footermenu` and `hiddenmenu` from the captured navigation. |
+| 8 | `build-modules.php` | Lays out navigation, homepage bands and footer columns using core modules. |
+| 9 | `configure-site.php` | Default language, article display options, the Home menu item, retires stock modules. |
+| 10 | `configure-falang.php` | Content languages, plugin ordering, the language switcher. |
+| 11 | `pair-languages.php` + `pair-languages-reverse.php` + `merge-menu-pairs.php` | Works out which English page is which Malay page's translation. |
+| 12 | `import-translations.php` | Writes the English content into Falang as translations. |
+| 13 | `translate-menus.php` | Translates menu labels and module titles. |
+| 14 | `feature-articles.php` | Features recent news so the homepage component area is not empty. |
+| 15 | `relink.php` | Rewrites internal links from source permalinks to Joomla routes. `--dry-run` supported. **Re-run after any menu rebuild** — routes change. |
+| 16 | `build-redirects.php` | 301s every old permalink at its new route (2,268 records). |
+| 17 | `harden.php` | Security headers, plugin posture, global configuration. `--production` switches on caching, HSTS, forced SSL and indexing. |
+| 18 | `qa-crawl.php` · `qa-media.php` | Crawl every route; check every media reference exists. |
+
+`Cleaner.php` is the Elementor-to-HTML converter used by both importers.
+`map.php` is the single source of truth for taxonomy and routing decisions —
+correct it there, not downstream.
+
+---
+
+## What landed
+
+- **1,065 articles** — 906 Malay (the canonical, translatable set) + 159
+  standalone English pages
+- **25 categories** mirroring the source sitemap
+- **4,854 media files, 3.2 GB**, filed under `images/` by category
+- **101 menu items** across three menus
+- **70 Falang translations** + 91 translated menu labels + 15 module titles
+- **2,268 redirects** from the old permalinks
+- **0 problems** across a full 1,155-URL crawl
+
+---
+
+## Known gaps
+
+These are limits of the source material, not of the import. Each has a report.
+
+| Report | Rows | What it means |
+|---|---|---|
+| `reports/media-failures.csv` | 10 | Files that 404 on lkim.gov.my itself. |
+| `reports/unresolved-links.csv` | 133 | Links in article bodies pointing at pages that do not exist on the source either — mostly leftovers from an older Liferay portal (`/c/document_library/...`) and `/intranet`. |
+| `reports/english-unpaired.csv` | 159 | English pages the source never declares as a translation of anything. Imported as standalone `en-GB` articles; pair them in Falang if a Malay counterpart is identified. |
+| `reports/translation-rejected.csv` | 4 | Malay pages whose hreflang all point at the same English page — the source's own links are wrong there. |
+| `reports/menu-gaps.csv` | 1 | *Pendaratan Ikan di Kompleks / Labuhan Perikanan LKIM* — a broken link on the live site too. Rendered as a heading. |
+| `reports/menu-untranslated.csv` | 9 | Mostly labels identical in both languages (Agrotourism, KUNITA, Fishpro). Three are Malay-only branches. |
+| `reports/skipped-spam.csv` | 2 | Injected SEO spam on the source. See the note below. |
+
+### The source site carries injected spam
+
+`lkim.gov.my` has SEO spam in it: a page titled *"Research Paper Writing
+Services: Things to Consider"*, and a tag cloud of `anabolic-steroids`,
+`npp-steroid`, `online-steroids` and similar. The tags carry no posts, and the
+spam pages are excluded by `map.php`'s blocklist, so none of it was migrated.
+**This is worth raising with LKIM** — it suggests the WordPress install has been
+compromised at some point.
+
+---
+
+## Before go-live
+
+1. `php harden.php --production` — turns on page caching, Gzip, HSTS, forced
+   SSL, and removes the `noindex` robots directive.
+2. Point `$live_site` in `configuration.php` at the real hostname.
+3. The `.htaccess` hardening block only takes effect on Apache/LiteSpeed. Herd
+   serves through nginx locally, so `X-Content-Type-Options` and the
+   `images/*.php` execution block are untested here — verify them on the
+   production host.
+4. The Content-Security-Policy is deliberately **report-only**. Watch the
+   reports with real traffic before enforcing; the portal embeds YouTube,
+   Facebook and Google Maps.
+5. Replace the placeholder links in the *Perkhidmatan Atas Talian* module and
+   the footer address/social modules with the real system URLs.
+6. Turn on multi-factor authentication for the Super User.
+7. Re-run `php cli/joomla.php finder:index` after the final content pass.
+
+## SPLaSK / MyGovEA
+
+The template renders the audited elements — language switcher, text-resize
+controls, high-contrast toggle, last-updated stamp, visitor-counter slot,
+breadcrumbs, skip links, search, and the full footer policy set (FAQ, Pautan,
+Peta Laman, Terma & Syarat, Dasar Keselamatan, Dasar Privasi, Penafian,
+Aduan/Pertanyaan/Cadangan).
+
+Each is marked with a `data-splask="..."` attribute. **The attribute name is a
+placeholder** — set the real one from the current MAMPU/JDN circular in the
+template style's *SPLaSK / MyGovEA → Atribut penanda SPLaSK* field, which
+rewrites every marker at once.
+
+The visitor counter is a slot, not an implementation: `lkim.js` fetches
+`com_ajax` plugin `lkimcounter` and leaves an em dash if nothing answers. Build
+that plugin or swap in the agency's existing counter.

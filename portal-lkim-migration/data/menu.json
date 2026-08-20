@@ -1,0 +1,417 @@
+[
+    {
+        "label": "Laman Utama",
+        "url": "https://www.lkim.gov.my/",
+        "slug": "home",
+        "children": []
+    },
+    {
+        "label": "INFO LKIM",
+        "url": "#",
+        "slug": "",
+        "children": [
+            {
+                "label": "PERUTUSAN",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "Pengerusi",
+                        "url": "https://www.lkim.gov.my/perutusan-pengerusi/",
+                        "slug": "perutusan-pengerusi",
+                        "children": []
+                    },
+                    {
+                        "label": "Ketua Pengarah",
+                        "url": "https://www.lkim.gov.my/perutusan-ketua-pengarah/",
+                        "slug": "perutusan-ketua-pengarah",
+                        "children": []
+                    },
+                    {
+                        "label": "Pendaftar PN",
+                        "url": "https://www.lkim.gov.my/perutusan-pendaftar-2/",
+                        "slug": "perutusan-pendaftar-2",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "label": "PROFIL",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "Profil Menteri",
+                        "url": "https://lkim.gov.my/profil-menteri/",
+                        "slug": "profil-menteri",
+                        "children": []
+                    },
+                    {
+                        "label": "Latar Belakang",
+                        "url": "https://lkim.gov.my/latar-belakang/",
+                        "slug": "latar-belakang",
+                        "children": []
+                    },
+                    {
+                        "label": "Visi, Misi dan Objektif",
+                        "url": "https://lkim.gov.my/visi-misi-objektif-fungsi/",
+                        "slug": "visi-misi-objektif-fungsi",
+                        "children": []
+                    },
+                    {
+                        "label": "Piagam Pelanggan",
+                        "url": "https://lkim.gov.my/piagam-pelanggan/",
+                        "slug": "piagam-pelanggan",
+                        "children": []
+                    },
+                    {
+                        "label": "Tafsif Logo",
+                        "url": "https://lkim.gov.my/tafsir-logo/",
+                        "slug": "tafsir-logo",
+                        "children": []
+                    },
+                    {
+                        "label": "Petunjuk Prestasi KPI LKIM",
+                        "url": "https://lkim.gov.my/petunjuk-prestasi-utama-kpi-lkim/",
+                        "slug": "petunjuk-prestasi-utama-kpi-lkim",
+                        "children": []
+                    },
+                    {
+                        "label": "Akta",
+                        "url": "https://lkim.gov.my/akta/",
+                        "slug": "akta",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "label": "ORGANISASI",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "Ahli Lembaga Pengarah",
+                        "url": "https://lkim.gov.my/ahli-ahli-jemaah-lembaga/",
+                        "slug": "ahli-ahli-jemaah-lembaga",
+                        "children": []
+                    },
+                    {
+                        "label": "Carta Organisasi LKIM Ibu Pejabat",
+                        "url": "https://www.lkim.gov.my/carta-organisasi-lkim-ibu-pejabat-2/",
+                        "slug": "carta-organisasi-lkim-ibu-pejabat-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Pengurusan Atasan",
+                        "url": "https://www.lkim.gov.my/pengurusan-atasan/",
+                        "slug": "pengurusan-atasan",
+                        "children": []
+                    },
+                    {
+                        "label": "Bahagian/Unit",
+                        "url": "https://www.lkim.gov.my/bahagian-bahagian-ibu-pejabat/",
+                        "slug": "bahagian-bahagian-ibu-pejabat",
+                        "children": []
+                    },
+                    {
+                        "label": "LKIM Negeri",
+                        "url": "https://www.lkim.gov.my/pejabat-lkim-negeri/",
+                        "slug": "pejabat-lkim-negeri",
+                        "children": []
+                    },
+                    {
+                        "label": "Persatuan Nelayan",
+                        "url": "https://www.lkim.gov.my/persatuan-persatuan-nelayan/",
+                        "slug": "persatuan-persatuan-nelayan",
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "label": "PERKHIDMATAN",
+        "url": "#",
+        "slug": "",
+        "children": [
+            {
+                "label": "Institusi Nelayan",
+                "url": "https://www.lkim.gov.my/kumpulan-wanita-nelayan/",
+                "slug": "kumpulan-wanita-nelayan",
+                "children": [
+                    {
+                        "label": "KUNITA",
+                        "url": "https://lkim.gov.my/kumpulan-wanita-nelayan-kunita/",
+                        "slug": "kumpulan-wanita-nelayan-kunita",
+                        "children": []
+                    },
+                    {
+                        "label": "KUBENA",
+                        "url": "https://lkim.gov.my/kumpulan-belia-nelayan-kubena/",
+                        "slug": "kumpulan-belia-nelayan-kubena",
+                        "children": []
+                    },
+                    {
+                        "label": "Kumpulan Keselamatan Nelayan (KESAN)",
+                        "url": "https://lkim.gov.my/kumpulan-keselamatan-nelayan-kesan/",
+                        "slug": "kumpulan-keselamatan-nelayan-kesan",
+                        "children": []
+                    },
+                    {
+                        "label": "Pembangunan Akuakultur",
+                        "url": "https://lkim.gov.my/pembangunan-akuakultur-3/",
+                        "slug": "pembangunan-akuakultur-3",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "label": "Bantuan Kepada Masyarakat Nelayan",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "Bantuan Sara Hidup Nelayan",
+                        "url": "https://lkim.gov.my/bantuan-sara-hidup-nelayan",
+                        "slug": "bantuan-sara-hidup-nelayan",
+                        "children": []
+                    },
+                    {
+                        "label": "Skim Diesel dan Petrol Nelayan",
+                        "url": "https://lkim.gov.my/skim-subsidi-diesel-dan-petrol-nelayan-2/",
+                        "slug": "skim-subsidi-diesel-dan-petrol-nelayan-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Skim Keselamatan Sosial Pekerjaan Sendiri (SKSPS)",
+                        "url": "https://lkim.gov.my/skim-keselamatan-sosial-pekerjaan-sendiri-sksps/",
+                        "slug": "skim-keselamatan-sosial-pekerjaan-sendiri-sksps",
+                        "children": []
+                    },
+                    {
+                        "label": "Skim Bantuan Bencana Alam dan Kebajikan Nelayan",
+                        "url": "https://lkim.gov.my/skim-bantuan-bencana-alam-dan-kebajikan-nelayan-2/",
+                        "slug": "skim-bantuan-bencana-alam-dan-kebajikan-nelayan-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Projek Khas Perumahan Nelayan",
+                        "url": "https://lkim.gov.my/projek-khas-perumahan-nelayan-2/",
+                        "slug": "projek-khas-perumahan-nelayan-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Dana Nelayan",
+                        "url": "https://lkim.gov.my/dana-nelayan/",
+                        "slug": "dana-nelayan",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "label": "Pemasaran Ikan",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "Pasar Nelayan",
+                        "url": "https://lkim.gov.my/pasar-nelayan-5/",
+                        "slug": "pasar-nelayan-5",
+                        "children": []
+                    },
+                    {
+                        "label": "Pusat Pengumpulan dan Pengedaran Ikan (CCDC)",
+                        "url": "https://lkim.gov.my/pusat-pengumpulan-dan-pengedaran-ikan-ccdc/",
+                        "slug": "pusat-pengumpulan-dan-pengedaran-ikan-ccdc",
+                        "children": []
+                    },
+                    {
+                        "label": "Program QFISH",
+                        "url": "https://lkim.gov.my/program-qfish-2/",
+                        "slug": "program-qfish-2",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "label": "Pembangunan Infrastruktur",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "Kompleks/ Labuhan Perikanan LKIM",
+                        "url": "https://lkim.gov.my/kompleks-atau-labuhan-perikanan-lkim/",
+                        "slug": "kompleks-atau-labuhan-perikanan-lkim",
+                        "children": []
+                    },
+                    {
+                        "label": "Jeti Pendaratan Ikan",
+                        "url": "https://lkim.gov.my/jeti-pendaratan-ikan-3/",
+                        "slug": "jeti-pendaratan-ikan-3",
+                        "children": []
+                    },
+                    {
+                        "label": "Kemudahan Bilik Sejuk",
+                        "url": "https://lkim.gov.my/kemudahan-bilik-sejuk-2/",
+                        "slug": "kemudahan-bilik-sejuk-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Pusat-Pusat Pemeriksaan Ikan",
+                        "url": "https://lkim.gov.my/pusat-pusat-pemeriksaan-ikan-2/",
+                        "slug": "pusat-pusat-pemeriksaan-ikan-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Pendaratan Ikan di Kompleks / Labuhan Perikanan LKIM",
+                        "url": "https://lkim.gov.my/pendaratan-ikan-di-kompleks-labuhan-perikanan-lkim/",
+                        "slug": "pendaratan-ikan-di-kompleks-labuhan-perikanan-lkim",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "label": "Kawalselia Pendaratan Ikan dan Penguatkuasaan",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "Pengiktirafan Tempat Pendaratan Ikan",
+                        "url": "https://www.lkim.gov.my/pengiktirafan-tempat-pendaratan-ikan-2/",
+                        "slug": "pengiktirafan-tempat-pendaratan-ikan-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Pengawasan Kualiti Tempat Pendaratan Ikan Bagi Pengeksportan Ikan Ke Kesatuan Eropah",
+                        "url": "https://www.lkim.gov.my/pengawasan-kualiti-tempat-pendaratan-ikan-bagi-pengeksportan-ikan-ke-kesatuan-eropah-2/",
+                        "slug": "pengawasan-kualiti-tempat-pendaratan-ikan-bagi-pengeksportan-ikan-ke-kesatuan-eropah-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Pendaftaran dan Sijil Kebenaran Jeti Pendaratan Ikan (Persendirian)",
+                        "url": "https://www.lkim.gov.my/pendaftaran-dan-sijil-kebenaran-jeti-pendaratan-ikan-persendirian-2/",
+                        "slug": "pendaftaran-dan-sijil-kebenaran-jeti-pendaratan-ikan-persendirian-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Pengawasan Kualiti Rantaian Perikanan Domestik",
+                        "url": "https://www.lkim.gov.my/pengawasan-kualiti-rantaian-perikanan-domestik-2/",
+                        "slug": "pengawasan-kualiti-rantaian-perikanan-domestik-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Operasi Pemantauan dan Penguatkuasaan",
+                        "url": "https://www.lkim.gov.my/operasi-pemantauan-dan-penguatkuasaan-2/",
+                        "slug": "operasi-pemantauan-dan-penguatkuasaan-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Sekatan Eksport Sempena Musim Perayaan",
+                        "url": "https://lkim.gov.my/sekatan-eksport-sempena-musim-perayaan/",
+                        "slug": "sekatan-eksport-sempena-musim-perayaan",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "label": "Pembangunan Industri Asas Tani",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "Pusat Pemprosesan Hasil Perikanan (PPHP)",
+                        "url": "https://www.lkim.gov.my/pusat-pemprosesan-hasil-perikanan-2/",
+                        "slug": "pusat-pemprosesan-hasil-perikanan-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Fishpro",
+                        "url": "https://www.lkim.gov.my/fishpro-3/",
+                        "slug": "fishpro-3",
+                        "children": []
+                    },
+                    {
+                        "label": "Pembangunan Perniagaan",
+                        "url": "https://www.lkim.gov.my/pembangunan-perniagaan-2/",
+                        "slug": "pembangunan-perniagaan-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Agropreneur Muda",
+                        "url": "https://www.lkim.gov.my/agropreneur-muda-2/",
+                        "slug": "agropreneur-muda-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Geran Padanan",
+                        "url": "https://www.lkim.gov.my/geran-padanan-2/",
+                        "slug": "geran-padanan-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Pembangunan Usahawan Bimbingan (PUB)",
+                        "url": "https://www.lkim.gov.my/pembangunan-usahawan-bimbingan-pub-2/",
+                        "slug": "pembangunan-usahawan-bimbingan-pub-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Pembangunan Perikanan Laut Dalam",
+                        "url": "https://www.lkim.gov.my/pembangunan-perikanan-laut-dalam-2/",
+                        "slug": "pembangunan-perikanan-laut-dalam-2",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "label": "Agrotourism",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "Pusat Latihan Camar Laut",
+                        "url": "https://www.lkim.gov.my/pusat-latihan-camar-laut/",
+                        "slug": "pusat-latihan-camar-laut",
+                        "children": []
+                    },
+                    {
+                        "label": "Chalet Nelayan",
+                        "url": "https://www.lkim.gov.my/chalet-nelayan-2/",
+                        "slug": "chalet-nelayan-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Medan Ikan Bakar (MIB)",
+                        "url": "https://www.lkim.gov.my/medan-ikan-bakar-mib-2/",
+                        "slug": "medan-ikan-bakar-mib-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Restoran",
+                        "url": "https://www.lkim.gov.my/restoran-2/",
+                        "slug": "restoran-2",
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "label": "HUBUNGI KAMI",
+        "url": "#",
+        "slug": "",
+        "children": [
+            {
+                "label": "Direktori Kakitangan",
+                "url": "https://www.lkim.gov.my/direktori-kakitangan/",
+                "slug": "direktori-kakitangan",
+                "children": []
+            },
+            {
+                "label": "Peta Lokasi",
+                "url": "https://lkim.gov.my/peta-lokasi/",
+                "slug": "peta-lokasi",
+                "children": []
+            }
+        ]
+    }
+]

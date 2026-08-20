@@ -1,0 +1,399 @@
+[
+    {
+        "label": "Home",
+        "url": "https://www.lkim.gov.my/en/",
+        "slug": "en",
+        "children": []
+    },
+    {
+        "label": "ABOUT LKIM",
+        "url": "#",
+        "slug": "",
+        "children": [
+            {
+                "label": "MESSAGE",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "Chairman’s",
+                        "url": "https://www.lkim.gov.my/en/chairmans-speech/",
+                        "slug": "chairmans-speech",
+                        "children": []
+                    },
+                    {
+                        "label": "Director General’s",
+                        "url": "https://www.lkim.gov.my/en/director-generals-speech/",
+                        "slug": "director-generals-speech",
+                        "children": []
+                    },
+                    {
+                        "label": "Registrar’s",
+                        "url": "https://www.lkim.gov.my/en/registrars-speech/",
+                        "slug": "registrars-speech",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "label": "PROFILE",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "Minister Profile",
+                        "url": "https://lkim.gov.my/en/minister-profile/",
+                        "slug": "minister-profile",
+                        "children": []
+                    },
+                    {
+                        "label": "Background",
+                        "url": "https://lkim.gov.my/en/background/",
+                        "slug": "background",
+                        "children": []
+                    },
+                    {
+                        "label": "Vision, Mission and Objective",
+                        "url": "https://lkim.gov.my/en/vision-mission-objectives/",
+                        "slug": "vision-mission-objectives",
+                        "children": []
+                    },
+                    {
+                        "label": "Client Charter",
+                        "url": "https://lkim.gov.my/en/client-charter/",
+                        "slug": "client-charter",
+                        "children": []
+                    },
+                    {
+                        "label": "Logo Definition",
+                        "url": "https://lkim.gov.my/en/logo-definition/",
+                        "slug": "logo-definition",
+                        "children": []
+                    },
+                    {
+                        "label": "LKIM Key Performance Indicator (KPI)",
+                        "url": "https://lkim.gov.my/en/lkim-key-performance-indicator-kpi/",
+                        "slug": "lkim-key-performance-indicator-kpi",
+                        "children": []
+                    },
+                    {
+                        "label": "Act",
+                        "url": "https://lkim.gov.my/en/act/",
+                        "slug": "act",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "label": "ORGANIZATION",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "Board Of Director",
+                        "url": "https://www.lkim.gov.my/en/board-of-directors/",
+                        "slug": "board-of-directors",
+                        "children": []
+                    },
+                    {
+                        "label": "LKIM Headquarter's Organization Chart",
+                        "url": "https://www.lkim.gov.my/en/carta-organisasi/",
+                        "slug": "carta-organisasi",
+                        "children": []
+                    },
+                    {
+                        "label": "Senior Management",
+                        "url": "https://www.lkim.gov.my/en/senior-management/",
+                        "slug": "senior-management",
+                        "children": []
+                    },
+                    {
+                        "label": "Divisions/Units",
+                        "url": "https://www.lkim.gov.my/en/headquarters-divisions/",
+                        "slug": "headquarters-divisions",
+                        "children": []
+                    },
+                    {
+                        "label": "LKIM State",
+                        "url": "https://www.lkim.gov.my/en/lkim-state-office/",
+                        "slug": "lkim-state-office",
+                        "children": []
+                    },
+                    {
+                        "label": "Fishermen Associations",
+                        "url": "https://www.lkim.gov.my/en/fishermen-associations/",
+                        "slug": "fishermen-associations",
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "label": "SERVICES",
+        "url": "#",
+        "slug": "",
+        "children": [
+            {
+                "label": "Fishermen Institution",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "KUNITA",
+                        "url": "https://lkim.gov.my/en/fishermens-wives-group-kunita/",
+                        "slug": "fishermens-wives-group-kunita",
+                        "children": []
+                    },
+                    {
+                        "label": "KUBENA",
+                        "url": "https://lkim.gov.my/en/fishermens-youth-group-kubena-2/",
+                        "slug": "fishermens-youth-group-kubena-2",
+                        "children": []
+                    },
+                    {
+                        "label": "KESAN",
+                        "url": "https://lkim.gov.my/en/fishermens-safety-group-kesan/",
+                        "slug": "fishermens-safety-group-kesan",
+                        "children": []
+                    },
+                    {
+                        "label": "Aquaculture Development",
+                        "url": "https://lkim.gov.my/en/aquaculture-development-2/",
+                        "slug": "aquaculture-development-2",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "label": "Assistance to the Fishing Community",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "Fisherman's Subsistence Assistance",
+                        "url": "https://lkim.gov.my/en/fishermans-subsistence-allowance-eshn/",
+                        "slug": "fishermans-subsistence-allowance-eshn",
+                        "children": []
+                    },
+                    {
+                        "label": "Fishermen's Diesel and Petrol Scheme",
+                        "url": "https://lkim.gov.my/en/management-of-fishermens-diesel-and-petrol-subsidy-scheme/",
+                        "slug": "management-of-fishermens-diesel-and-petrol-subsidy-scheme",
+                        "children": []
+                    },
+                    {
+                        "label": "Self-Employed Social Security Scheme (SKSPS)",
+                        "url": "https://lkim.gov.my/en/the-self-employed-social-security-scheme-sksps/",
+                        "slug": "the-self-employed-social-security-scheme-sksps",
+                        "children": []
+                    },
+                    {
+                        "label": "Natural Disaster Relief and Fishermen's Welfare Scheme",
+                        "url": "https://lkim.gov.my/en/natural-disaster-relief-and-fishermens-welfare-scheme-2/",
+                        "slug": "natural-disaster-relief-and-fishermens-welfare-scheme-2",
+                        "children": []
+                    },
+                    {
+                        "label": "Fishermen’s Housing Special Project",
+                        "url": "https://lkim.gov.my/en/fishermens-housing-special-project/",
+                        "slug": "fishermens-housing-special-project",
+                        "children": []
+                    },
+                    {
+                        "label": "Agriculture Livelihood Programme",
+                        "url": "https://lkim.gov.my/en/agriculture-livelihood-programme/",
+                        "slug": "agriculture-livelihood-programme",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "label": "Fish Marketing",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "Fisherman’s Market",
+                        "url": "https://lkim.gov.my/en/fishermans-market/",
+                        "slug": "fishermans-market",
+                        "children": []
+                    },
+                    {
+                        "label": "Fish Collection & Distribution Centre (CCDC)",
+                        "url": "https://lkim.gov.my/en/fish-collection-distribution-centre-ccdc/",
+                        "slug": "fish-collection-distribution-centre-ccdc",
+                        "children": []
+                    },
+                    {
+                        "label": "QFISH Programme",
+                        "url": "https://lkim.gov.my/en/qfish-programme/",
+                        "slug": "qfish-programme",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "label": "Infrastructure Development",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "LKIM Fisheries Complex / Port",
+                        "url": "https://lkim.gov.my/en/lkim-fisheries-complex-or-port/",
+                        "slug": "lkim-fisheries-complex-or-port",
+                        "children": []
+                    },
+                    {
+                        "label": "Fish Landing Jetty",
+                        "url": "https://lkim.gov.my/en/fish-landing-jetty/",
+                        "slug": "fish-landing-jetty",
+                        "children": []
+                    },
+                    {
+                        "label": "Cold Storage Room Facility",
+                        "url": "https://lkim.gov.my/en/cold-storage-room-facility/",
+                        "slug": "cold-storage-room-facility",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "label": "Fish Landings Regulation and Enforcement",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "Recognition of Fish Landing Sites",
+                        "url": "https://www.lkim.gov.my/en/recognition-of-fish-landing-sites/",
+                        "slug": "recognition-of-fish-landing-sites",
+                        "children": []
+                    },
+                    {
+                        "label": "Quality Surveillance of Fish Landing Sites for Fish Export to the European Union",
+                        "url": "https://www.lkim.gov.my/en/quality-surveillance-of-fish-landing-sites-for-fish-export-to-the-european-union/",
+                        "slug": "quality-surveillance-of-fish-landing-sites-for-fish-export-to-the-european-union",
+                        "children": []
+                    },
+                    {
+                        "label": "Registration and Permits on Fish Landing Jetties (Private)",
+                        "url": "https://www.lkim.gov.my/en/registration-and-permits-on-fish-landing-jetties-private/",
+                        "slug": "registration-and-permits-on-fish-landing-jetties-private",
+                        "children": []
+                    },
+                    {
+                        "label": "Domestic Fisheries Chain Quality Surveillance",
+                        "url": "https://www.lkim.gov.my/en/domestic-fisheries-chain-quality-surveillance/",
+                        "slug": "domestic-fisheries-chain-quality-surveillance",
+                        "children": []
+                    },
+                    {
+                        "label": "Monitoring and Enforcement Operations",
+                        "url": "https://www.lkim.gov.my/en/monitoring-and-enforcement-operations/",
+                        "slug": "monitoring-and-enforcement-operations",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "label": "Agro-Based Industry Development",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "Fisheries Product Processing Centre",
+                        "url": "https://www.lkim.gov.my/en/fisheries-product-processing-centre/",
+                        "slug": "fisheries-product-processing-centre",
+                        "children": []
+                    },
+                    {
+                        "label": "Fishpro",
+                        "url": "https://www.lkim.gov.my/en/fishpro-4/",
+                        "slug": "fishpro-4",
+                        "children": []
+                    },
+                    {
+                        "label": "Business Development",
+                        "url": "https://www.lkim.gov.my/en/business-development/",
+                        "slug": "business-development",
+                        "children": []
+                    },
+                    {
+                        "label": "Young Agropreneur",
+                        "url": "https://www.lkim.gov.my/en/young-agropreneur/",
+                        "slug": "young-agropreneur",
+                        "children": []
+                    },
+                    {
+                        "label": "Matching Grant",
+                        "url": "https://www.lkim.gov.my/en/matching-grant/",
+                        "slug": "matching-grant",
+                        "children": []
+                    },
+                    {
+                        "label": "Mentoring Entrepreneur Development Programme (PUB)",
+                        "url": "https://www.lkim.gov.my/en/mentoring-entrepreneur-development-programme-pub/",
+                        "slug": "mentoring-entrepreneur-development-programme-pub",
+                        "children": []
+                    },
+                    {
+                        "label": "Marine Fisheries Development",
+                        "url": "https://www.lkim.gov.my/en/marine-fisheries-development/",
+                        "slug": "marine-fisheries-development",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "label": "Agrotourism",
+                "url": "#",
+                "slug": "",
+                "children": [
+                    {
+                        "label": "Camar Laut Training Centre",
+                        "url": "https://www.lkim.gov.my/en/camar-laut-training-centre/",
+                        "slug": "camar-laut-training-centre",
+                        "children": []
+                    },
+                    {
+                        "label": "Nelayan Chalet",
+                        "url": "https://www.lkim.gov.my/en/nelayan-chalet/",
+                        "slug": "nelayan-chalet",
+                        "children": []
+                    },
+                    {
+                        "label": "Medan Ikan Bakar (MIB)",
+                        "url": "https://www.lkim.gov.my/en/medan-ikan-bakarmib/",
+                        "slug": "medan-ikan-bakarmib",
+                        "children": []
+                    },
+                    {
+                        "label": "Restaurant",
+                        "url": "https://www.lkim.gov.my/en/restaurant/",
+                        "slug": "restaurant",
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "label": "CONTACT US",
+        "url": "#",
+        "slug": "",
+        "children": [
+            {
+                "label": "Staff Directory",
+                "url": "https://lkim.gov.my/en/staff-directory/",
+                "slug": "staff-directory",
+                "children": []
+            },
+            {
+                "label": "Location Maps",
+                "url": "https://lkim.gov.my/en/location-maps/",
+                "slug": "location-maps",
+                "children": []
+            }
+        ]
+    }
+]

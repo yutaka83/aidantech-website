@@ -1,0 +1,594 @@
+[
+    {
+        "ms_wp_id": 17648,
+        "ms_slug": "restoran-2",
+        "ms_type": "page",
+        "en_wp_id": 17654,
+        "en_slug": "restaurant",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 17632,
+        "ms_slug": "medan-ikan-bakar-mib-2",
+        "ms_type": "page",
+        "en_wp_id": 17638,
+        "en_slug": "medan-ikan-bakarmib",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 17616,
+        "ms_slug": "chalet-nelayan-2",
+        "ms_type": "page",
+        "en_wp_id": 17622,
+        "en_slug": "nelayan-chalet",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 17598,
+        "ms_slug": "pusat-latihan-camar-laut",
+        "ms_type": "page",
+        "en_wp_id": 17607,
+        "en_slug": "camar-laut-training-centre",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 17580,
+        "ms_slug": "pembangunan-perikanan-laut-dalam-2",
+        "ms_type": "page",
+        "en_wp_id": 17586,
+        "en_slug": "marine-fisheries-development",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 17564,
+        "ms_slug": "pembangunan-usahawan-bimbingan-pub-2",
+        "ms_type": "page",
+        "en_wp_id": 17570,
+        "en_slug": "mentoring-entrepreneur-development-programme-pub",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 17546,
+        "ms_slug": "geran-padanan-2",
+        "ms_type": "page",
+        "en_wp_id": 17552,
+        "en_slug": "matching-grant",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 17531,
+        "ms_slug": "agropreneur-muda-2",
+        "ms_type": "page",
+        "en_wp_id": 17537,
+        "en_slug": "young-agropreneur",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 17513,
+        "ms_slug": "pembangunan-perniagaan-2",
+        "ms_type": "page",
+        "en_wp_id": 17519,
+        "en_slug": "business-development",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 17488,
+        "ms_slug": "fishpro-3",
+        "ms_type": "page",
+        "en_wp_id": 17504,
+        "en_slug": "fishpro-4",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 17468,
+        "ms_slug": "pusat-pemprosesan-hasil-perikanan-2",
+        "ms_type": "page",
+        "en_wp_id": 17474,
+        "en_slug": "fisheries-product-processing-centre",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 17441,
+        "ms_slug": "operasi-pemantauan-dan-penguatkuasaan-2",
+        "ms_type": "page",
+        "en_wp_id": 17447,
+        "en_slug": "monitoring-and-enforcement-operations",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 17426,
+        "ms_slug": "pengawasan-kualiti-rantaian-perikanan-domestik-2",
+        "ms_type": "page",
+        "en_wp_id": 17432,
+        "en_slug": "domestic-fisheries-chain-quality-surveillance",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 17404,
+        "ms_slug": "pendaftaran-dan-sijil-kebenaran-jeti-pendaratan-ikan-persendirian-2",
+        "ms_type": "page",
+        "en_wp_id": 17411,
+        "en_slug": "registration-and-permits-on-fish-landing-jetties-private",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 17387,
+        "ms_slug": "pengawasan-kualiti-tempat-pendaratan-ikan-bagi-pengeksportan-ikan-ke-kesatuan-eropah-2",
+        "ms_type": "page",
+        "en_wp_id": 17394,
+        "en_slug": "quality-surveillance-of-fish-landing-sites-for-fish-export-to-the-european-union",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 17368,
+        "ms_slug": "pengiktirafan-tempat-pendaratan-ikan-2",
+        "ms_type": "page",
+        "en_wp_id": 17374,
+        "en_slug": "recognition-of-fish-landing-sites",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 15156,
+        "ms_slug": "sekatan-eksport-sempena-musim-perayaan",
+        "ms_type": "page",
+        "en_wp_id": 13519,
+        "en_slug": "womens-fisherman-group",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 15131,
+        "ms_slug": "pengiktirafan-tempat-pendaratan-ikan",
+        "ms_type": "page",
+        "en_wp_id": 13519,
+        "en_slug": "womens-fisherman-group",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 15119,
+        "ms_slug": "pusat-pusat-pemeriksaan-ikan-2",
+        "ms_type": "page",
+        "en_wp_id": 13519,
+        "en_slug": "womens-fisherman-group",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 15104,
+        "ms_slug": "kompleks-labuhan-perikanan-lkim",
+        "ms_type": "page",
+        "en_wp_id": 13519,
+        "en_slug": "womens-fisherman-group",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 16808,
+        "ms_slug": "kemudahan-bilik-sejuk-2",
+        "ms_type": "page",
+        "en_wp_id": 16814,
+        "en_slug": "cold-storage-room-facility",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 16790,
+        "ms_slug": "jeti-pendaratan-ikan-3",
+        "ms_type": "page",
+        "en_wp_id": 16796,
+        "en_slug": "fish-landing-jetty",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 16775,
+        "ms_slug": "kompleks-atau-labuhan-perikanan-lkim",
+        "ms_type": "page",
+        "en_wp_id": 16781,
+        "en_slug": "lkim-fisheries-complex-or-port",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 16754,
+        "ms_slug": "program-qfish-2",
+        "ms_type": "page",
+        "en_wp_id": 16763,
+        "en_slug": "qfish-programme",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 13735,
+        "ms_slug": "dana-nelayan",
+        "ms_type": "page",
+        "en_wp_id": 19218,
+        "en_slug": "fishermens-fund",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 13457,
+        "ms_slug": "pusat-pengumpulan-dan-pengedaran-ccdc",
+        "ms_type": "page",
+        "en_wp_id": 13538,
+        "en_slug": "collection-center-and-distribution-center",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 13361,
+        "ms_slug": "peta-lokasi",
+        "ms_type": "page",
+        "en_wp_id": 13388,
+        "en_slug": "location-maps",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 12324,
+        "ms_slug": "carta-organisasi-lkim-ibu-pejabat-2",
+        "ms_type": "page",
+        "en_wp_id": 1085,
+        "en_slug": "carta-organisasi",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 16739,
+        "ms_slug": "pusat-pengumpulan-dan-pengedaran-ikan-ccdc",
+        "ms_type": "page",
+        "en_wp_id": 16745,
+        "en_slug": "fish-collection-distribution-centre-ccdc",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 16698,
+        "ms_slug": "pasar-nelayan-5",
+        "ms_type": "page",
+        "en_wp_id": 16714,
+        "en_slug": "fishermans-market",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 16649,
+        "ms_slug": "projek-khas-perumahan-nelayan-2",
+        "ms_type": "page",
+        "en_wp_id": 16655,
+        "en_slug": "fishermens-housing-special-project",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 16630,
+        "ms_slug": "skim-bantuan-bencana-alam-dan-kebajikan-nelayan-2",
+        "ms_type": "page",
+        "en_wp_id": 16636,
+        "en_slug": "natural-disaster-relief-and-fishermens-welfare-scheme-2",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 16614,
+        "ms_slug": "skim-keselamatan-sosial-pekerjaan-sendiri-sksps",
+        "ms_type": "page",
+        "en_wp_id": 16620,
+        "en_slug": "the-self-employed-social-security-scheme-sksps",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 16543,
+        "ms_slug": "pembangunan-akuakultur-3",
+        "ms_type": "page",
+        "en_wp_id": 16549,
+        "en_slug": "aquaculture-development-2",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 16524,
+        "ms_slug": "sokongan-dan-bantuan-kepada-kumpulan-nelayan-2",
+        "ms_type": "page",
+        "en_wp_id": 16530,
+        "en_slug": "natural-disaster-relief-and-fishermens-welfare-scheme",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 16500,
+        "ms_slug": "kumpulan-keselamatan-nelayan-kesan",
+        "ms_type": "page",
+        "en_wp_id": 16506,
+        "en_slug": "fishermens-safety-group-kesan",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 16484,
+        "ms_slug": "kumpulan-belia-nelayan-kubena",
+        "ms_type": "page",
+        "en_wp_id": 16490,
+        "en_slug": "fishermens-youth-group-kubena-2",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 16460,
+        "ms_slug": "kumpulan-wanita-nelayan-kunita",
+        "ms_type": "page",
+        "en_wp_id": 16466,
+        "en_slug": "fishermens-wives-group-kunita",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 12182,
+        "ms_slug": "laporan-harga-ikan-2",
+        "ms_type": "page",
+        "en_wp_id": 12195,
+        "en_slug": "fish-price-report",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 12139,
+        "ms_slug": "penerbitan",
+        "ms_type": "page",
+        "en_wp_id": 12165,
+        "en_slug": "publication",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 12124,
+        "ms_slug": "keluarga-lkim",
+        "ms_type": "page",
+        "en_wp_id": 12137,
+        "en_slug": "lkim-family",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 12081,
+        "ms_slug": "persatuan-nelayan",
+        "ms_type": "page",
+        "en_wp_id": 12122,
+        "en_slug": "fishermens-association",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 12028,
+        "ms_slug": "maklumat-korporat",
+        "ms_type": "page",
+        "en_wp_id": 19202,
+        "en_slug": "corporate-information",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 1092,
+        "ms_slug": "ahli-ahli-jemaah-lembaga",
+        "ms_type": "page",
+        "en_wp_id": 1094,
+        "en_slug": "board-of-directors",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 29,
+        "ms_slug": "perutusan-ketua-pengarah",
+        "ms_type": "page",
+        "en_wp_id": 37,
+        "en_slug": "director-generals-speech",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 5929,
+        "ms_slug": "profil-menteri",
+        "ms_type": "page",
+        "en_wp_id": 5940,
+        "en_slug": "minister-profile",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 2519,
+        "ms_slug": "direktori-kakitangan",
+        "ms_type": "page",
+        "en_wp_id": 9231,
+        "en_slug": "staff-directory",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 1280,
+        "ms_slug": "persatuan-persatuan-nelayan",
+        "ms_type": "page",
+        "en_wp_id": 1283,
+        "en_slug": "fishermen-associations",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 1276,
+        "ms_slug": "pejabat-lkim-negeri",
+        "ms_type": "page",
+        "en_wp_id": 1278,
+        "en_slug": "lkim-state-office",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 1257,
+        "ms_slug": "bahagian-pengurusan-maklumat",
+        "ms_type": "page",
+        "en_wp_id": 1262,
+        "en_slug": "information-management-division",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 1167,
+        "ms_slug": "bantuan",
+        "ms_type": "page",
+        "en_wp_id": 1169,
+        "en_slug": "help",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 1163,
+        "ms_slug": "peta-laman",
+        "ms_type": "page",
+        "en_wp_id": 1165,
+        "en_slug": "sitemap",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 1137,
+        "ms_slug": "pautan",
+        "ms_type": "page",
+        "en_wp_id": 1160,
+        "en_slug": "links",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 1101,
+        "ms_slug": "bahagian-bahagian-ibu-pejabat",
+        "ms_type": "page",
+        "en_wp_id": 1406,
+        "en_slug": "headquarters-divisions",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 1096,
+        "ms_slug": "pengurusan-atasan",
+        "ms_type": "page",
+        "en_wp_id": 1099,
+        "en_slug": "senior-management",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 1011,
+        "ms_slug": "soalan-lazim",
+        "ms_type": "page",
+        "en_wp_id": 1016,
+        "en_slug": "frequently-asked-questions",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 1004,
+        "ms_slug": "hubungi-kami",
+        "ms_type": "page",
+        "en_wp_id": 1008,
+        "en_slug": "contact-us",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 956,
+        "ms_slug": "dasar-keselamatan-ict",
+        "ms_type": "page",
+        "en_wp_id": 960,
+        "en_slug": "ict-security-policy",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 952,
+        "ms_slug": "penafian",
+        "ms_type": "page",
+        "en_wp_id": 954,
+        "en_slug": "disclaimer",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 948,
+        "ms_slug": "dasar-privasi",
+        "ms_type": "page",
+        "en_wp_id": 950,
+        "en_slug": "privacy-policy",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 942,
+        "ms_slug": "terma-syarat",
+        "ms_type": "page",
+        "en_wp_id": 945,
+        "en_slug": "terms-conditions",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 914,
+        "ms_slug": "tender-2",
+        "ms_type": "page",
+        "en_wp_id": 918,
+        "en_slug": "tender",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 368,
+        "ms_slug": "muat-turun",
+        "ms_type": "page",
+        "en_wp_id": 388,
+        "en_slug": "download",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 211,
+        "ms_slug": "akta",
+        "ms_type": "page",
+        "en_wp_id": 219,
+        "en_slug": "act",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 76,
+        "ms_slug": "petunjuk-prestasi-utama-kpi-lkim",
+        "ms_type": "page",
+        "en_wp_id": 85,
+        "en_slug": "lkim-key-performance-indicator-kpi",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 63,
+        "ms_slug": "tafsir-logo",
+        "ms_type": "page",
+        "en_wp_id": 67,
+        "en_slug": "logo-definition",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 59,
+        "ms_slug": "piagam-pelanggan",
+        "ms_type": "page",
+        "en_wp_id": 61,
+        "en_slug": "client-charter",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 52,
+        "ms_slug": "visi-misi-objektif-fungsi",
+        "ms_type": "page",
+        "en_wp_id": 57,
+        "en_slug": "vision-mission-objectives",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 48,
+        "ms_slug": "latar-belakang",
+        "ms_type": "page",
+        "en_wp_id": 50,
+        "en_slug": "background",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 46,
+        "ms_slug": "perutusan-pendaftar-2",
+        "ms_type": "page",
+        "en_wp_id": 12383,
+        "en_slug": "registrars-speech",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 21,
+        "ms_slug": "perutusan-pengerusi",
+        "ms_type": "page",
+        "en_wp_id": 26,
+        "en_slug": "chairmans-speech",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 5639,
+        "ms_slug": "laporan-harga-ikan",
+        "ms_type": "post",
+        "en_wp_id": 226,
+        "en_slug": "fish-market-price-report",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 1190,
+        "ms_slug": "bahagian-perancangan-dan-pembangunan",
+        "ms_type": "page",
+        "en_wp_id": 1195,
+        "en_slug": "planning-and-development-division",
+        "en_type": "page"
+    },
+    {
+        "ms_wp_id": 179,
+        "ms_slug": "perkhidmatan-dalam-talian",
+        "ms_type": "page",
+        "en_wp_id": 196,
+        "en_slug": "online-services",
+        "en_type": "page"
+    }
+]
