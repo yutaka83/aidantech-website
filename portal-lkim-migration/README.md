@@ -56,10 +56,17 @@ Run in this order. Each step prints a summary and writes CSV reports to
 | 12 | `import-translations.php` | Writes the English content into Falang as translations. |
 | 13 | `translate-menus.php` | Translates menu labels and module titles. |
 | 14 | `feature-articles.php` | Features recent news so the homepage component area is not empty. |
-| 15 | `relink.php` | Rewrites internal links from source permalinks to Joomla routes. `--dry-run` supported. **Re-run after any menu rebuild** — routes change. |
+| 15 | `relink.php` | Rewrites internal links from source permalinks to Joomla routes. `--dry-run` supported. |
 | 16 | `build-redirects.php` | 301s every old permalink at its new route (2,268 records). |
-| 17 | `harden.php` | Security headers, plugin posture, global configuration. `--production` switches on caching, HSTS, forced SSL and indexing. |
-| 18 | `qa-crawl.php` · `qa-media.php` | Crawl every route; check every media reference exists. |
+| 17 | `build-sitemap.php` | Writes `sitemap.xml` with hreflang alternates, points `robots.txt` at it, and regenerates the Peta Laman page from the live menu tree in both languages. `--base=` for the production hostname. |
+| 18 | `harden.php` | Security headers, plugin posture, global configuration. `--production` switches on caching, HSTS, forced SSL and indexing. |
+| 19 | `qa-crawl.php` · `qa-media.php` · `qa-sitemap.php` | Crawl every route; check every media reference exists; check every sitemap URL resolves. |
+
+> **`relink.php` must run last among the content steps.** `import.php` rebuilds
+> article bodies from the harvested source, so re-running an import — even just
+> to regenerate a report — silently undoes the link rewriting. Menu rebuilds
+> change routes and invalidate it too. If in doubt, run steps 15–17 again;
+> all three are cheap and idempotent.
 
 `Cleaner.php` is the Elementor-to-HTML converter used by both importers.
 `map.php` is the single source of truth for taxonomy and routing decisions —
@@ -76,7 +83,10 @@ correct it there, not downstream.
 - **101 menu items** across three menus
 - **70 Falang translations** + 91 translated menu labels + 15 module titles
 - **2,268 redirects** from the old permalinks
-- **0 problems** across a full 1,155-URL crawl
+- **sitemap.xml** with 1,090 URLs and 190 hreflang alternates, plus a **Peta
+  Laman** page generated from the live menus (87 links, both languages)
+- **0 problems** across a full 1,155-URL crawl, and 0 broken links across the
+  1,264 URLs the two sitemaps advertise
 
 ---
 
@@ -121,6 +131,11 @@ compromised at some point.
    the footer address/social modules with the real system URLs.
 6. Turn on multi-factor authentication for the Super User.
 7. Re-run `php cli/joomla.php finder:index` after the final content pass.
+8. Regenerate the sitemaps against the real hostname —
+   `php build-sitemap.php --base=https://www.lkim.gov.my` — and re-run it
+   whenever the menus or a batch of content change. `sitemap.xml` is a static
+   file, so it does not update itself; wiring it to Joomla's task scheduler is
+   the obvious follow-up if LKIM publish often.
 
 ## SPLaSK / MyGovEA
 

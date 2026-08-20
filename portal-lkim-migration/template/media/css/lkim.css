@@ -583,6 +583,70 @@ body.lkim.wrapper-fluid .lkim-shell {
 	font-size: 0.875rem;
 }
 
+/* ── Peta Laman ──────────────────────────────────────────────────────────── */
+
+.lkim-sitemap h2 {
+	font-size: 1.15rem;
+	margin: 2.25rem 0 1rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 2px solid var(--lkim-gold);
+	display: inline-block;
+}
+
+.lkim-sitemap > ul {
+	columns: 2 300px;
+	column-gap: 2.5rem;
+}
+
+.lkim-sitemap ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Keep a top-level branch from splitting across the column break */
+.lkim-sitemap > ul > li {
+	break-inside: avoid;
+	margin-bottom: 1.4rem;
+}
+
+.lkim-sitemap li > span {
+	display: block;
+	font-weight: 700;
+	color: var(--lkim-navy);
+	padding: 0.25rem 0;
+}
+
+.lkim-sitemap li > a {
+	display: block;
+	padding: 0.25rem 0;
+	text-decoration: none;
+	color: var(--lkim-ink);
+}
+
+.lkim-sitemap li > a:hover,
+.lkim-sitemap li > a:focus {
+	color: var(--lkim-blue-600);
+	text-decoration: underline;
+}
+
+.lkim-sitemap ul ul {
+	margin-inline-start: 0.9rem;
+	padding-inline-start: 0.9rem;
+	border-inline-start: 1px solid var(--lkim-line);
+}
+
+.lkim-sitemap ul ul li > a {
+	font-size: 0.94rem;
+	color: var(--lkim-ink-muted);
+}
+
+@media (max-width: 640px) {
+	.lkim-sitemap > ul {
+		columns: 1;
+	}
+}
+
 /* ── Footer ──────────────────────────────────────────────────────────────── */
 
 .lkim-footer {
