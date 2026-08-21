@@ -1,0 +1,137 @@
+"MAIN CONTENT","SUB CONTENT (LEVEL 0)","SUB CONTENT (LEVEL 1)","SUB CONTENT (LEVEL 2)",BM,EN,"CATATAN LKIM DARI SITEMAP","CATATAN AIDAN"
+"LAMAN UTAMA (LANDING PAGE)",,,,,,,
+"Logo & Jata",,,,COMPLETED,COMPLETED,Dikekalkan,"Logo LKIM diambil dari laman sumber."
+"Tajuk & Tagline Portal",,,,COMPLETED,COMPLETED,Dikekalkan,
+"Bar Kebolehaksesan (saiz teks, kontras)",,,,COMPLETED,COMPLETED,Dikemaskini,"Elemen baharu — keperluan SPLaSK, tiada pada laman sumber."
+"Pilihan Bahasa (BM / EN)",,,,COMPLETED,COMPLETED,Dikekalkan,
+Carian,,,,COMPLETED,COMPLETED,Dikemaskini,"Smart Search Joomla; indeks perlu dibina semula selepas kemas kini kandungan."
+"Menu Utama",,,,COMPLETED,COMPLETED,Dikekalkan,"Struktur diambil terus dari menu laman sumber."
+"Banner / Hero",,,,"NOT STARTED YET","NOT STARTED YET",Dikemaskini,"Kedudukan modul tersedia; imej dan kandungan belum ditetapkan."
+"Modul: Pengumuman",,,,COMPLETED,COMPLETED,Dikekalkan,"88 artikel diterbitkan dalam kategori ini."
+"Modul: Berita Terkini",,,,COMPLETED,COMPLETED,Dikekalkan,"91 artikel diterbitkan dalam kategori ini."
+"Modul: Sebut Harga & Tender",,,,COMPLETED,COMPLETED,Dikekalkan,"247 artikel diterbitkan dalam kategori ini."
+"Modul: Perkhidmatan Atas Talian",,,,COMPLETED,COMPLETED,Dikemaskini,"Pautan sistem masih placeholder — perlu disahkan dengan pemilik sistem."
+"Modul: Perkhidmatan LKIM",,,,COMPLETED,COMPLETED,Dikekalkan,
+"Modul: Arkib",,,,COMPLETED,COMPLETED,Dikekalkan,
+"MENU UTAMA",,,,,,,
+"INFO LKIM",,,,,,,"Tajuk menu sahaja — tiada halaman kandungan."
+,PERUTUSAN,,,,,,"Tajuk menu sahaja — tiada halaman kandungan."
+,,Pengerusi,,"IN PROGRESS","IN PROGRESS",Dikemaskini,"Laman sumber memaparkan notis ""Maklumat dalam tindakan kemaskini."" — kandungan belum disediakan oleh LKIM. EN: Kandungan sangat ringkas (50 aksara) pada laman sumber."
+,,"Ketua Pengarah",,"IN PROGRESS","IN PROGRESS",Dikemaskini,"Laman sumber memaparkan notis ""Maklumat dalam tindakan kemaskini."" — kandungan belum disediakan oleh LKIM. EN: Kandungan sangat ringkas (58 aksara) pada laman sumber."
+,,"Pendaftar PN",,COMPLETED,COMPLETED,Dikekalkan,"Kandungan disampaikan sebagai 1 pautan dokumen, bukan teks."
+,PROFIL,,,,,,"Tajuk menu sahaja — tiada halaman kandungan."
+,,"Profil Menteri",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Latar Belakang",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Visi, Misi dan Objektif",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Piagam Pelanggan",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Tafsif Logo",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Petunjuk Prestasi KPI LKIM",,COMPLETED,COMPLETED,Dikekalkan,
+,,Akta,,COMPLETED,COMPLETED,Dikekalkan,
+,ORGANISASI,,,,,,"Tajuk menu sahaja — tiada halaman kandungan."
+,,"Ahli Lembaga Pengarah",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Carta Organisasi LKIM Ibu Pejabat",,COMPLETED,COMPLETED,Dikekalkan,"Kandungan disampaikan sebagai 1 embed / 4 pautan dokumen, bukan teks. EN: Kandungan disampaikan sebagai 1 embed / 3 pautan dokumen / 4 imej, bukan teks."
+,,"Pengurusan Atasan",,COMPLETED,COMPLETED,Dikekalkan,
+,,Bahagian/Unit,,COMPLETED,COMPLETED,Dikekalkan,
+,,"LKIM Negeri",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Persatuan Nelayan",,COMPLETED,COMPLETED,Dikekalkan,"Kandungan disampaikan sebagai 1 pautan dokumen, bukan teks. EN: Kandungan disampaikan sebagai 1 embed / 1 pautan dokumen, bukan teks."
+PERKHIDMATAN,,,,,,,"Tajuk menu sahaja — tiada halaman kandungan."
+,"Institusi Nelayan",,,COMPLETED,"NO TRANSLATION",Dikemaskini,"Laman sumber tidak menghubungkan halaman ini dengan versi EN."
+,,KUNITA,,COMPLETED,COMPLETED,Dikekalkan,
+,,KUBENA,,COMPLETED,COMPLETED,Dikekalkan,
+,,"Kumpulan Keselamatan Nelayan (KESAN)",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Pembangunan Akuakultur",,COMPLETED,COMPLETED,Dikekalkan,
+,"Bantuan Kepada Masyarakat Nelayan",,,,,,"Tajuk menu sahaja — tiada halaman kandungan."
+,,"Bantuan Sara Hidup Nelayan",,COMPLETED,"NO TRANSLATION",Dikemaskini,"Laman sumber tidak menghubungkan halaman ini dengan versi EN."
+,,"Skim Diesel dan Petrol Nelayan",,COMPLETED,"NO TRANSLATION",Dikemaskini,"Laman sumber tidak menghubungkan halaman ini dengan versi EN."
+,,"Skim Keselamatan Sosial Pekerjaan Sendiri (SKSPS)",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Skim Bantuan Bencana Alam dan Kebajikan Nelayan",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Projek Khas Perumahan Nelayan",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Dana Nelayan",,COMPLETED,"IN PROGRESS",Dikemaskini,"EN: Kandungan sangat ringkas (21 aksara) pada laman sumber."
+,"Pemasaran Ikan",,,,,,"Tajuk menu sahaja — tiada halaman kandungan."
+,,"Pasar Nelayan",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Pusat Pengumpulan dan Pengedaran Ikan (CCDC)",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Program QFISH",,COMPLETED,COMPLETED,Dikekalkan,
+,"Pembangunan Infrastruktur",,,,,,"Tajuk menu sahaja — tiada halaman kandungan."
+,,"Kompleks/ Labuhan Perikanan LKIM",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Jeti Pendaratan Ikan",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Kemudahan Bilik Sejuk",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Pusat-Pusat Pemeriksaan Ikan",,COMPLETED,"NO TRANSLATION",Dikemaskini,"Laman sumber tidak menghubungkan halaman ini dengan versi EN."
+,,"Pendaratan Ikan di Kompleks / Labuhan Perikanan LKIM",,,,Dikemaskini,"Pautan rosak pada laman sumber — dirender sebagai tajuk sahaja. Perlu halaman baharu atau dibuang."
+,"Kawalselia Pendaratan Ikan dan Penguatkuasaan",,,,,,"Tajuk menu sahaja — tiada halaman kandungan."
+,,"Pengiktirafan Tempat Pendaratan Ikan",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Pengawasan Kualiti Tempat Pendaratan Ikan Bagi Pengeksportan Ikan Ke Kesatuan Eropah",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Pendaftaran dan Sijil Kebenaran Jeti Pendaratan Ikan (Persendirian)",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Pengawasan Kualiti Rantaian Perikanan Domestik",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Operasi Pemantauan dan Penguatkuasaan",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Sekatan Eksport Sempena Musim Perayaan",,"IN PROGRESS","NO TRANSLATION",Dikemaskini,"Kandungan sangat ringkas (224 aksara) pada laman sumber. Laman sumber tidak menghubungkan halaman ini dengan versi EN."
+,"Pembangunan Industri Asas Tani",,,,,,"Tajuk menu sahaja — tiada halaman kandungan."
+,,"Pusat Pemprosesan Hasil Perikanan (PPHP)",,COMPLETED,COMPLETED,Dikekalkan,
+,,Fishpro,,COMPLETED,COMPLETED,Dikekalkan,
+,,"Pembangunan Perniagaan",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Agropreneur Muda",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Geran Padanan",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Pembangunan Usahawan Bimbingan (PUB)",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Pembangunan Perikanan Laut Dalam",,COMPLETED,COMPLETED,Dikekalkan,
+,Agrotourism,,,,,,"Tajuk menu sahaja — tiada halaman kandungan."
+,,"Pusat Latihan Camar Laut",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Chalet Nelayan",,COMPLETED,COMPLETED,Dikekalkan,
+,,"Medan Ikan Bakar (MIB)",,COMPLETED,COMPLETED,Dikekalkan,
+,,Restoran,,COMPLETED,COMPLETED,Dikekalkan,
+"HUBUNGI KAMI",,,,,,,"Tajuk menu sahaja — tiada halaman kandungan."
+,"Direktori Kakitangan",,,"IN PROGRESS","IN PROGRESS",Dikemaskini,"Kandungan sangat ringkas (22 aksara) pada laman sumber. EN: Kandungan sangat ringkas (35 aksara) pada laman sumber."
+,"Peta Lokasi",,,COMPLETED,COMPLETED,Dikekalkan,"Kandungan disampaikan sebagai 1 embed / 3 imej, bukan teks."
+"SENARAI & ARKIB",,,,,,,
+"Berita & Pengumuman",,,,COMPLETED,COMPLETED,Dikekalkan,"Kategori induk — 475 artikel berada dalam subkategori."
+Pengumuman,,,,COMPLETED,COMPLETED,Dikekalkan,"88 artikel diterbitkan."
+"Berita Terkini",,,,COMPLETED,COMPLETED,Dikekalkan,"91 artikel diterbitkan."
+"Sebut Harga",,,,COMPLETED,COMPLETED,Dikekalkan,"247 artikel diterbitkan."
+Tender,,,,COMPLETED,COMPLETED,Dikekalkan,"49 artikel diterbitkan."
+Arkib,,,,COMPLETED,COMPLETED,Dikekalkan,"Kategori induk — 264 artikel berada dalam subkategori."
+"Arkib Pengumuman",,,,COMPLETED,COMPLETED,Dikekalkan,"86 artikel diterbitkan."
+"Arkib Sebut Harga",,,,COMPLETED,COMPLETED,Dikekalkan,"104 artikel diterbitkan."
+"Arkib Berita",,,,COMPLETED,COMPLETED,Dikekalkan,"74 artikel diterbitkan."
+Galeri,,,,"NO CONTENT","NO CONTENT",Dikemaskini,"0 artikel diterbitkan."
+Lain-lain,,,,COMPLETED,COMPLETED,Dikekalkan,"272 artikel diterbitkan."
+Perutusan,,,,COMPLETED,COMPLETED,Dikekalkan,"3 artikel diterbitkan."
+Profil,,,,COMPLETED,COMPLETED,Dikekalkan,"7 artikel diterbitkan."
+Organisasi,,,,COMPLETED,COMPLETED,Dikekalkan,"6 artikel diterbitkan."
+"Institusi Nelayan",,,,COMPLETED,COMPLETED,Dikekalkan,"5 artikel diterbitkan."
+"Bantuan Kepada Masyarakat Nelayan",,,,COMPLETED,COMPLETED,Dikekalkan,"7 artikel diterbitkan."
+"Pemasaran Ikan",,,,COMPLETED,COMPLETED,Dikekalkan,"3 artikel diterbitkan."
+"Pembangunan Infrastruktur",,,,COMPLETED,COMPLETED,Dikekalkan,"4 artikel diterbitkan."
+"Kawalselia Pendaratan Ikan dan Penguatkuasaan",,,,COMPLETED,COMPLETED,Dikekalkan,"6 artikel diterbitkan."
+"Pembangunan Industri Asas Tani",,,,COMPLETED,COMPLETED,Dikekalkan,"7 artikel diterbitkan."
+Agrotourism,,,,COMPLETED,COMPLETED,Dikekalkan,"4 artikel diterbitkan."
+"Info LKIM",,,,COMPLETED,COMPLETED,Dikekalkan,"Kategori induk — 16 artikel berada dalam subkategori."
+Perkhidmatan,,,,COMPLETED,COMPLETED,Dikekalkan,"Kategori induk — 36 artikel berada dalam subkategori."
+"Hubungi Kami",,,,COMPLETED,COMPLETED,Dikekalkan,"2 artikel diterbitkan."
+Carian,,,,COMPLETED,COMPLETED,Dikemaskini,"Halaman carian Smart Search."
+"MENU BAWAH / PENGAKI",,,,,,,
+"Hubungi Kami",,,,COMPLETED,COMPLETED,Dikekalkan,"Kandungan disampaikan sebagai 1 embed / 3 imej, bukan teks. EN: Kandungan disampaikan sebagai 3 imej, bukan teks."
+"Aduan / Pertanyaan / Cadangan",,,,"IN PROGRESS","NO TRANSLATION",Dikemaskini,"Kandungan sangat ringkas (176 aksara) pada laman sumber. Laman sumber tidak menghubungkan halaman ini dengan versi EN."
+"Soalan Lazim (FAQ)",,,,COMPLETED,COMPLETED,Dikekalkan,
+Pautan,,,,COMPLETED,COMPLETED,Dikemaskini,"1 pautan dalaman tidak dapat diselesaikan (sasaran tiada pada laman sumber)."
+"Peta Laman",,,,COMPLETED,COMPLETED,Dikekalkan,
+"Terma & Syarat",,,,COMPLETED,COMPLETED,Dikekalkan,
+"Dasar Keselamatan",,,,COMPLETED,COMPLETED,Dikekalkan,"Kandungan disampaikan sebagai 1 pautan dokumen, bukan teks."
+"Dasar Privasi",,,,COMPLETED,COMPLETED,Dikekalkan,
+Penafian,,,,"IN PROGRESS","IN PROGRESS",Dikemaskini,"Kandungan sangat ringkas (132 aksara) pada laman sumber. EN: Kandungan sangat ringkas (98 aksara) pada laman sumber."
+"Modul: Alamat & Talian LKIM",,,,COMPLETED,COMPLETED,Dikemaskini,"Maklumat placeholder — perlu disahkan dengan LKIM."
+"Modul: Pautan Pantas",,,,COMPLETED,COMPLETED,Dikekalkan,
+"Modul: Info Portal",,,,COMPLETED,COMPLETED,Dikekalkan,
+"Modul: Media Sosial",,,,COMPLETED,COMPLETED,Dikemaskini,"Maklumat placeholder — perlu disahkan dengan LKIM."
+"Modul: Suapan RSS",,,,COMPLETED,COMPLETED,Dikekalkan,
+"ELEMEN SPLaSK / MyGovEA",,,,,,,
+"Peta Laman",,,,COMPLETED,COMPLETED,Dikemaskini,"Dijana semula dari struktur menu sebenar; halaman asal hanya mengandungi kod pendek WordPress."
+"Dasar Keselamatan",,,,COMPLETED,COMPLETED,Dikekalkan,"Kandungan disampaikan sebagai 1 pautan dokumen, bukan teks."
+"Dasar Privasi",,,,COMPLETED,COMPLETED,Dikekalkan,
+Penafian,,,,"IN PROGRESS","IN PROGRESS",Dikemaskini,"Kandungan sangat ringkas (132 aksara) pada laman sumber. EN: Kandungan sangat ringkas (98 aksara) pada laman sumber."
+"Terma & Syarat",,,,COMPLETED,COMPLETED,Dikekalkan,
+"Soalan Lazim (FAQ)",,,,COMPLETED,COMPLETED,Dikekalkan,
+"Aduan / Pertanyaan / Cadangan",,,,"IN PROGRESS","NO TRANSLATION",Dikemaskini,"Kandungan sangat ringkas (176 aksara) pada laman sumber. Laman sumber tidak menghubungkan halaman ini dengan versi EN."
+"Kemas Kini Terakhir",,,,COMPLETED,COMPLETED,Dikemaskini,"Dijana automatik dari tarikh ubah suai kandungan."
+"Kaunter Pelawat",,,,"NOT STARTED YET","NOT STARTED YET",Dikemaskini,"Slot tersedia dalam templat; pemalam kaunter belum dibina atau disambung."
+"Penanda SPLaSK (atribut)",,,,"IN PROGRESS","IN PROGRESS",Dikemaskini,"Semua elemen ditanda dengan data-splask; nama atribut sebenar perlu ditetapkan mengikut pekeliling MAMPU/JDN semasa."
+"Pautan Langkau (skip links)",,,,COMPLETED,COMPLETED,Dikemaskini,"Elemen baharu untuk kebolehaksesan."
+"Suapan RSS",,,,COMPLETED,COMPLETED,Dikemaskini,
+"W3C / Kebolehaksesan",,,,"IN PROGRESS","IN PROGRESS",Dikemaskini,"Templat mengikut WCAG 2.1 AA; audit penuh belum dijalankan."

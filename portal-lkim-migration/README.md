@@ -60,7 +60,8 @@ Run in this order. Each step prints a summary and writes CSV reports to
 | 16 | `build-redirects.php` | 301s every old permalink at its new route (2,268 records). |
 | 17 | `build-sitemap.php` | Writes `sitemap.xml` with hreflang alternates, points `robots.txt` at it, and regenerates the Peta Laman page from the live menu tree in both languages. `--base=` for the production hostname. |
 | 18 | `harden.php` | Security headers, plugin posture, global configuration. `--production` switches on caching, HSTS, forced SSL and indexing. |
-| 19 | `qa-crawl.php` · `qa-media.php` · `qa-sitemap.php` | Crawl every route; check every media reference exists; check every sitemap URL resolves. |
+| 19 | `build-content-checklist.php` | Content checklist as an .xlsx, in the JKM sheet's format. Statuses are resolved against the live portal rather than typed by hand. |
+| 20 | `qa-crawl.php` · `qa-media.php` · `qa-sitemap.php` | Crawl every route; check every media reference exists; check every sitemap URL resolves. |
 
 > **`relink.php` must run last among the content steps.** `import.php` rebuilds
 > article bodies from the harvested source, so re-running an import — even just
@@ -68,9 +69,12 @@ Run in this order. Each step prints a summary and writes CSV reports to
 > change routes and invalidate it too. If in doubt, run steps 15–17 again;
 > all three are cheap and idempotent.
 
-`Cleaner.php` is the Elementor-to-HTML converter used by both importers.
-`map.php` is the single source of truth for taxonomy and routing decisions —
-correct it there, not downstream.
+`Cleaner.php` converts the source markup to clean HTML — it handles both page
+builders the site used: Elementor on the newer pages, and WPBakery shortcodes
+on the older ones. `map.php` is the single source of truth for taxonomy and
+routing decisions — correct it there, not downstream. `XlsxWriter.php` is a
+minimal SpreadsheetML writer, because this machine has no Python and the
+project has no Composer packages.
 
 ---
 
@@ -85,6 +89,7 @@ correct it there, not downstream.
 - **2,268 redirects** from the old permalinks
 - **sitemap.xml** with 1,090 URLs and 190 hreflang alternates, plus a **Peta
   Laman** page generated from the live menus (87 links, both languages)
+- **content checklist** as an .xlsx in the JKM format, statuses resolved live
 - **0 problems** across a full 1,155-URL crawl, and 0 broken links across the
   1,264 URLs the two sitemaps advertise
 
@@ -97,7 +102,7 @@ These are limits of the source material, not of the import. Each has a report.
 | Report | Rows | What it means |
 |---|---|---|
 | `reports/media-failures.csv` | 10 | Files that 404 on lkim.gov.my itself. |
-| `reports/unresolved-links.csv` | 133 | Links in article bodies pointing at pages that do not exist on the source either — mostly leftovers from an older Liferay portal (`/c/document_library/...`) and `/intranet`. |
+| `reports/unresolved-links.csv` | 176 | Links in article bodies pointing at pages that do not exist on the source either — mostly leftovers from an older Liferay portal (`/c/document_library/...`) and `/intranet`. |
 | `reports/english-unpaired.csv` | 159 | English pages the source never declares as a translation of anything. Imported as standalone `en-GB` articles; pair them in Falang if a Malay counterpart is identified. |
 | `reports/translation-rejected.csv` | 4 | Malay pages whose hreflang all point at the same English page — the source's own links are wrong there. |
 | `reports/menu-gaps.csv` | 1 | *Pendaratan Ikan di Kompleks / Labuhan Perikanan LKIM* — a broken link on the live site too. Rendered as a heading. |

@@ -19,6 +19,9 @@ class Cleaner
     /** @var string[] */
     public array $unresolvedLinks = [];
 
+    /** @var array<string,int> shortcode tag => times dropped, for reporting */
+    public array $droppedShortcodes = [];
+
     /** Attributes worth keeping, per tag. Everything else is dropped. */
     private const KEEP = [
         '*'      => ['href', 'src', 'alt', 'title', 'colspan', 'rowspan', 'target', 'rel', 'lang', 'dir'],
@@ -51,12 +54,18 @@ class Cleaner
 
     public function clean(string $html): string
     {
-        $this->unresolvedLinks = [];
+        $this->unresolvedLinks    = [];
+        $this->droppedShortcodes  = [];
 
         $html = trim($html);
         if ($html === '') {
             return '';
         }
+
+        // The source ran WPBakery on its older pages and Elementor on the newer
+        // ones. WPBakery leaves its shortcodes in the rendered output, so they
+        // have to be resolved as text before the markup is parsed.
+        $html = $this->expandShortcodes($html);
 
         $doc = new DOMDocument('1.0', 'UTF-8');
         libxml_use_internal_errors(true);
@@ -85,6 +94,79 @@ class Cleaner
     }
 
     /* ── Steps ───────────────────────────────────────────────────────────── */
+
+    /**
+     * Resolve WPBakery / Visual Composer shortcodes to plain HTML.
+     *
+     * Layout shortcodes carry no meaning once the grid is gone, so they are
+     * unwrapped; the ones that hold a title become a heading; raw_html holds
+     * base64; sidebar widgets are navigation, which is a module in Joomla.
+     */
+    private function expandShortcodes(string $html): string
+    {
+        if (!str_contains($html, '[')) {
+            return $html;
+        }
+
+        // [vc_raw_html] wraps base64-encoded, url-encoded markup.
+        $html = preg_replace_callback(
+            '#\[vc_raw_html[^\]]*\](.*?)\[/vc_raw_html\]#is',
+            function ($m) {
+                $decoded = base64_decode(trim($m[1]), true);
+                return $decoded === false ? '' : rawurldecode($decoded);
+            },
+            $html
+        );
+
+        // Whole blocks that carry no content worth keeping.
+        foreach (['vc_widget_sidebar', 'useyourdrive'] as $tag) {
+            $html = preg_replace_callback(
+                '#\[' . $tag . '[^\]]*\](?:.*?\[/' . $tag . '\])?#is',
+                function () use ($tag) {
+                    $this->droppedShortcodes[$tag] = ($this->droppedShortcodes[$tag] ?? 0) + 1;
+                    return '';
+                },
+                $html
+            );
+        }
+
+        // Titled panels become a heading followed by their content.
+        $html = preg_replace_callback(
+            '#\[(vc_tta_section|vc_toggle)([^\]]*)\]#i',
+            function ($m) {
+                if (preg_match('#title="([^"]*)"#i', $m[2], $t) && trim($t[1]) !== '') {
+                    return '<h3>' . htmlspecialchars(trim($t[1]), ENT_QUOTES, 'UTF-8') . '</h3>';
+                }
+                return '';
+            },
+            $html
+        );
+
+        // Separators with a title do the same; without one they are decoration.
+        $html = preg_replace_callback(
+            '#\[vc_text_separator([^\]]*)\]#i',
+            function ($m) {
+                if (preg_match('#title="([^"]*)"#i', $m[1], $t) && trim($t[1]) !== '') {
+                    return '<h3>' . htmlspecialchars(trim($t[1]), ENT_QUOTES, 'UTF-8') . '</h3>';
+                }
+                return '';
+            },
+            $html
+        );
+
+        // Everything else: drop the tag, keep whatever sat inside it.
+        $html = preg_replace_callback(
+            '#\[/?([a-z][a-z0-9_]*)((?:[^\]"]|"[^"]*")*)\]#i',
+            function ($m) {
+                $tag = strtolower($m[1]);
+                $this->droppedShortcodes[$tag] = ($this->droppedShortcodes[$tag] ?? 0) + 1;
+                return '';
+            },
+            $html
+        );
+
+        return $html;
+    }
 
     private function removeNoise(DOMXPath $xp): void
     {
