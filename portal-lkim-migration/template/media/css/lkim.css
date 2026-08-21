@@ -110,6 +110,143 @@ body.lkim.wrapper-fluid .lkim-shell {
 	max-width: none;
 }
 
+/* ── Government site identification (JDN / MyGovEA) ──────────────────────── */
+
+.lkim-govbar {
+	background: var(--lkim-surface-alt);
+	border-bottom: 1px solid var(--lkim-line);
+	font-size: 0.8125rem;
+}
+
+.lkim-govbar-inner {
+	padding-block: 0;
+}
+
+.lkim-govbar-summary {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem 1rem;
+	padding-block: 0.5rem;
+	cursor: pointer;
+	list-style: none;
+	color: var(--lkim-ink-muted);
+}
+
+/* Hide the native disclosure triangle in both engines */
+.lkim-govbar-summary::-webkit-details-marker {
+	display: none;
+}
+
+.lkim-govbar-summary::marker {
+	content: "";
+}
+
+.lkim-govbar-summary:focus-visible {
+	outline: 3px solid var(--lkim-gold);
+	outline-offset: -3px;
+}
+
+.lkim-govbar-brand {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	min-width: 0;
+}
+
+.lkim-govbar-flag {
+	flex: none;
+	border: 1px solid var(--lkim-line);
+	border-radius: 2px;
+}
+
+.lkim-govbar-title {
+	color: var(--lkim-ink);
+	font-weight: 500;
+}
+
+.lkim-govbar-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	color: var(--lkim-blue-600);
+	font-weight: 500;
+	border: 1px solid transparent;
+	border-radius: 999px;
+	padding: 0.15rem 0.6rem;
+}
+
+.lkim-govbar-summary:hover .lkim-govbar-toggle {
+	border-color: var(--lkim-blue-300);
+	background: var(--lkim-surface);
+}
+
+.lkim-govbar-chevron {
+	width: 0.45em;
+	height: 0.45em;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: rotate(45deg) translate(-0.1em, -0.1em);
+	transition: transform 0.15s ease;
+}
+
+/* [open] sits on the <details>, which is .lkim-govbar-inner */
+.lkim-govbar-inner[open] .lkim-govbar-chevron {
+	transform: rotate(-135deg) translate(-0.1em, -0.1em);
+}
+
+.lkim-govbar-panel {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 1rem 2.5rem;
+	padding-block: 0.5rem 1.1rem;
+	border-top: 1px solid var(--lkim-line);
+}
+
+.lkim-govbar-item {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.75rem;
+}
+
+.lkim-govbar-ico {
+	flex: none;
+	display: grid;
+	place-items: center;
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	background: var(--lkim-surface);
+	border: 1px solid var(--lkim-line);
+	font-size: 0.95rem;
+	line-height: 1;
+}
+
+.lkim-govbar-h {
+	margin: 0 0 0.15rem;
+	font-weight: 600;
+	color: var(--lkim-ink);
+}
+
+.lkim-govbar-p {
+	margin: 0;
+	color: var(--lkim-ink-muted);
+	line-height: 1.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.lkim-govbar-chevron {
+		transition: none;
+	}
+}
+
+@media (max-width: 640px) {
+	.lkim-govbar-panel {
+		grid-template-columns: 1fr;
+	}
+}
+
 /* ── Skip links ──────────────────────────────────────────────────────────── */
 
 .lkim-skiplinks {

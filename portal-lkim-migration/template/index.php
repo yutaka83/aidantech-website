@@ -124,6 +124,59 @@ $footerCols = array_filter(
         <a class="lkim-skiplink" href="#site-footer"><?php echo Text::_('TPL_LKIM_SKIP_TO_FOOTER'); ?></a>
     </nav>
 
+    <?php if ($this->params->get('showGovBanner', 1)) : ?>
+        <?php
+        /*
+         * Official government site identification, per JDN / MyGovEA. The copy
+         * is theirs verbatim, in both languages.
+         *
+         * jdn.gov.my injects this with JavaScript into a fixed-position bar;
+         * here it is server-rendered in normal flow and uses <details>, so it
+         * needs no script, causes no layout shift, and is keyboard-operable
+         * on its own.
+         */
+        ?>
+        <section class="lkim-govbar" aria-label="<?php echo Text::_('TPL_LKIM_GOV_BANNER'); ?>" <?php echo $splask; ?>="gov-identification">
+            <details class="lkim-shell lkim-govbar-inner">
+                <summary class="lkim-govbar-summary">
+                    <span class="lkim-govbar-brand">
+                        <svg class="lkim-govbar-flag" viewBox="0 0 32 16" width="28" height="14" role="img" aria-label="Jalur Gemilang" focusable="false">
+                            <rect width="32" height="16" fill="#fff" />
+                            <g fill="#d10525">
+                                <path d="M16 0h16v1.14H16zM16 2.29h16v1.14H16zM16 4.57h16v1.14H16zM16 6.86h16v1.14H16z" />
+                                <path d="M0 9.14h32v1.14H0zM0 11.43h32v1.14H0zM0 13.71h32v1.14H0z" />
+                            </g>
+                            <path d="M0 0h16v9.15H0z" fill="#102a7e" />
+                            <path d="M8.39 1.71a3.06 3.06 0 1 0 0 5.72 3.4 3.4 0 1 1 0-5.72z" fill="#fad209" />
+                            <path d="m9.98 1.69.26 1.75 1-1.47-.54 1.7 1.54-.9-1.22 1.3 1.77-.14-1.65.63 1.65.64-1.77-.14 1.22 1.29-1.54-.89.53 1.69-.99-1.47-.26 1.76-.26-1.76-.99 1.47.53-1.69-1.53.89 1.21-1.29-1.77.14 1.65-.64-1.65-.63 1.77.14-1.21-1.3 1.53.9-.53-1.7 1 1.47.25-1.75z" fill="#fad209" />
+                        </svg>
+                        <span class="lkim-govbar-title"><?php echo Text::_('TPL_LKIM_GOV_BRAND'); ?></span>
+                    </span>
+                    <span class="lkim-govbar-toggle">
+                        <?php echo Text::_('TPL_LKIM_GOV_TOGGLE'); ?>
+                        <span class="lkim-govbar-chevron" aria-hidden="true"></span>
+                    </span>
+                </summary>
+                <div class="lkim-govbar-panel">
+                    <div class="lkim-govbar-item">
+                        <span class="lkim-govbar-ico" aria-hidden="true">&#127963;&#65039;</span>
+                        <div>
+                            <p class="lkim-govbar-h"><?php echo Text::_('TPL_LKIM_GOV_DOMAIN_TITLE'); ?></p>
+                            <p class="lkim-govbar-p"><?php echo Text::_('TPL_LKIM_GOV_DOMAIN_DESC'); ?></p>
+                        </div>
+                    </div>
+                    <div class="lkim-govbar-item">
+                        <span class="lkim-govbar-ico" aria-hidden="true">&#128274;</span>
+                        <div>
+                            <p class="lkim-govbar-h"><?php echo Text::_('TPL_LKIM_GOV_HTTPS_TITLE'); ?></p>
+                            <p class="lkim-govbar-p"><?php echo Text::_('TPL_LKIM_GOV_HTTPS_DESC'); ?></p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+        </section>
+    <?php endif; ?>
+
     <header class="lkim-header<?php echo $stickyHeader; ?>">
 
         <?php if ($this->params->get('showAccessBar', 1)) : ?>
