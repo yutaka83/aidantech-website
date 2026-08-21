@@ -1,0 +1,56 @@
+local_path,origin,referenced_by,http,bytes,content_type,source_url
+fonts.googleapis.com/css2-42343e0b.jpg,fonts.googleapis.com,styles.css,200,2738,text/css,"https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+images.unsplash.com/photo-1497366216548-37526070297c-34be8747.jpg,images.unsplash.com,img,200,6691,image/jpeg,https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=150&auto=format&fit=crop
+images.unsplash.com/photo-1504307651254-35680f356dfd-2daeca3c.jpg,images.unsplash.com,img,200,10519,image/jpeg,https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=150&auto=format&fit=crop
+images.unsplash.com/photo-1518837695005-2083093ee35b-836d70ea.jpg,images.unsplash.com,img,200,81523,image/jpeg,https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1200&auto=format&fit=crop
+images.unsplash.com/photo-1534604973900-c43ab4c2e0ab-6f27db4a.jpg,images.unsplash.com,img,200,256070,image/jpeg,https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?q=80&w=1200&auto=format&fit=crop
+images.unsplash.com/photo-1549399542-7e3f8b79c341-55a653c8.jpg,images.unsplash.com,img,200,15374,image/jpeg,https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=150&auto=format&fit=crop
+images.unsplash.com/photo-1596022312589-f400f7ed7bc8-c90de85b.jpg,images.unsplash.com,styles.css,200,439400,image/jpeg,https://images.unsplash.com/photo-1596022312589-f400f7ed7bc8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
+images.unsplash.com/photo-1621905251189-08b45d6a269e-bc97cbc8.jpg,images.unsplash.com,img,200,38249,image/jpeg,https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=600&auto=format&fit=crop
+picsum.photos/120-120-143a6fc6.jpg,picsum.photos,img,200,5918,image/jpeg,https://picsum.photos/120/120?random=120
+picsum.photos/120-120-15f6f5b0.jpg,picsum.photos,img,200,4738,image/jpeg,https://picsum.photos/120/120?random=113
+picsum.photos/120-120-2344a7d8.jpg,picsum.photos,img,200,3200,image/jpeg,https://picsum.photos/120/120?random=110
+picsum.photos/120-120-2c2d3f89.jpg,picsum.photos,img,200,4216,image/jpeg,https://picsum.photos/120/120?random=116
+picsum.photos/120-120-30246f6e.jpg,picsum.photos,img,200,3636,image/jpeg,https://picsum.photos/120/120?random=117
+picsum.photos/120-120-3db0a49c.jpg,picsum.photos,img,200,3803,image/jpeg,https://picsum.photos/120/120?random=115
+picsum.photos/120-120-6bbf19ba.jpg,picsum.photos,img,200,1857,image/jpeg,https://picsum.photos/120/120?random=111
+picsum.photos/120-120-76cb0d9b.jpg,picsum.photos,img,200,3338,image/jpeg,https://picsum.photos/120/120?random=114
+picsum.photos/120-120-ac0e5d18.jpg,picsum.photos,img,200,2286,image/jpeg,https://picsum.photos/120/120?random=112
+picsum.photos/120-120-b75ca33f.jpg,picsum.photos,img,200,2991,image/jpeg,https://picsum.photos/120/120?random=119
+picsum.photos/120-120-fa04f267.jpg,picsum.photos,img,200,2575,image/jpeg,https://picsum.photos/120/120?random=118
+picsum.photos/400-178-405a2f0d.jpg,picsum.photos,img,200,14200,image/jpeg,https://picsum.photos/400/178?random=85
+picsum.photos/400-178-9c2ca859.jpg,picsum.photos,img,200,10386,image/jpeg,https://picsum.photos/400/178?random=80
+picsum.photos/400-178-bc5de24f.jpg,picsum.photos,img,200,20030,image/jpeg,https://picsum.photos/400/178?random=81
+picsum.photos/400-178-ecdc6034.jpg,picsum.photos,img,200,20243,image/jpeg,https://picsum.photos/400/178?random=83
+picsum.photos/400-178-f635b7ae.jpg,picsum.photos,img,200,13385,image/jpeg,https://picsum.photos/400/178?random=82
+picsum.photos/400-178-fc25bdef.jpg,picsum.photos,img,200,13234,image/jpeg,https://picsum.photos/400/178?random=84
+picsum.photos/400-200-18abbbec.jpg,picsum.photos,img,200,18989,image/jpeg,https://picsum.photos/400/200?random=72
+picsum.photos/400-200-1f8646ea.jpg,picsum.photos,img,200,4220,image/jpeg,https://picsum.photos/400/200?random=70
+picsum.photos/400-200-2b5b2fdc.jpg,picsum.photos,img,200,16036,image/jpeg,https://picsum.photos/400/200?random=73
+picsum.photos/400-200-d2cb6d6e.jpg,picsum.photos,img,200,18237,image/jpeg,https://picsum.photos/400/200?random=74
+picsum.photos/400-200-db9322eb.jpg,picsum.photos,img,200,10146,image/jpeg,https://picsum.photos/400/200?random=75
+picsum.photos/400-200-ff646297.jpg,picsum.photos,img,200,16627,image/jpeg,https://picsum.photos/400/200?random=71
+picsum.photos/80-70-21d7cd16.jpg,picsum.photos,img,200,1905,image/jpeg,https://picsum.photos/80/70?random=66
+site/1-icon-facilities-and-offices.png,"reference site","img + index.html",200,39626,image/png,https://nurzamf.github.io/lkim/src/assets/images/1-icon-facilities-and-offices.png
+site/1-icon-funding-and-programme.png,"reference site","img + index.html",200,46028,image/png,https://nurzamf.github.io/lkim/src/assets/images/1-icon-funding-and-programme.png
+site/1-icon-industry-info.png,"reference site","img + index.html",200,40551,image/png,https://nurzamf.github.io/lkim/src/assets/images/1-icon-industry-info.png
+site/1-icon-licensing.png,"reference site","img + index.html",200,32774,image/png,https://nurzamf.github.io/lkim/src/assets/images/1-icon-licensing.png
+site/1-icon-online-services.png,"reference site","img + index.html",200,36649,image/png,https://nurzamf.github.io/lkim/src/assets/images/1-icon-online-services.png
+site/aquaculture-operator-img.png,"reference site","img + index.html",200,39678,image/png,https://nurzamf.github.io/lkim/src/assets/images/aquaculture-operator-img.png
+site/banner-MAHA-2026.png,"reference site","img + index.html",200,2066317,image/png,https://nurzamf.github.io/lkim/src/assets/images/banner-MAHA-2026.png
+site/e_dana-thumbnail.png,"reference site","img + index.html",200,114103,image/png,https://nurzamf.github.io/lkim/src/assets/images/e_dana-thumbnail.png
+site/entrepreneur-img.png,"reference site","img + index.html",200,28194,image/png,https://nurzamf.github.io/lkim/src/assets/images/entrepreneur-img.png
+site/fama.png,"reference site","img + index.html",200,12627,image/png,https://nurzamf.github.io/lkim/src/assets/images/fama.png
+site/fish-trader-img.png,"reference site","img + index.html",200,33396,image/png,https://nurzamf.github.io/lkim/src/assets/images/fish-trader-img.png
+site/fisherman-img.png,"reference site","img + index.html",200,29873,image/png,https://nurzamf.github.io/lkim/src/assets/images/fisherman-img.png
+site/general-publics-img.png,"reference site","img + index.html",200,34968,image/png,https://nurzamf.github.io/lkim/src/assets/images/general-publics-img.png
+site/kubena-thumbnail.png,"reference site","img + index.html",200,101448,image/png,https://nurzamf.github.io/lkim/src/assets/images/kubena-thumbnail.png
+site/kunita-thumbnail.png,"reference site","img + index.html",200,115636,image/png,https://nurzamf.github.io/lkim/src/assets/images/kunita-thumbnail.png
+site/licensing_icon_1782699145873.jpg,"reference site","img + index.html",200,292062,image/jpeg,https://nurzamf.github.io/lkim/src/assets/images/licensing_icon_1782699145873.jpg
+site/main-logo.png,"reference site","img + index.html",200,69649,image/png,https://nurzamf.github.io/lkim/src/assets/images/main-logo.png
+site/mygov.png,"reference site","img + index.html",200,89915,image/png,https://nurzamf.github.io/lkim/src/assets/images/mygov.png
+site/perikanan.png,"reference site","img + index.html",200,30141,image/png,https://nurzamf.github.io/lkim/src/assets/images/perikanan.png
+site/pertanian.png,"reference site","img + index.html",200,33639,image/png,https://nurzamf.github.io/lkim/src/assets/images/pertanian.png
+site/qfish-thumbnail.png,"reference site","img + index.html",200,137950,image/png,https://nurzamf.github.io/lkim/src/assets/images/qfish-thumbnail.png
+site/researcher-img.png,"reference site","img + index.html",200,38457,image/png,https://nurzamf.github.io/lkim/src/assets/images/researcher-img.png
+site/veterinar.png,"reference site","img + index.html",200,20267,image/png,https://nurzamf.github.io/lkim/src/assets/images/veterinar.png
