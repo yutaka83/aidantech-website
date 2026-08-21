@@ -69,6 +69,10 @@ Run in this order. Each step prints a summary and writes CSV reports to
 > change routes and invalidate it too. If in doubt, run steps 15–17 again;
 > all three are cheap and idempotent.
 
+`admin-overrides/` holds administrator template overrides that the scripts do
+not create — currently a fix for the Preview link in Site Template Styles; see
+its README. Copy them into `administrator/templates/atum/html/` on deploy.
+
 `Cleaner.php` converts the source markup to clean HTML — it handles both page
 builders the site used: Elementor on the newer pages, and WPBakery shortcodes
 on the older ones. `map.php` is the single source of truth for taxonomy and
