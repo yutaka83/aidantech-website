@@ -1168,6 +1168,126 @@ body.lkim.wrapper-fluid .lkim-shell {
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
+/* ── Icon card list (Popular Services) ───────────────────────────────────── */
+
+.lk-cardlist {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+	gap: var(--lkim-gap);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.lk-section-body .lk-cardlist li,
+.lk-cardlist li {
+	background: var(--lkim-surface);
+	border: 1px solid var(--lkim-line);
+	border-radius: var(--lkim-radius);
+	box-shadow: var(--lkim-shadow);
+	padding: 0;
+	overflow: hidden;
+}
+
+.lk-cardlist li > a {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.35rem;
+	height: 100%;
+	padding: 1.75rem 1.25rem 1.5rem;
+	text-align: center;
+	text-decoration: none;
+	transition: transform 0.15s ease;
+}
+
+.lk-cardlist li > a:hover,
+.lk-cardlist li > a:focus-visible {
+	transform: translateY(-2px);
+}
+
+.lk-cardlist img {
+	width: 72px;
+	height: 72px;
+	object-fit: contain;
+	margin-bottom: 0.5rem;
+}
+
+.lk-cardlist-title {
+	display: block;
+	font-weight: 700;
+	font-size: 0.8125rem;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: var(--lkim-navy);
+}
+
+.lk-cardlist-desc {
+	display: block;
+	font-size: 0.9375rem;
+	font-weight: 400;
+	line-height: 1.45;
+	color: var(--lkim-ink-muted);
+}
+
+/* ── Logo list (Related agencies) ────────────────────────────────────────── */
+
+.lk-logolist {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+	gap: 1.25rem 2rem;
+	align-items: center;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.lk-section-body .lk-logolist li,
+.lk-logolist li {
+	background: transparent;
+	border: 0;
+	box-shadow: none;
+	padding: 0;
+	text-align: center;
+}
+
+.lk-logolist a {
+	display: grid;
+	place-items: center;
+	min-height: 72px;
+	padding: 0.5rem;
+	text-decoration: none;
+}
+
+.lk-logolist img {
+	max-width: 100%;
+	max-height: 60px;
+	width: auto;
+	height: auto;
+	filter: grayscale(1);
+	opacity: 0.72;
+	transition: filter 0.15s ease, opacity 0.15s ease;
+}
+
+.lk-logolist a:hover img,
+.lk-logolist a:focus-visible img {
+	filter: none;
+	opacity: 1;
+}
+
+/* Agencies whose artwork LKIM has not supplied yet read as a plain link */
+.lk-logolist-text {
+	font-size: 0.875rem;
+	font-weight: 600;
+	line-height: 1.35;
+	color: var(--lkim-ink-muted);
+}
+
+.lk-logolist-text:hover,
+.lk-logolist-text:focus-visible {
+	color: var(--lkim-blue);
+}
+
 /* ── Profile chooser ─────────────────────────────────────────────────────── */
 
 .lk-profile-grid {
@@ -1202,44 +1322,36 @@ body.lkim.wrapper-fluid .lkim-shell {
 
 .lk-profile-ico {
 	flex: none;
-	width: 2.75rem;
-	height: 2.75rem;
+	width: 3.5rem;
+	height: 3.5rem;
 	border-radius: 50%;
-	background: var(--lkim-surface-tint);
-	display: grid;
-	place-items: center;
-	font-size: 1.35rem;
-	line-height: 1;
+	border: 1px solid var(--lkim-line);
+	background: var(--lkim-surface-tint) center / cover no-repeat;
 }
 
-/* Each audience gets its own mark, set as a glyph so the design needs no icon
-   font beyond what Cassiopeia already loads. */
-.lk-profile-ico::before {
-	content: "\1F41F";
+/* Each audience has its own portrait, from the reference design. */
+.lk-profile-ico-nelayan {
+	background-image: url("../images/profiles/fisherman.png");
 }
 
-.lk-profile-ico-nelayan::before {
-	content: "\1F6A4";
+.lk-profile-ico-peniaga {
+	background-image: url("../images/profiles/fish-trader.png");
 }
 
-.lk-profile-ico-peniaga::before {
-	content: "\1F3EA";
+.lk-profile-ico-usahawan {
+	background-image: url("../images/profiles/entrepreneur.png");
 }
 
-.lk-profile-ico-usahawan::before {
-	content: "\1F4BC";
+.lk-profile-ico-akuakultur {
+	background-image: url("../images/profiles/aquaculture-operator.png");
 }
 
-.lk-profile-ico-akuakultur::before {
-	content: "\1F420";
+.lk-profile-ico-penyelidik {
+	background-image: url("../images/profiles/researcher.png");
 }
 
-.lk-profile-ico-penyelidik::before {
-	content: "\1F4CA";
-}
-
-.lk-profile-ico-awam::before {
-	content: "\1F465";
+.lk-profile-ico-awam {
+	background-image: url("../images/profiles/general-publics.png");
 }
 
 .lk-profile-text {

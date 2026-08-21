@@ -268,12 +268,12 @@ put_module($moduleFactory, $db, 'perkhidmatan-popular', array_merge([
     'position' => 'quicklinks',
     'ordering' => 1,
     'content'  => <<<'HTML'
-<ul>
-  <li><a href="/perkhidmatan/kawalselia-pendaratan-ikan-dan-penguatkuasaan">Pelesenan &amp; Penguatkuasaan<br><small>Pengiktirafan, sijil jeti dan pengawasan kualiti</small></a></li>
-  <li><a href="/perkhidmatan/pemasaran-ikan">Maklumat Industri<br><small>Harga ikan, pasar nelayan dan CCDC</small></a></li>
-  <li><a href="/perkhidmatan/bantuan-kepada-masyarakat-nelayan">Bantuan &amp; Pembiayaan<br><small>Skim bantuan, subsidi dan Dana Nelayan</small></a></li>
-  <li><a href="/perkhidmatan/pembangunan-infrastruktur">Kemudahan &amp; Pejabat<br><small>Kompleks perikanan, jeti dan bilik sejuk</small></a></li>
-  <li><a href="/k-lain-lain/perkhidmatan-dalam-talian">Perkhidmatan Atas Talian<br><small>e-Dana, e-Pelesenan, W-ICCS dan lain-lain</small></a></li>
+<ul class="lk-cardlist">
+  <li><a href="/perkhidmatan/kawalselia-pendaratan-ikan-dan-penguatkuasaan"><img src="/images/ikon-perkhidmatan/licensing.png" alt="" width="72" height="72" loading="lazy"><span class="lk-cardlist-title">Pelesenan &amp; Penguatkuasaan</span><span class="lk-cardlist-desc">Pengiktirafan, sijil jeti dan pengawasan kualiti</span></a></li>
+  <li><a href="/perkhidmatan/pemasaran-ikan"><img src="/images/ikon-perkhidmatan/industry-info.png" alt="" width="72" height="72" loading="lazy"><span class="lk-cardlist-title">Maklumat Industri</span><span class="lk-cardlist-desc">Harga ikan, pasar nelayan dan CCDC</span></a></li>
+  <li><a href="/perkhidmatan/bantuan-kepada-masyarakat-nelayan"><img src="/images/ikon-perkhidmatan/funding-and-programme.png" alt="" width="72" height="72" loading="lazy"><span class="lk-cardlist-title">Bantuan &amp; Pembiayaan</span><span class="lk-cardlist-desc">Skim bantuan, subsidi dan Dana Nelayan</span></a></li>
+  <li><a href="/perkhidmatan/pembangunan-infrastruktur"><img src="/images/ikon-perkhidmatan/facilities-and-offices.png" alt="" width="72" height="72" loading="lazy"><span class="lk-cardlist-title">Kemudahan &amp; Pejabat</span><span class="lk-cardlist-desc">Kompleks perikanan, jeti dan bilik sejuk</span></a></li>
+  <li><a href="/k-lain-lain/perkhidmatan-dalam-talian"><img src="/images/ikon-perkhidmatan/online-services.png" alt="" width="72" height="72" loading="lazy"><span class="lk-cardlist-title">Perkhidmatan Atas Talian</span><span class="lk-cardlist-desc">e-Dana, e-Pelesenan, W-ICCS dan lain-lain</span></a></li>
 </ul>
 HTML,
     'params' => json_encode(['prepare_content' => 1, 'layout' => '_:default']),
@@ -285,15 +285,18 @@ put_module($moduleFactory, $db, 'agensi', array_merge([
     'module'   => 'mod_custom',
     'position' => 'agencies',
     'ordering' => 1,
+    // The reference design has no logo for the ministry or MARDI — it reuses
+    // the MyGov mark for the ministry, which would be wrong on a real portal.
+    // Those two are text links until LKIM supplies the artwork.
     'content'  => <<<'HTML'
-<ul>
-  <li><a href="https://www.mafs.gov.my" target="_blank" rel="noopener">Kementerian Pertanian dan Keterjaminan Makanan</a></li>
-  <li><a href="https://www.malaysia.gov.my" target="_blank" rel="noopener">MyGOV</a></li>
-  <li><a href="https://www.dof.gov.my" target="_blank" rel="noopener">Jabatan Perikanan Malaysia</a></li>
-  <li><a href="https://www.doa.gov.my" target="_blank" rel="noopener">Jabatan Pertanian</a></li>
-  <li><a href="https://www.dvs.gov.my" target="_blank" rel="noopener">Jabatan Perkhidmatan Veterinar</a></li>
-  <li><a href="https://www.fama.gov.my" target="_blank" rel="noopener">FAMA</a></li>
-  <li><a href="https://www.mardi.gov.my" target="_blank" rel="noopener">MARDI</a></li>
+<ul class="lk-logolist">
+  <li><a href="https://www.malaysia.gov.my" target="_blank" rel="noopener"><img src="/images/agensi/mygov.png" alt="MyGOV" loading="lazy"></a></li>
+  <li><a href="https://www.dof.gov.my" target="_blank" rel="noopener"><img src="/images/agensi/perikanan.png" alt="Jabatan Perikanan Malaysia" loading="lazy"></a></li>
+  <li><a href="https://www.doa.gov.my" target="_blank" rel="noopener"><img src="/images/agensi/pertanian.png" alt="Jabatan Pertanian" loading="lazy"></a></li>
+  <li><a href="https://www.dvs.gov.my" target="_blank" rel="noopener"><img src="/images/agensi/veterinar.png" alt="Jabatan Perkhidmatan Veterinar" loading="lazy"></a></li>
+  <li><a href="https://www.fama.gov.my" target="_blank" rel="noopener"><img src="/images/agensi/fama.png" alt="FAMA" loading="lazy"></a></li>
+  <li><a class="lk-logolist-text" href="https://www.mafs.gov.my" target="_blank" rel="noopener">Kementerian Pertanian dan Keterjaminan Makanan</a></li>
+  <li><a class="lk-logolist-text" href="https://www.mardi.gov.my" target="_blank" rel="noopener">MARDI</a></li>
 </ul>
 HTML,
     'params' => json_encode(['prepare_content' => 1, 'layout' => '_:default']),

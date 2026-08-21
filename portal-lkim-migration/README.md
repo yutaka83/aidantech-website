@@ -73,6 +73,9 @@ Run in this order. Each step prints a summary and writes CSV reports to
 current default) and `tpl_lkim2` (the 2026 design). `php build-package.php
 template2 tpl_lkim2-1.0.0.zip` rebuilds the second one.
 
+`site-images/` holds images that generated module content points at; copy them
+into the site `images/` folder before running `build-modules.php`.
+
 `admin-overrides/` holds administrator template overrides that the scripts do
 not create — currently a fix for the Preview link in Site Template Styles; see
 its README. Copy them into `administrator/templates/atum/html/` on deploy.
