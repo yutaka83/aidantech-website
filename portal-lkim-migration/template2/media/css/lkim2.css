@@ -1,0 +1,1397 @@
+/**
+ * Portal Rasmi LKIM — presentation layer on top of Cassiopeia.
+ *
+ * Everything is scoped to .lkim-* so Cassiopeia's Bootstrap base keeps working
+ * for component output (articles, forms, tables) without a fight.
+ */
+
+:root {
+	/* 2026 design tokens, from the reference build */
+	--lkim-navy: #003087;
+	--lkim-navy-700: #00256b;
+	--lkim-blue: #0354AB;
+	--lkim-blue-600: #024287;
+	--lkim-blue-300: #1a6fc4;
+	--lkim-teal: #00a99d;
+	--lkim-gold: #f5a623;
+	--lkim-gold-600: #d98e12;
+
+	--lkim-ink: #1a2744;
+	--lkim-ink-muted: #6b7a99;
+	--lkim-line: #dde3ed;
+	--lkim-surface: #ffffff;
+	--lkim-surface-alt: #f4f7fc;
+	--lkim-surface-tint: #eef1f7;
+
+	--lkim-radius: 12px;
+	--lkim-radius-sm: 8px;
+	--lkim-radius-pill: 100px;
+	--lkim-shadow: 0 2px 14px rgb(0 48 135 / 9%);
+	--lkim-shadow-lg: 0 8px 32px rgb(0 48 135 / 14%);
+	--lkim-shell: 1240px;
+	--lkim-gap: 1.5rem;
+
+	--lkim-text-scale: 1;
+
+	--lkim-font: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* ── High contrast mode (SPLaSK accessibility requirement) ───────────────── */
+
+html[data-lkim-contrast="on"] {
+	--lkim-navy: #000000;
+	--lkim-navy-700: #000000;
+	--lkim-blue: #000000;
+	--lkim-blue-600: #000000;
+	--lkim-blue-300: #ffff00;
+	--lkim-gold: #ffff00;
+	--lkim-ink: #000000;
+	--lkim-ink-muted: #000000;
+	--lkim-line: #000000;
+	--lkim-surface: #ffffff;
+	--lkim-surface-alt: #ffffff;
+	--lkim-surface-tint: #ffffff;
+	--lkim-shadow: none;
+}
+
+html[data-lkim-contrast="on"] body.lkim,
+html[data-lkim-contrast="on"] .lkim-band,
+html[data-lkim-contrast="on"] .lkim-card {
+	background: #fff;
+	color: #000;
+}
+
+html[data-lkim-contrast="on"] a {
+	color: #00006b;
+	text-decoration: underline;
+}
+
+html[data-lkim-contrast="on"] .lkim-header a,
+html[data-lkim-contrast="on"] .lkim-footer a {
+	color: #ffff00;
+}
+
+/* ── Base ────────────────────────────────────────────────────────────────── */
+
+body.lkim {
+	font-family: var(--lkim-font);
+	font-size: calc(1rem * var(--lkim-text-scale));
+	line-height: 1.65;
+	color: var(--lkim-ink);
+	background: var(--lkim-surface);
+	margin: 0;
+}
+
+body.lkim h1,
+body.lkim h2,
+body.lkim h3,
+body.lkim h4 {
+	color: var(--lkim-navy);
+	font-weight: 700;
+	line-height: 1.25;
+}
+
+body.lkim a {
+	color: var(--lkim-blue-600);
+}
+
+body.lkim :focus-visible {
+	outline: 3px solid var(--lkim-gold);
+	outline-offset: 2px;
+	border-radius: 2px;
+}
+
+.lkim-shell {
+	width: 100%;
+	max-width: var(--lkim-shell);
+	margin-inline: auto;
+	padding-inline: 1.25rem;
+}
+
+body.lkim.wrapper-fluid .lkim-shell {
+	max-width: none;
+}
+
+/* ── Government site identification (JDN / MyGovEA) ──────────────────────── */
+
+.lkim-govbar {
+	background: var(--lkim-surface-alt);
+	border-bottom: 1px solid var(--lkim-line);
+	font-size: 0.8125rem;
+}
+
+.lkim-govbar-inner {
+	padding-block: 0;
+}
+
+.lkim-govbar-summary {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem 1rem;
+	padding-block: 0.5rem;
+	cursor: pointer;
+	list-style: none;
+	color: var(--lkim-ink-muted);
+}
+
+/* Hide the native disclosure triangle in both engines */
+.lkim-govbar-summary::-webkit-details-marker {
+	display: none;
+}
+
+.lkim-govbar-summary::marker {
+	content: "";
+}
+
+.lkim-govbar-summary:focus-visible {
+	outline: 3px solid var(--lkim-gold);
+	outline-offset: -3px;
+}
+
+.lkim-govbar-brand {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	min-width: 0;
+}
+
+.lkim-govbar-flag {
+	flex: none;
+	border: 1px solid var(--lkim-line);
+	border-radius: 2px;
+}
+
+.lkim-govbar-title {
+	color: var(--lkim-ink);
+	font-weight: 500;
+}
+
+.lkim-govbar-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	color: var(--lkim-blue-600);
+	font-weight: 500;
+	border: 1px solid transparent;
+	border-radius: 999px;
+	padding: 0.15rem 0.6rem;
+}
+
+.lkim-govbar-summary:hover .lkim-govbar-toggle {
+	border-color: var(--lkim-blue-300);
+	background: var(--lkim-surface);
+}
+
+.lkim-govbar-chevron {
+	width: 0.45em;
+	height: 0.45em;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: rotate(45deg) translate(-0.1em, -0.1em);
+	transition: transform 0.15s ease;
+}
+
+/* [open] sits on the <details>, which is .lkim-govbar-inner */
+.lkim-govbar-inner[open] .lkim-govbar-chevron {
+	transform: rotate(-135deg) translate(-0.1em, -0.1em);
+}
+
+.lkim-govbar-panel {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 1rem 2.5rem;
+	padding-block: 0.5rem 1.1rem;
+	border-top: 1px solid var(--lkim-line);
+}
+
+.lkim-govbar-item {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.75rem;
+}
+
+.lkim-govbar-ico {
+	flex: none;
+	display: grid;
+	place-items: center;
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	background: var(--lkim-surface);
+	border: 1px solid var(--lkim-line);
+	font-size: 0.95rem;
+	line-height: 1;
+}
+
+.lkim-govbar-h {
+	margin: 0 0 0.15rem;
+	font-weight: 600;
+	color: var(--lkim-ink);
+}
+
+.lkim-govbar-p {
+	margin: 0;
+	color: var(--lkim-ink-muted);
+	line-height: 1.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.lkim-govbar-chevron {
+		transition: none;
+	}
+}
+
+@media (max-width: 640px) {
+	.lkim-govbar-panel {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ── Skip links ──────────────────────────────────────────────────────────── */
+
+.lkim-skiplinks {
+	position: absolute;
+	inset-inline-start: 0;
+	top: 0;
+	z-index: 2000;
+}
+
+.lkim-skiplink {
+	position: absolute;
+	inset-inline-start: -9999px;
+	background: var(--lkim-navy);
+	color: #fff;
+	padding: 0.75rem 1.25rem;
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+.lkim-skiplink:focus {
+	inset-inline-start: 0.5rem;
+	top: 0.5rem;
+	position: fixed;
+}
+
+/* ── Accessibility bar ───────────────────────────────────────────────────── */
+
+.lkim-accessbar {
+	background: var(--lkim-navy);
+	color: #fff;
+	font-size: 0.8125rem;
+}
+
+.lkim-accessbar-inner {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+	min-height: 40px;
+	padding-block: 0.375rem;
+}
+
+.lkim-accessbar-official {
+	margin: 0;
+	opacity: 0.9;
+}
+
+.lkim-accessbar-tools {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.lkim-textsize {
+	display: inline-flex;
+	gap: 2px;
+}
+
+.lkim-tsbtn {
+	background: rgb(255 255 255 / 12%);
+	border: 1px solid rgb(255 255 255 / 25%);
+	color: #fff;
+	border-radius: var(--lkim-radius-sm);
+	padding: 0.2rem 0.6rem;
+	font-size: 0.8125rem;
+	line-height: 1.4;
+	cursor: pointer;
+}
+
+.lkim-tsbtn:hover,
+.lkim-tsbtn[aria-pressed="true"] {
+	background: var(--lkim-gold);
+	border-color: var(--lkim-gold);
+	color: var(--lkim-navy-700);
+}
+
+.lkim-langswitch ul,
+.lkim-langswitch .mod-languages ul {
+	display: flex;
+	gap: 0.25rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.lkim-langswitch a {
+	color: #fff;
+	text-decoration: none;
+	padding: 0.2rem 0.55rem;
+	border-radius: var(--lkim-radius-sm);
+	border: 1px solid rgb(255 255 255 / 25%);
+	font-size: 0.8125rem;
+}
+
+.lkim-langswitch .lang-active a,
+.lkim-langswitch a:hover {
+	background: var(--lkim-gold);
+	color: var(--lkim-navy-700);
+	border-color: var(--lkim-gold);
+}
+
+/* ── Brand bar ───────────────────────────────────────────────────────────── */
+
+.lkim-brandbar {
+	background: var(--lkim-surface);
+	border-bottom: 1px solid var(--lkim-line);
+}
+
+.lkim-brandbar-inner {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--lkim-gap);
+	padding-block: 0.875rem;
+}
+
+.lkim-brand {
+	display: flex;
+	align-items: center;
+	gap: 0.875rem;
+	text-decoration: none;
+	color: inherit;
+	min-width: 0;
+}
+
+.lkim-jata {
+	height: 56px;
+	width: auto;
+}
+
+.lkim-logo {
+	height: 52px;
+	width: auto;
+}
+
+.lkim-brand-text {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.lkim-brand-title {
+	font-weight: 700;
+	font-size: 1.0625rem;
+	color: var(--lkim-navy);
+	line-height: 1.25;
+}
+
+.lkim-brand-tagline {
+	font-size: 0.8125rem;
+	color: var(--lkim-ink-muted);
+}
+
+.lkim-search {
+	flex: 0 1 320px;
+}
+
+.lkim-search input[type="search"],
+.lkim-search input[type="text"] {
+	width: 100%;
+	border: 1px solid var(--lkim-line);
+	border-radius: 999px;
+	padding: 0.5rem 1rem;
+	font-size: 0.9375rem;
+}
+
+/* ── Main navigation ─────────────────────────────────────────────────────── */
+
+.lkim-navbar {
+	background: var(--lkim-blue);
+	color: #fff;
+}
+
+.lkim-header.is-sticky {
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	background: var(--lkim-surface);
+}
+
+.lkim-navbar-inner {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.lkim-navtoggle {
+	display: none;
+	align-items: center;
+	gap: 0.5rem;
+	background: transparent;
+	border: 1px solid rgb(255 255 255 / 35%);
+	color: #fff;
+	border-radius: var(--lkim-radius-sm);
+	padding: 0.5rem 0.85rem;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.lkim-navtoggle-bars,
+.lkim-navtoggle-bars::before,
+.lkim-navtoggle-bars::after {
+	display: block;
+	width: 18px;
+	height: 2px;
+	background: currentColor;
+	position: relative;
+}
+
+.lkim-navtoggle-bars::before,
+.lkim-navtoggle-bars::after {
+	content: "";
+	position: absolute;
+}
+
+.lkim-navtoggle-bars::before {
+	top: -6px;
+}
+
+.lkim-navtoggle-bars::after {
+	top: 6px;
+}
+
+.lkim-mainnav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.lkim-mainnav > ul {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.lkim-mainnav a,
+.lkim-mainnav .separator {
+	display: block;
+	padding: 0.9rem 1rem;
+	color: #fff;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 0.9375rem;
+	text-transform: uppercase;
+	letter-spacing: 0.01em;
+}
+
+.lkim-mainnav > ul > li {
+	position: relative;
+}
+
+.lkim-mainnav > ul > li:hover > a,
+.lkim-mainnav > ul > li:focus-within > a,
+.lkim-mainnav > ul > li.active > a,
+.lkim-mainnav > ul > li.current > a {
+	background: var(--lkim-navy);
+}
+
+/* Dropdowns — CSS-driven so they work without JS, JS only adds touch support */
+.lkim-mainnav ul ul {
+	position: absolute;
+	top: 100%;
+	inset-inline-start: 0;
+	min-width: 260px;
+	background: var(--lkim-surface);
+	border: 1px solid var(--lkim-line);
+	border-radius: 0 0 var(--lkim-radius) var(--lkim-radius);
+	box-shadow: var(--lkim-shadow);
+	padding: 0.35rem 0;
+	z-index: 60;
+	visibility: hidden;
+	opacity: 0;
+	transform: translateY(4px);
+	transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+
+.lkim-mainnav li:hover > ul,
+.lkim-mainnav li:focus-within > ul,
+.lkim-mainnav li.is-open > ul {
+	visibility: visible;
+	opacity: 1;
+	transform: none;
+}
+
+.lkim-mainnav ul ul li {
+	position: relative;
+}
+
+.lkim-mainnav ul ul a {
+	color: var(--lkim-ink);
+	text-transform: none;
+	font-weight: 500;
+	font-size: 0.9375rem;
+	padding: 0.55rem 1rem;
+	border-inline-start: 3px solid transparent;
+}
+
+.lkim-mainnav ul ul a:hover,
+.lkim-mainnav ul ul a:focus {
+	background: var(--lkim-surface-tint);
+	border-inline-start-color: var(--lkim-gold);
+	color: var(--lkim-navy);
+}
+
+.lkim-mainnav ul ul ul {
+	top: 0;
+	inset-inline-start: 100%;
+	border-radius: var(--lkim-radius);
+}
+
+.lkim-mainnav .parent > a::after {
+	content: "";
+	display: inline-block;
+	width: 0.4em;
+	height: 0.4em;
+	margin-inline-start: 0.5em;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: rotate(45deg) translateY(-0.15em);
+	vertical-align: middle;
+}
+
+.lkim-mainnav ul ul .parent > a::after {
+	transform: rotate(-45deg);
+}
+
+/* ── Bands ───────────────────────────────────────────────────────────────── */
+
+.lkim-band {
+	padding-block: 3rem;
+}
+
+.lkim-band-quicklinks {
+	background: var(--lkim-navy);
+	color: #fff;
+	padding-block: 1.75rem;
+}
+
+.lkim-band-announcements {
+	background: var(--lkim-surface-alt);
+}
+
+.lkim-band-services {
+	background: var(--lkim-surface-tint);
+}
+
+.lkim-band-social,
+.lkim-band-agencies {
+	background: var(--lkim-surface-alt);
+}
+
+.lkim-band-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: var(--lkim-gap);
+	align-items: start;
+}
+
+/* ── Cards (chrome style "lkimcard") ─────────────────────────────────────── */
+
+.lkim-card {
+	background: var(--lkim-surface);
+	border: 1px solid var(--lkim-line);
+	border-radius: var(--lkim-radius);
+	box-shadow: var(--lkim-shadow);
+	overflow: hidden;
+}
+
+.lkim-card > .lkim-card-title {
+	margin: 0;
+	padding: 0.9rem 1.25rem;
+	font-size: 1rem;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	color: #fff;
+	background: var(--lkim-blue);
+	border-bottom: 3px solid var(--lkim-gold);
+}
+
+.lkim-card > .lkim-card-body {
+	padding: 1.25rem;
+}
+
+.lkim-card ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.lkim-card li + li {
+	border-top: 1px solid var(--lkim-line);
+}
+
+.lkim-card li > a {
+	display: block;
+	padding: 0.6rem 0;
+	text-decoration: none;
+	color: var(--lkim-ink);
+}
+
+.lkim-card li > a:hover {
+	color: var(--lkim-blue-600);
+}
+
+/* ── Main content ────────────────────────────────────────────────────────── */
+
+.lkim-main {
+	padding-block: 2.5rem 3rem;
+}
+
+.lkim-layout {
+	display: grid;
+	gap: 2rem;
+	grid-template-columns: 1fr;
+}
+
+.lkim-layout.has-sidebar-left {
+	grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+}
+
+.lkim-layout.has-sidebar-right {
+	grid-template-columns: minmax(0, 1fr) minmax(0, 300px);
+}
+
+.lkim-layout.has-sidebar-left.has-sidebar-right {
+	grid-template-columns: minmax(0, 260px) minmax(0, 1fr) minmax(0, 260px);
+}
+
+.lkim-layout.has-sidebar-left .lkim-sidebar-left {
+	order: -1;
+}
+
+.lkim-content {
+	min-width: 0;
+}
+
+.lkim-content img {
+	max-width: 100%;
+	height: auto;
+}
+
+.lkim-content table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-block: 1.25rem;
+}
+
+.lkim-content table th,
+.lkim-content table td {
+	border: 1px solid var(--lkim-line);
+	padding: 0.6rem 0.75rem;
+	vertical-align: top;
+}
+
+.lkim-content table th {
+	background: var(--lkim-surface-tint);
+	color: var(--lkim-navy);
+	text-align: start;
+}
+
+/* Wide tables scroll inside themselves rather than blowing out the page */
+.lkim-table-scroll {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.lkim-content .breadcrumb {
+	background: transparent;
+	padding: 0 0 1rem;
+	font-size: 0.875rem;
+}
+
+/* ── Peta Laman ──────────────────────────────────────────────────────────── */
+
+.lkim-sitemap h2 {
+	font-size: 1.15rem;
+	margin: 2.25rem 0 1rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 2px solid var(--lkim-gold);
+	display: inline-block;
+}
+
+.lkim-sitemap > ul {
+	columns: 2 300px;
+	column-gap: 2.5rem;
+}
+
+.lkim-sitemap ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Keep a top-level branch from splitting across the column break */
+.lkim-sitemap > ul > li {
+	break-inside: avoid;
+	margin-bottom: 1.4rem;
+}
+
+.lkim-sitemap li > span {
+	display: block;
+	font-weight: 700;
+	color: var(--lkim-navy);
+	padding: 0.25rem 0;
+}
+
+.lkim-sitemap li > a {
+	display: block;
+	padding: 0.25rem 0;
+	text-decoration: none;
+	color: var(--lkim-ink);
+}
+
+.lkim-sitemap li > a:hover,
+.lkim-sitemap li > a:focus {
+	color: var(--lkim-blue-600);
+	text-decoration: underline;
+}
+
+.lkim-sitemap ul ul {
+	margin-inline-start: 0.9rem;
+	padding-inline-start: 0.9rem;
+	border-inline-start: 1px solid var(--lkim-line);
+}
+
+.lkim-sitemap ul ul li > a {
+	font-size: 0.94rem;
+	color: var(--lkim-ink-muted);
+}
+
+@media (max-width: 640px) {
+	.lkim-sitemap > ul {
+		columns: 1;
+	}
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+
+.lkim-footer {
+	background: var(--lkim-navy);
+	color: #cdd7e6;
+	margin-top: 0;
+}
+
+.lkim-footer a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.lkim-footer a:hover {
+	color: var(--lkim-gold);
+	text-decoration: underline;
+}
+
+.lkim-footer-cols {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+	gap: 2rem;
+	padding-block: 3rem 2rem;
+}
+
+.lkim-footer-col h3,
+.lkim-footer-col .lkim-footer-title {
+	color: #fff;
+	font-size: 0.9375rem;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	margin: 0 0 0.9rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 2px solid var(--lkim-gold);
+	display: inline-block;
+}
+
+.lkim-footer-col ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.lkim-footer-col li {
+	margin-bottom: 0.4rem;
+}
+
+.lkim-footer-bar {
+	background: var(--lkim-navy-700);
+	border-top: 1px solid rgb(255 255 255 / 10%);
+	font-size: 0.8125rem;
+}
+
+.lkim-footer-bar-inner {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1.5rem;
+	align-items: center;
+	justify-content: space-between;
+	padding-block: 1rem;
+}
+
+.lkim-footer-bar p {
+	margin: 0;
+}
+
+.lkim-footer-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem 1.25rem;
+}
+
+/* ── Back to top ─────────────────────────────────────────────────────────── */
+
+.lkim-backtotop {
+	position: fixed;
+	inset-inline-end: 1.25rem;
+	bottom: 1.25rem;
+	width: 44px;
+	height: 44px;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	background: var(--lkim-blue);
+	color: #fff;
+	border-radius: 50%;
+	text-decoration: none;
+	box-shadow: var(--lkim-shadow);
+	z-index: 900;
+}
+
+.lkim-backtotop.is-visible {
+	display: flex;
+}
+
+.lkim-backtotop:hover {
+	background: var(--lkim-navy);
+	color: #fff;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 991px) {
+	.lkim-layout.has-sidebar-left,
+	.lkim-layout.has-sidebar-right,
+	.lkim-layout.has-sidebar-left.has-sidebar-right {
+		grid-template-columns: 1fr;
+	}
+
+	.lkim-layout .lkim-sidebar-left {
+		order: 0;
+	}
+
+	.lkim-navtoggle {
+		display: inline-flex;
+	}
+
+	.lkim-navbar-inner {
+		flex-direction: column;
+		align-items: stretch;
+		padding-block: 0.6rem;
+	}
+
+	.lkim-mainnav {
+		display: none;
+	}
+
+	.lkim-mainnav.is-open {
+		display: block;
+		padding-bottom: 0.5rem;
+	}
+
+	.lkim-mainnav > ul {
+		flex-direction: column;
+	}
+
+	.lkim-mainnav ul ul {
+		position: static;
+		visibility: visible;
+		opacity: 1;
+		transform: none;
+		box-shadow: none;
+		border: 0;
+		border-radius: 0;
+		background: rgb(255 255 255 / 8%);
+		padding: 0;
+		min-width: 0;
+	}
+
+	.lkim-mainnav ul ul a {
+		color: #fff;
+		padding-inline-start: 2rem;
+	}
+
+	.lkim-mainnav ul ul a:hover {
+		background: rgb(255 255 255 / 12%);
+		color: #fff;
+	}
+
+	.lkim-mainnav ul ul ul a {
+		padding-inline-start: 3rem;
+	}
+}
+
+@media (max-width: 640px) {
+	.lkim-accessbar-inner {
+		justify-content: center;
+	}
+
+	.lkim-accessbar-official {
+		flex-basis: 100%;
+		text-align: center;
+	}
+
+	.lkim-brandbar-inner {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.lkim-search {
+		flex-basis: 100%;
+		width: 100%;
+	}
+
+	.lkim-jata,
+	.lkim-logo {
+		height: 44px;
+	}
+
+	.lkim-band {
+		padding-block: 2rem;
+	}
+}
+
+@media print {
+	.lkim-accessbar,
+	.lkim-navbar,
+	.lkim-search,
+	.lkim-backtotop,
+	.lkim-band-social {
+		display: none !important;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.lkim-mainnav ul ul {
+		transition: none;
+	}
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   2026 homepage design
+   Bands are prefixed .lk- to stay distinct from the shared .lkim- chrome.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+
+.lk-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.55rem;
+	padding: 0.85rem 1.75rem;
+	border-radius: var(--lkim-radius-pill);
+	font-weight: 600;
+	font-size: 0.975rem;
+	text-decoration: none;
+	border: 1px solid transparent;
+	transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.lk-btn-primary {
+	background: var(--lkim-gold);
+	color: #10203d;
+}
+
+.lk-btn-primary:hover,
+.lk-btn-primary:focus {
+	background: var(--lkim-gold-600);
+	color: #10203d;
+	transform: translateY(-1px);
+}
+
+.lk-btn-arrow {
+	width: 0.5em;
+	height: 0.5em;
+	border-top: 2px solid currentColor;
+	border-right: 2px solid currentColor;
+	transform: rotate(45deg);
+}
+
+/* ── Hero ────────────────────────────────────────────────────────────────── */
+
+.lk-hero {
+	position: relative;
+	display: flex;
+	align-items: center;
+	min-height: 480px;
+	padding-block: 5rem;
+	color: #fff;
+	background:
+		linear-gradient(rgb(10 20 42 / 78%), rgb(10 20 42 / 62%)),
+		var(--lk-hero-image, none) center / cover no-repeat,
+		var(--lkim-navy);
+}
+
+.lk-hero-inner {
+	width: 100%;
+}
+
+.lk-hero-title {
+	max-width: 18ch;
+	margin: 0 0 1rem;
+	font-size: clamp(2rem, 5vw, 3rem);
+	font-weight: 800;
+	line-height: 1.12;
+	letter-spacing: -0.02em;
+	color: #fff;
+	text-wrap: balance;
+	text-shadow: 0 2px 10px rgb(0 0 0 / 45%);
+}
+
+.lk-hero-lead {
+	max-width: 58ch;
+	margin: 0 0 1.75rem;
+	font-size: clamp(1rem, 1.6vw, 1.125rem);
+	line-height: 1.6;
+	color: rgb(255 255 255 / 92%);
+	text-shadow: 0 1px 6px rgb(0 0 0 / 40%);
+}
+
+.lk-hero-actions {
+	margin: 0;
+}
+
+/* ── Bands ───────────────────────────────────────────────────────────────── */
+
+.lk-band {
+	padding-block: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.lk-band-popular,
+.lk-band-dashboard,
+.lk-band-highlights {
+	background: var(--lkim-surface);
+}
+
+.lk-band-profiles,
+.lk-band-news,
+.lk-band-social,
+.lk-band-agencies {
+	background: var(--lkim-surface-alt);
+}
+
+.lk-band-services {
+	background: var(--lkim-surface-tint);
+}
+
+.lk-band-head {
+	max-width: 62ch;
+	margin: 0 auto 2.25rem;
+	text-align: center;
+}
+
+.lk-band-title {
+	margin: 0 0 0.5rem;
+	font-size: clamp(1.5rem, 3vw, 1.9rem);
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	color: var(--lkim-ink);
+	text-wrap: balance;
+}
+
+.lk-band-lead {
+	margin: 0;
+	color: var(--lkim-ink-muted);
+	line-height: 1.6;
+}
+
+/* Module bands rendered through the lkimsection chrome */
+.lk-section + .lk-section {
+	margin-top: 3rem;
+}
+
+.lk-section-body > div,
+.lk-section-body > ul {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: var(--lkim-gap);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.lk-section-body li {
+	background: var(--lkim-surface);
+	border: 1px solid var(--lkim-line);
+	border-radius: var(--lkim-radius);
+	box-shadow: var(--lkim-shadow);
+	padding: 1.25rem 1.35rem;
+}
+
+.lk-section-body li + li {
+	border-top: 1px solid var(--lkim-line);
+}
+
+.lk-section-body li > a {
+	color: var(--lkim-ink);
+	font-weight: 600;
+	text-decoration: none;
+	padding: 0;
+}
+
+.lk-section-body li > a:hover {
+	color: var(--lkim-blue);
+}
+
+/* News bands read better as a wider card grid */
+.lk-news-grid .lk-section-body > div,
+.lk-news-grid .lk-section-body > ul {
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* ── Profile chooser ─────────────────────────────────────────────────────── */
+
+.lk-profile-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	gap: var(--lkim-gap);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.lk-profile {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	height: 100%;
+	padding: 1.35rem 1.4rem;
+	background: var(--lkim-surface);
+	border: 1px solid var(--lkim-line);
+	border-radius: var(--lkim-radius);
+	box-shadow: var(--lkim-shadow);
+	text-decoration: none;
+	transition: box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+}
+
+.lk-profile:hover,
+.lk-profile:focus-visible {
+	box-shadow: var(--lkim-shadow-lg);
+	border-color: var(--lkim-blue-300);
+	transform: translateY(-2px);
+}
+
+.lk-profile-ico {
+	flex: none;
+	width: 2.75rem;
+	height: 2.75rem;
+	border-radius: 50%;
+	background: var(--lkim-surface-tint);
+	display: grid;
+	place-items: center;
+	font-size: 1.35rem;
+	line-height: 1;
+}
+
+/* Each audience gets its own mark, set as a glyph so the design needs no icon
+   font beyond what Cassiopeia already loads. */
+.lk-profile-ico::before {
+	content: "\1F41F";
+}
+
+.lk-profile-ico-nelayan::before {
+	content: "\1F6A4";
+}
+
+.lk-profile-ico-peniaga::before {
+	content: "\1F3EA";
+}
+
+.lk-profile-ico-usahawan::before {
+	content: "\1F4BC";
+}
+
+.lk-profile-ico-akuakultur::before {
+	content: "\1F420";
+}
+
+.lk-profile-ico-penyelidik::before {
+	content: "\1F4CA";
+}
+
+.lk-profile-ico-awam::before {
+	content: "\1F465";
+}
+
+.lk-profile-text {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+	min-width: 0;
+}
+
+.lk-profile-name {
+	font-weight: 700;
+	color: var(--lkim-ink);
+	text-transform: uppercase;
+	font-size: 0.8125rem;
+	letter-spacing: 0.04em;
+}
+
+.lk-profile-desc {
+	color: var(--lkim-ink-muted);
+	font-size: 0.9375rem;
+	line-height: 1.4;
+}
+
+/* ── Statistics dashboard ────────────────────────────────────────────────── */
+
+.lk-stat-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: var(--lkim-gap);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.lk-stat {
+	background: var(--lkim-surface);
+	border: 1px solid var(--lkim-line);
+	border-radius: var(--lkim-radius);
+	box-shadow: var(--lkim-shadow);
+	padding: 1.75rem 1.25rem;
+	text-align: center;
+}
+
+.lk-stat-value {
+	display: block;
+	font-size: clamp(1.75rem, 4vw, 2.375rem);
+	font-weight: 800;
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+	color: var(--lkim-navy);
+	font-variant-numeric: tabular-nums;
+}
+
+.lk-stat-label {
+	display: block;
+	margin-top: 0.5rem;
+	font-size: 0.875rem;
+	color: var(--lkim-ink-muted);
+}
+
+.lk-stat-note {
+	margin: 1.5rem 0 0;
+	text-align: center;
+	font-size: 0.8125rem;
+	color: var(--lkim-ink-muted);
+	font-style: italic;
+}
+
+/* ── Agencies strip ──────────────────────────────────────────────────────── */
+
+.lk-band-agencies .lk-section-body > div,
+.lk-band-agencies .lk-section-body > ul {
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	align-items: center;
+}
+
+.lk-band-agencies .lk-section-body li {
+	background: transparent;
+	border: 0;
+	box-shadow: none;
+	text-align: center;
+}
+
+.lk-band-agencies img {
+	max-height: 56px;
+	width: auto;
+	filter: grayscale(1);
+	opacity: 0.75;
+	transition: filter 0.15s ease, opacity 0.15s ease;
+}
+
+.lk-band-agencies a:hover img {
+	filter: none;
+	opacity: 1;
+}
+
+/* ── The 2026 look applied to the shared chrome ──────────────────────────── */
+
+.lkim2 .lkim-navbar {
+	background: var(--lkim-navy);
+}
+
+.lkim2 .lkim-mainnav > ul > li:hover > a,
+.lkim2 .lkim-mainnav > ul > li:focus-within > a,
+.lkim2 .lkim-mainnav > ul > li.active > a,
+.lkim2 .lkim-mainnav > ul > li.current > a {
+	background: var(--lkim-blue);
+}
+
+.lkim2 .lkim-card {
+	border-radius: var(--lkim-radius);
+}
+
+.lkim2 .lkim-card > .lkim-card-title {
+	background: var(--lkim-navy);
+	border-bottom-color: var(--lkim-gold);
+}
+
+.lkim2 .lkim-search input[type="search"],
+.lkim2 .lkim-search input[type="text"] {
+	border-radius: var(--lkim-radius-pill);
+}
+
+.lkim2 .lkim-backtotop {
+	background: var(--lkim-navy);
+}
+
+/* On the homepage the bands carry the page; the component area is furniture */
+.lkim2.is-home .lkim-main {
+	padding-block: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.lk-btn,
+	.lk-profile,
+	.lk-band-agencies img {
+		transition: none;
+	}
+
+	.lk-btn-primary:hover,
+	.lk-profile:hover {
+		transform: none;
+	}
+}
+
+@media (max-width: 640px) {
+	.lk-hero {
+		min-height: 380px;
+		padding-block: 3.5rem;
+	}
+
+	.lk-band-head {
+		text-align: start;
+	}
+}

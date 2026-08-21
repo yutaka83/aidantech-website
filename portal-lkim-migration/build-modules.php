@@ -260,6 +260,45 @@ HTML,
     'params' => json_encode(['prepare_content' => 1, 'backgroundimage' => '', 'layout' => '_:default']),
 ], $home), $created, $updated, $failed);
 
+// "Popular Services" — the quicklinks band on the 2026 homepage. Plain links
+// to menu paths that already exist, so nothing here can rot independently.
+put_module($moduleFactory, $db, 'perkhidmatan-popular', array_merge([
+    'title'    => 'Perkhidmatan Popular',
+    'module'   => 'mod_custom',
+    'position' => 'quicklinks',
+    'ordering' => 1,
+    'content'  => <<<'HTML'
+<ul>
+  <li><a href="/perkhidmatan/kawalselia-pendaratan-ikan-dan-penguatkuasaan">Pelesenan &amp; Penguatkuasaan<br><small>Pengiktirafan, sijil jeti dan pengawasan kualiti</small></a></li>
+  <li><a href="/perkhidmatan/pemasaran-ikan">Maklumat Industri<br><small>Harga ikan, pasar nelayan dan CCDC</small></a></li>
+  <li><a href="/perkhidmatan/bantuan-kepada-masyarakat-nelayan">Bantuan &amp; Pembiayaan<br><small>Skim bantuan, subsidi dan Dana Nelayan</small></a></li>
+  <li><a href="/perkhidmatan/pembangunan-infrastruktur">Kemudahan &amp; Pejabat<br><small>Kompleks perikanan, jeti dan bilik sejuk</small></a></li>
+  <li><a href="/k-lain-lain/perkhidmatan-dalam-talian">Perkhidmatan Atas Talian<br><small>e-Dana, e-Pelesenan, W-ICCS dan lain-lain</small></a></li>
+</ul>
+HTML,
+    'params' => json_encode(['prepare_content' => 1, 'layout' => '_:default']),
+], $home), $created, $updated, $failed);
+
+// Related agencies strip.
+put_module($moduleFactory, $db, 'agensi', array_merge([
+    'title'    => 'Agensi Berkaitan',
+    'module'   => 'mod_custom',
+    'position' => 'agencies',
+    'ordering' => 1,
+    'content'  => <<<'HTML'
+<ul>
+  <li><a href="https://www.mafs.gov.my" target="_blank" rel="noopener">Kementerian Pertanian dan Keterjaminan Makanan</a></li>
+  <li><a href="https://www.malaysia.gov.my" target="_blank" rel="noopener">MyGOV</a></li>
+  <li><a href="https://www.dof.gov.my" target="_blank" rel="noopener">Jabatan Perikanan Malaysia</a></li>
+  <li><a href="https://www.doa.gov.my" target="_blank" rel="noopener">Jabatan Pertanian</a></li>
+  <li><a href="https://www.dvs.gov.my" target="_blank" rel="noopener">Jabatan Perkhidmatan Veterinar</a></li>
+  <li><a href="https://www.fama.gov.my" target="_blank" rel="noopener">FAMA</a></li>
+  <li><a href="https://www.mardi.gov.my" target="_blank" rel="noopener">MARDI</a></li>
+</ul>
+HTML,
+    'params' => json_encode(['prepare_content' => 1, 'layout' => '_:default']),
+], $home), $created, $updated, $failed);
+
 put_module($moduleFactory, $db, 'arkib', array_merge([
     'title'    => 'Arkib',
     'module'   => 'mod_articles_archive',

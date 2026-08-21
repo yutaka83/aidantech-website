@@ -69,6 +69,10 @@ Run in this order. Each step prints a summary and writes CSV reports to
 > change routes and invalidate it too. If in doubt, run steps 15–17 again;
 > all three are cheap and idempotent.
 
+`template/` and `template2/` hold the two site templates: `tpl_lkim` (the
+current default) and `tpl_lkim2` (the 2026 design). `php build-package.php
+template2 tpl_lkim2-1.0.0.zip` rebuilds the second one.
+
 `admin-overrides/` holds administrator template overrides that the scripts do
 not create — currently a fix for the Preview link in Site Template Styles; see
 its README. Copy them into `administrator/templates/atum/html/` on deploy.

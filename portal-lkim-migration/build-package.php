@@ -7,8 +7,8 @@
  * does not understand.
  */
 
-$root = __DIR__ . '/template';
-$out  = __DIR__ . '/tpl_lkim-1.0.0.zip';
+$root = __DIR__ . '/' . ($argv[1] ?? 'template');
+$out  = __DIR__ . '/' . ($argv[2] ?? 'tpl_lkim-1.0.0.zip');
 
 @unlink($out);
 

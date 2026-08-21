@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="template" client="site">
+	<name>lkim2</name>
+	<version>1.0.0</version>
+	<creationDate>2026-08</creationDate>
+	<author>Aidan Technologies</author>
+	<authorEmail>hidayati@aidan.my</authorEmail>
+	<copyright>(C) 2026 Lembaga Kemajuan Ikan Malaysia</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<description>Portal Rasmi LKIM - 2026 design. Child of Cassiopeia, styled to SPLaSK / MyGovEA expectations, with the hero, service chooser and statistics dashboard homepage layout.</description>
+	<parent>cassiopeia</parent>
+	<inheritable>0</inheritable>
+	<files>
+		<filename>index.php</filename>
+		<filename>joomla.asset.json</filename>
+		<filename>templateDetails.xml</filename>
+		<folder>html</folder>
+	</files>
+	<media destination="templates/site/lkim2" folder="media">
+		<folder>css</folder>
+		<folder>js</folder>
+		<folder>images</folder>
+	</media>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/tpl_lkim2.ini</language>
+		<language tag="en-GB">en-GB/tpl_lkim2.sys.ini</language>
+		<language tag="ms-MY">ms-MY/tpl_lkim2.ini</language>
+	</languages>
+	<positions>
+		<!-- Cassiopeia inherited positions -->
+		<position>topbar</position>
+		<position>below-top</position>
+		<position>menu</position>
+		<position>search</position>
+		<position>banner</position>
+		<position>top-a</position>
+		<position>top-b</position>
+		<position>main-top</position>
+		<position>main-bottom</position>
+		<position>breadcrumbs</position>
+		<position>sidebar-left</position>
+		<position>sidebar-right</position>
+		<position>bottom-a</position>
+		<position>bottom-b</position>
+		<position>footer</position>
+		<position>debug</position>
+		<position>error-403</position>
+		<position>error-404</position>
+		<!-- LKIM portal positions -->
+		<position>quicklinks</position>
+		<position>announcements</position>
+		<position>services</position>
+		<position>highlights</position>
+		<position>agencies</position>
+		<position>social</position>
+		<position>footer-a</position>
+		<position>footer-b</position>
+		<position>footer-c</position>
+		<position>footer-d</position>
+	</positions>
+	<config>
+		<fields name="params">
+			<fieldset name="basic" label="Portal">
+				<field name="logoFile" type="media" schemes="http,https,data,file" validate="url" relative="true" default="" label="Logo portal" />
+				<field name="jataFile" type="media" schemes="http,https,data,file" validate="url" relative="true" default="" label="Logo Jata Negara / kementerian" />
+				<field name="siteTitle" type="text" default="Lembaga Kemajuan Ikan Malaysia" label="Tajuk portal" filter="string" />
+				<field name="siteDescription" type="text" default="Kementerian Pertanian dan Keterjaminan Makanan" label="Tagline" filter="string" />
+				<field name="fluidContainer" type="radio" layout="joomla.form.field.radio.switcher" default="0" label="Lebar kandungan">
+					<option value="0">Statik</option>
+					<option value="1">Penuh</option>
+				</field>
+				<field name="stickyHeader" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="Header melekat">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="homepage" label="Laman Utama">
+				<field name="heroImage" type="media" schemes="http,https,data,file" validate="url" relative="true"
+					default="media/templates/site/lkim2/images/hero-lkim.jpg" label="Imej hero" />
+				<field name="heroTitle" type="text" default="" filter="string"
+					label="Tajuk hero" description="Kosongkan untuk menggunakan teks lalai dari fail bahasa." />
+				<field name="heroLead" type="textarea" rows="3" default="" filter="string" label="Teks pengenalan hero" />
+				<field name="heroCtaText" type="text" default="" filter="string" label="Teks butang hero" />
+				<field name="heroCtaLink" type="text" default="/perkhidmatan" filter="string" label="Pautan butang hero" />
+
+				<field name="showProfiles" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
+					label="Bahagian &quot;Pilih Profil Anda&quot;">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field name="showDashboard" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
+					label="Papan data perangkaan"
+					description="Angka ditetapkan di bawah. Sambungkan kepada sumber data sebenar sebelum go-live.">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="statLanding" type="text" default="1,248" label="Pendaratan hari ini (MT)" />
+				<field name="statPrice" type="text" default="14.60" label="Harga purata ikan (RM/kg)" />
+				<field name="statMarket" type="text" default="8.4j" label="Nilai pasaran (RM)" />
+				<field name="statComplex" type="text" default="72" label="Kompleks perikanan" />
+				<field name="statNote" type="text" default="" filter="string" label="Nota sumber data" />
+			</fieldset>
+			<fieldset name="splask" label="SPLaSK / MyGovEA">
+				<field name="showGovBanner" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
+					label="Pengenalan portal rasmi kerajaan"
+					description="Bar &quot;Portal Rasmi Kerajaan Malaysia&quot; dengan teks rasmi JDN / MyGovEA.">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="showAccessBar" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="Bar kebolehaksesan (saiz teks + kontras)">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="showLastUpdate" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="Papar tarikh kemas kini">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="showVisitorCounter" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="Papar kaunter pelawat">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="splaskAttribute" type="text" default="data-splask" label="Atribut penanda SPLaSK"
+					description="Nama atribut HTML yang digunakan untuk menanda elemen SPLaSK. Tukar kepada nama yang ditetapkan dalam pekeliling semasa jika berbeza." />
+				<field name="agencyAddress" type="textarea" rows="4" default="" label="Alamat agensi" filter="raw" />
+				<field name="agencyPhone" type="text" default="" label="Telefon" />
+				<field name="agencyFax" type="text" default="" label="Faks" />
+				<field name="agencyEmail" type="text" default="" label="E-mel" />
+			</fieldset>
+			<fieldset name="advanced" label="JGLOBAL_FIELDSET_ADVANCED">
+				<field name="backTop" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="TPL_CASSIOPEIA_BACKTOTOP_LABEL">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
