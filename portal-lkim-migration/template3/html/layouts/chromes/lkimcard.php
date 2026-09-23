@@ -3,7 +3,7 @@
 /**
  * Module chrome: a titled card used throughout the portal bands.
  *
- * @package  Templates.lkim
+ * @package  Templates.lkim3
  */
 
 defined('_JEXEC') or die;

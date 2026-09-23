@@ -7,7 +7,7 @@
  * beneath it in a grid, matching the "Popular Services" / "News &
  * Announcements" pattern of the 2026 design.
  *
- * @package  Templates.lkim2
+ * @package  Templates.lkim3
  */
 
 defined('_JEXEC') or die;

@@ -3,7 +3,7 @@
 /**
  * Module chrome: a plain footer column - underlined heading, no card frame.
  *
- * @package  Templates.lkim
+ * @package  Templates.lkim3
  */
 
 defined('_JEXEC') or die;
