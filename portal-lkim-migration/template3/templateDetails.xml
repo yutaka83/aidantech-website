@@ -231,11 +231,17 @@
 					label="This code runs on every page"
 					description="Both fields below are written to the page exactly as entered, with no filtering. Keep &quot;Edit&quot; permission on com_templates with Super Users only. For anything substantial, use the user.css / user.js files below so the code stays under version control." />
 
+				<!--
+					Joomla echoes field descriptions unescaped (layouts/joomla/form/renderfield.php),
+					so tag names here are double-encoded: &amp;lt; reaches the browser as &lt; and
+					renders as visible text. Writing &lt;style&gt; directly would open a real style
+					element and swallow the rest of the admin page.
+				-->
 				<field name="customCss" type="textarea" rows="12" filter="raw" default="" label="Custom CSS"
-					description="Loaded after lkim3.css, so it overrides the template without needing !important. Do not include &lt;style&gt; tags." />
+					description="Loaded after lkim3.css, so it overrides the template without needing !important. Do not include &amp;lt;style&amp;gt; tags." />
 
 				<field name="customJs" type="textarea" rows="12" filter="raw" default="" label="Custom JavaScript"
-					description="Do not include &lt;script&gt; tags, and avoid strings containing &lt;/script&gt;." />
+					description="Do not include &amp;lt;script&amp;gt; tags, and avoid strings containing &amp;lt;/script&amp;gt;." />
 
 				<field name="customJsPosition" type="list" default="body" label="Custom JavaScript position"
 					description="&quot;End of body&quot; runs after the page is drawn and is right for almost all code. Choose &quot;In head&quot; only for code that must run earlier, such as a measurement tag.">
