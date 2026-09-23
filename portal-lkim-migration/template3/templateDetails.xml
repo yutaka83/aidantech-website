@@ -63,160 +63,162 @@
 		<fields name="params">
 			<fieldset name="basic" label="Portal">
 				<field name="logoFile" type="media" schemes="http,https,data,file" validate="url" relative="true"
-					default="media/templates/site/lkim3/images/logo.png" label="Logo portal" />
-				<field name="jataFile" type="media" schemes="http,https,data,file" validate="url" relative="true" default="" label="Logo Jata Negara / kementerian" />
-				<field name="siteTitle" type="text" default="Lembaga Kemajuan Ikan Malaysia" label="Tajuk portal" filter="string" />
+					default="media/templates/site/lkim3/images/logo.png" label="Portal logo" />
+				<field name="jataFile" type="media" schemes="http,https,data,file" validate="url" relative="true" default="" label="Jata Negara / ministry crest" />
+				<field name="siteTitle" type="text" default="Lembaga Kemajuan Ikan Malaysia" label="Portal title" filter="string" />
 				<field name="siteDescription" type="text" default="Kementerian Pertanian dan Keterjaminan Makanan" label="Tagline" filter="string" />
-				<field name="fluidContainer" type="radio" layout="joomla.form.field.radio.switcher" default="0" label="Lebar kandungan">
-					<option value="0">Statik</option>
-					<option value="1">Penuh</option>
+				<field name="fluidContainer" type="radio" layout="joomla.form.field.radio.switcher" default="0" label="Content width">
+					<option value="0">Fixed</option>
+					<option value="1">Full width</option>
 				</field>
 				<field name="stickyHeader" type="radio" layout="joomla.form.field.radio.switcher" default="0" filter="integer"
-					label="Header melekat"
-					description="Reka bentuk ini meletakkan header terapung di atas hero. Hidupkan hanya jika header perlu kekal semasa menatal.">
+					label="Sticky header"
+					description="This design floats the header over the hero. Turn this on only if the header must stay visible while scrolling.">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="menuSource" type="list" default="design" label="Sumber menu utama"
-					description="&quot;Reka bentuk LKIM-3&quot; melukis mega menu terus daripada menu yang dipilih di bawah, tanpa menyentuh kedudukan modul &quot;menu&quot;.">
-					<option value="design">Reka bentuk LKIM-3</option>
-					<option value="module">Kedudukan modul &quot;menu&quot;</option>
+				<field name="menuSource" type="list" default="design" label="Main menu source"
+					description="&quot;LKIM-3 design&quot; draws the mega menu straight from the menu selected below, leaving the &quot;menu&quot; module position untouched.">
+					<option value="design">LKIM-3 design</option>
+					<option value="module">&quot;menu&quot; module position</option>
 				</field>
 				<field name="menuType" type="menu" clientid="0" default="mainmenu" label="Menu" showon="menuSource:design" />
-				<field name="utilFaq" type="text" default="/pk-soalan-lazim" filter="string" label="Pautan ikon Soalan Lazim" />
-				<field name="utilContact" type="text" default="/pk-hubungi-kami" filter="string" label="Pautan ikon Hubungi" />
-				<field name="utilFeedback" type="text" default="/pk-maklum-balas" filter="string" label="Pautan ikon Maklum Balas" />
-				<field name="utilSitemap" type="text" default="/pk-peta-laman" filter="string" label="Pautan ikon Peta Laman" />
+				<field name="utilFaq" type="text" default="/pk-soalan-lazim" filter="string" label="FAQ icon link" />
+				<field name="utilContact" type="text" default="/pk-hubungi-kami" filter="string" label="Contact icon link" />
+				<field name="utilFeedback" type="text" default="/pk-maklum-balas" filter="string" label="Feedback icon link" />
+				<field name="utilSitemap" type="text" default="/pk-peta-laman" filter="string" label="Sitemap icon link" />
 			</fieldset>
-			<fieldset name="homepage" label="Laman Utama">
+			<fieldset name="homepage" label="Homepage">
 				<field name="heroImage" type="media" schemes="http,https,data,file" validate="url" relative="true"
-					default="media/templates/site/lkim3/images/banner.jpg" label="Imej hero"
-					description="Latar penuh bagi hero laman utama. Nisbah lebar disyorkan 1920x1080." />
-				<field name="heroAlt" type="text" default="" filter="string" label="Teks alternatif imej hero" />
+					default="media/templates/site/lkim3/images/banner.jpg" label="Hero image"
+					description="Full-bleed background for the homepage hero. 1920x1080 or wider is recommended." />
+				<field name="heroAlt" type="text" default="" filter="string" label="Hero image alt text" />
 				<field name="heroTitle" type="text" default="" filter="string"
-					label="Tajuk hero"
-					description="Kosongkan untuk menggunakan teks lalai dari fail bahasa. Bungkus perkataan dengan {a}...{/a} untuk warna oren." />
-				<field name="heroLead" type="textarea" rows="3" default="" filter="string" label="Teks pengenalan hero" />
-				<field name="heroCtaText" type="text" default="" filter="string" label="Butang utama hero" />
-				<field name="heroCtaLink" type="text" default="/pk-maklum-balas" filter="string" label="Pautan butang utama" />
-				<field name="heroCta2Text" type="text" default="" filter="string" label="Butang kedua hero" />
-				<field name="heroCta2Link" type="text" default="/k-perkhidmatan" filter="string" label="Pautan butang kedua" />
+					label="Hero heading"
+					description="Leave empty to use the default from the language file. Wrap words in {a}...{/a} for the orange accent, and use {br} to force a line break." />
+				<field name="heroLead" type="textarea" rows="3" default="" filter="string" label="Hero intro text" />
+				<field name="heroCtaText" type="text" default="" filter="string" label="Hero primary button" />
+				<field name="heroCtaLink" type="text" default="/pk-maklum-balas" filter="string" label="Primary button link" />
+				<field name="heroCta2Text" type="text" default="" filter="string" label="Hero secondary button" />
+				<field name="heroCta2Link" type="text" default="/k-perkhidmatan" filter="string" label="Secondary button link" />
 
 				<field name="bandSourceNote" type="note" class="alert alert-info"
-					label="Sumber kandungan jalur"
-					description="Setiap jalur laman utama boleh mengambil kandungan dari reka bentuk LKIM-3 (tetapan di bawah) atau dari kedudukan modulnya. Lalai ialah reka bentuk, supaya laman utama sepadan dengan mockup sebaik dipasang." />
+					label="Where each band gets its content"
+					description="Every homepage band can draw its content either from the LKIM-3 design (the settings below) or from its module position. The design is the default, so the homepage matches the mockup as soon as the template is installed." />
 
 				<field name="showGateways" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
-					label="Kad khalayak (bertindih hero)">
+					label="Audience cards (overlapping the hero)">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="srcGateways" type="list" default="design" label="Sumber kad khalayak"
+				<field name="srcGateways" type="list" default="design" label="Audience card source"
 					showon="showGateways:1">
-					<option value="design">Reka bentuk LKIM-3</option>
-					<option value="module">Kedudukan modul &quot;quicklinks&quot;</option>
+					<option value="design">LKIM-3 design</option>
+					<option value="module">&quot;quicklinks&quot; module position</option>
 				</field>
-				<field name="gateway1Link" type="text" default="/k-perkhidmatan" filter="string" label="Pautan kad 1 (Umum / Orang Awam)" />
-				<field name="gateway2Link" type="text" default="/k-perkhidmatan-bantuan-masyarakat-nelayan" filter="string" label="Pautan kad 2 (Pembangunan Nelayan)" />
-				<field name="gateway3Link" type="text" default="/k-info-lkim-organisasi" filter="string" label="Pautan kad 3 (Keluarga LKIM)" />
+				<field name="gateway1Link" type="text" default="/k-perkhidmatan" filter="string" label="Card 1 link (Umum / Orang Awam)" />
+				<field name="gateway2Link" type="text" default="/k-perkhidmatan-bantuan-masyarakat-nelayan" filter="string" label="Card 2 link (Pembangunan Nelayan)" />
+				<field name="gateway3Link" type="text" default="/k-info-lkim-organisasi" filter="string" label="Card 3 link (Keluarga LKIM)" />
 
 				<field name="showServices" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
-					label="Bahagian perkhidmatan"
-					description="Kad utama beserta empat kad sokongan.">
+					label="Services section"
+					description="One feature card plus four supporting cards.">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="srcServices" type="list" default="design" label="Sumber perkhidmatan" showon="showServices:1">
-					<option value="design">Reka bentuk LKIM-3</option>
-					<option value="module">Kedudukan modul &quot;services&quot;</option>
+				<field name="srcServices" type="list" default="design" label="Services source" showon="showServices:1">
+					<option value="design">LKIM-3 design</option>
+					<option value="module">&quot;services&quot; module position</option>
 				</field>
-				<field name="servicesMoreLink" type="text" default="/k-perkhidmatan" filter="string" label="Pautan &quot;Lihat Semua Perkhidmatan&quot;" />
-				<field name="featureLink" type="text" default="/perkhidmatan/bantuan-kepada-masyarakat-nelayan/bantuan-sara-hidup-nelayan" filter="string" label="Pautan butang kad perkhidmatan utama" />
-				<field name="svcLink1" type="text" default="/k-perkhidmatan-pemasaran-ikan" filter="string" label="Pautan kad: Pasaran &amp; Pendapatan" />
-				<field name="svcLink2" type="text" default="/perkhidmatan/bantuan-kepada-masyarakat-nelayan/dana-nelayan" filter="string" label="Pautan kad: Dana Nelayan" />
-				<field name="svcLink3" type="text" default="/perkhidmatan/bantuan-kepada-masyarakat-nelayan/skim-keselamatan-sosial-pekerjaan-sendiri-sksps" filter="string" label="Pautan kad: Skim Keselamatan Sosial" />
-				<field name="svcLink4" type="text" default="/perkhidmatan/bantuan-kepada-masyarakat-nelayan/projek-khas-perumahan-nelayan-2" filter="string" label="Pautan kad: Perumahan Nelayan" />
+				<field name="servicesMoreLink" type="text" default="/k-perkhidmatan" filter="string" label="&quot;View all services&quot; link" />
+				<field name="featureLink" type="text" default="/perkhidmatan/bantuan-kepada-masyarakat-nelayan/bantuan-sara-hidup-nelayan" filter="string" label="Feature card button link" />
+				<field name="svcLink1" type="text" default="/k-perkhidmatan-pemasaran-ikan" filter="string" label="Card link: Pasaran &amp; Pendapatan" />
+				<field name="svcLink2" type="text" default="/perkhidmatan/bantuan-kepada-masyarakat-nelayan/dana-nelayan" filter="string" label="Card link: Dana Nelayan" />
+				<field name="svcLink3" type="text" default="/perkhidmatan/bantuan-kepada-masyarakat-nelayan/skim-keselamatan-sosial-pekerjaan-sendiri-sksps" filter="string" label="Card link: Skim Keselamatan Sosial" />
+				<field name="svcLink4" type="text" default="/perkhidmatan/bantuan-kepada-masyarakat-nelayan/projek-khas-perumahan-nelayan-2" filter="string" label="Card link: Perumahan Nelayan" />
 
 				<field name="showGallery" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
-					label="Ruang sosial (jalur galeri)">
+					label="Social space (gallery strip)">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="srcGallery" type="list" default="design" label="Sumber galeri" showon="showGallery:1">
-					<option value="design">Reka bentuk LKIM-3</option>
-					<option value="module">Kedudukan modul &quot;highlights&quot;</option>
+				<field name="srcGallery" type="list" default="design" label="Gallery source" showon="showGallery:1">
+					<option value="design">LKIM-3 design</option>
+					<option value="module">&quot;highlights&quot; module position</option>
 				</field>
-				<field name="facebookUrl" type="url" default="" filter="url" label="URL Facebook" />
-				<field name="youtubeUrl" type="url" default="" filter="url" label="URL YouTube" />
-				<field name="twitterUrl" type="url" default="" filter="url" label="URL X / Twitter" />
-				<field name="instagramUrl" type="url" default="" filter="url" label="URL Instagram" />
+				<field name="facebookUrl" type="url" default="" filter="url" label="Facebook URL" />
+				<field name="youtubeUrl" type="url" default="" filter="url" label="YouTube URL" />
+				<field name="twitterUrl" type="url" default="" filter="url" label="X / Twitter URL" />
+				<field name="instagramUrl" type="url" default="" filter="url" label="Instagram URL" />
 
 				<field name="showNews" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
-					label="Berita &amp; pengumuman">
+					label="News &amp; announcements">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="srcNews" type="list" default="design" label="Sumber berita" showon="showNews:1"
-					description="&quot;Reka bentuk LKIM-3&quot; memaparkan tiga artikel terbaharu portal dalam kad reka bentuk ini.">
-					<option value="design">Reka bentuk LKIM-3</option>
-					<option value="module">Kedudukan modul &quot;announcements&quot;</option>
+				<field name="srcNews" type="list" default="design" label="News source" showon="showNews:1"
+					description="&quot;LKIM-3 design&quot; shows the portal's three most recent articles in this design's cards.">
+					<option value="design">LKIM-3 design</option>
+					<option value="module">&quot;announcements&quot; module position</option>
 				</field>
-				<field name="newsMoreLink" type="text" default="/k-berita" filter="string" label="Pautan &quot;Lihat Semua Berita&quot;" />
+				<field name="newsMoreLink" type="text" default="/k-berita" filter="string" label="&quot;View all news&quot; link" />
 
 				<field name="showAgencies" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
-					label="Karusel agensi berkaitan">
+					label="Related agency carousel">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="srcAgencies" type="list" default="design" label="Sumber agensi" showon="showAgencies:1">
-					<option value="design">Reka bentuk LKIM-3</option>
-					<option value="module">Kedudukan modul &quot;agencies&quot;</option>
+				<field name="srcAgencies" type="list" default="design" label="Agency source" showon="showAgencies:1">
+					<option value="design">LKIM-3 design</option>
+					<option value="module">&quot;agencies&quot; module position</option>
 				</field>
 
 				<field name="showCta" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
-					label="Sepanduk aduan">
+					label="Complaints banner">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="ctaLink" type="text" default="/pk-maklum-balas" filter="string" label="Pautan &quot;Hantar Aduan&quot;" />
-				<field name="ctaLink2" type="text" default="/pk-maklum-balas" filter="string" label="Pautan &quot;Semak Status Aduan&quot;" />
+				<field name="ctaLink" type="text" default="/pk-maklum-balas" filter="string" label="&quot;Submit a complaint&quot; link" />
+				<field name="ctaLink2" type="text" default="/pk-maklum-balas" filter="string" label="&quot;Check complaint status&quot; link" />
 			</fieldset>
 			<fieldset name="splask" label="SPLaSK / MyGovEA">
 				<field name="showGovBanner" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
-					label="Pengenalan portal rasmi kerajaan"
-					description="Bar &quot;Portal Rasmi Kerajaan Malaysia&quot; dengan teks rasmi JDN / MyGovEA.">
+					label="Government portal identification bar"
+					description="The &quot;Portal Rasmi Kerajaan Malaysia&quot; bar, with the official JDN / MyGovEA wording.">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="showAccessBar" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="Bar kebolehaksesan (saiz teks + kontras)">
+				<field name="showAccessBar" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
+					label="Accessibility controls (text size + contrast)"
+					description="Shown in the header behind the accessibility icon.">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="showLastUpdate" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="Papar tarikh kemas kini">
+				<field name="showLastUpdate" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="Show last-updated date">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="showVisitorCounter" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="Papar kaunter pelawat">
+				<field name="showVisitorCounter" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="Show visitor counter">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="splaskAttribute" type="text" default="data-splask" label="Atribut penanda SPLaSK"
-					description="Nama atribut HTML yang digunakan untuk menanda elemen SPLaSK. Tukar kepada nama yang ditetapkan dalam pekeliling semasa jika berbeza." />
+				<field name="splaskAttribute" type="text" default="data-splask" label="SPLaSK marker attribute"
+					description="The HTML attribute name used to mark SPLaSK elements. Change it to whatever the current circular specifies if that differs." />
 				<field name="showFooterContact" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
-					label="Lajur &quot;Hubungi Kami&quot; dalam pengaki"
-					description="Lajur alamat terbina dalam, dengan penanda SPLaSK. Matikan jika modul pengaki sudah menyenaraikan alamat yang sama.">
+					label="&quot;Contact us&quot; column in the footer"
+					description="The built-in address column, which carries the SPLaSK markers. Turn it off if a footer module already lists the same address.">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
 				<field name="agencyAddress" type="textarea" rows="4"
-					default="Aras 1-12, Wisma LKIM, Pulau Meranti, 47120 Puchong, Selangor" label="Alamat agensi" filter="raw" />
-				<field name="agencyPhone" type="text" default="03-8942 2745" label="Telefon" />
-				<field name="agencyFax" type="text" default="" label="Faks" />
-				<field name="agencyEmail" type="text" default="info@lkim.gov.my" label="E-mel" />
-				<field name="legalTerms" type="text" default="/pk-terma-syarat" filter="string" label="Pautan Terma &amp; Syarat" />
-				<field name="legalPrivacy" type="text" default="/pk-dasar-privasi" filter="string" label="Pautan Dasar Privasi" />
-				<field name="legalSecurity" type="text" default="/pk-dasar-keselamatan" filter="string" label="Pautan Dasar Keselamatan ICT" />
-				<field name="legalDisclaimer" type="text" default="/pk-penafian" filter="string" label="Pautan Penafian" />
+					default="Aras 1-12, Wisma LKIM, Pulau Meranti, 47120 Puchong, Selangor" label="Agency address" filter="raw" />
+				<field name="agencyPhone" type="text" default="03-8942 2745" label="Telephone" />
+				<field name="agencyFax" type="text" default="" label="Fax" />
+				<field name="agencyEmail" type="text" default="info@lkim.gov.my" label="Email" />
+				<field name="legalTerms" type="text" default="/pk-terma-syarat" filter="string" label="Terms &amp; conditions link" />
+				<field name="legalPrivacy" type="text" default="/pk-dasar-privasi" filter="string" label="Privacy policy link" />
+				<field name="legalSecurity" type="text" default="/pk-dasar-keselamatan" filter="string" label="ICT security policy link" />
+				<field name="legalDisclaimer" type="text" default="/pk-penafian" filter="string" label="Disclaimer link" />
 			</fieldset>
 			<fieldset name="advanced" label="JGLOBAL_FIELDSET_ADVANCED">
 				<field name="backTop" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="TPL_CASSIOPEIA_BACKTOTOP_LABEL">
@@ -224,26 +226,26 @@
 					<option value="1">JYES</option>
 				</field>
 			</fieldset>
-			<fieldset name="customcode" label="Kod Tersuai">
+			<fieldset name="customcode" label="Custom Code">
 				<field name="customCodeNote" type="note" class="alert alert-warning"
-					label="Kod ini dimuatkan pada setiap halaman"
-					description="Kandungan dua medan di bawah dikeluarkan ke halaman apa adanya, tanpa penapisan. Hadkan kebenaran &quot;Edit&quot; bagi com_templates kepada Super User sahaja. Untuk perubahan yang lebih besar, gunakan fail user.css / user.js di bawah supaya kod itu kekal dalam kawalan versi." />
+					label="This code runs on every page"
+					description="Both fields below are written to the page exactly as entered, with no filtering. Keep &quot;Edit&quot; permission on com_templates with Super Users only. For anything substantial, use the user.css / user.js files below so the code stays under version control." />
 
-				<field name="customCss" type="textarea" rows="12" filter="raw" default="" label="CSS tersuai"
-					description="Dimuatkan selepas lkim3.css, jadi ia mengatasi gaya templat tanpa perlu !important. Jangan sertakan tag &lt;style&gt;." />
+				<field name="customCss" type="textarea" rows="12" filter="raw" default="" label="Custom CSS"
+					description="Loaded after lkim3.css, so it overrides the template without needing !important. Do not include &lt;style&gt; tags." />
 
-				<field name="customJs" type="textarea" rows="12" filter="raw" default="" label="JavaScript tersuai"
-					description="Jangan sertakan tag &lt;script&gt;, dan elakkan rentetan yang mengandungi &lt;/script&gt;." />
+				<field name="customJs" type="textarea" rows="12" filter="raw" default="" label="Custom JavaScript"
+					description="Do not include &lt;script&gt; tags, and avoid strings containing &lt;/script&gt;." />
 
-				<field name="customJsPosition" type="list" default="body" label="Kedudukan JavaScript tersuai"
-					description="&quot;Hujung body&quot; berjalan selepas halaman dilukis dan selamat untuk kebanyakan kod. Pilih &quot;head&quot; hanya untuk kod yang mesti berjalan lebih awal, seperti tag pengukuran.">
-					<option value="body">Hujung body</option>
-					<option value="head">Dalam head</option>
+				<field name="customJsPosition" type="list" default="body" label="Custom JavaScript position"
+					description="&quot;End of body&quot; runs after the page is drawn and is right for almost all code. Choose &quot;In head&quot; only for code that must run earlier, such as a measurement tag.">
+					<option value="body">End of body</option>
+					<option value="head">In head</option>
 				</field>
 
 				<field name="useUserFiles" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
-					label="Muatkan user.css / user.js"
-					description="Jika ada, muatkan media/templates/site/lkim3/css/user.css dan js/user.js. Fail yang tiada diabaikan senyap.">
+					label="Load user.css / user.js"
+					description="Loads media/templates/site/lkim3/css/user.css and js/user.js when they exist. Missing files are skipped silently.">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
