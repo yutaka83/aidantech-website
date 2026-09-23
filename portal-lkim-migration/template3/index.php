@@ -60,6 +60,38 @@ $wa->usePreset('template.cassiopeia.' . $direction)
 $wa->registerStyle('template.active', '', [], [], ['template.cassiopeia.' . $direction]);
 $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
 
+/* ── Custom code ─────────────────────────────────────────────────────────── */
+
+// user.css / user.js are not shipped. Joomla skips an asset whose file does not
+// exist, so asking for them is free until someone drops the files in.
+if ($this->params->get('useUserFiles', 1)) {
+    $wa->useStyle('template.lkim3.user.' . $direction)
+        ->useScript('template.lkim3.user');
+}
+
+// The two style parameters go out unfiltered — they are Super User input, the
+// same trust level as a Custom HTML module.
+$customCss = trim((string) $this->params->get('customCss', ''));
+$customJs  = trim((string) $this->params->get('customJs', ''));
+
+if ($customCss !== '') {
+    $wa->addInlineStyle(
+        $customCss,
+        ['name' => 'template.lkim3.inline'],
+        [],
+        ['template.lkim3.' . $direction]
+    );
+}
+
+if ($customJs !== '' && $this->params->get('customJsPosition', 'body') === 'head') {
+    $wa->addInlineScript(
+        $customJs,
+        ['name' => 'template.lkim3.inline'],
+        [],
+        ['template.lkim3']
+    );
+}
+
 // Manrope for headings, Inter for body — the pairing the design is drawn in.
 $this->getPreloadManager()->preconnect('https://fonts.googleapis.com/', ['crossorigin' => 'anonymous']);
 $this->getPreloadManager()->preconnect('https://fonts.gstatic.com/', ['crossorigin' => 'anonymous']);
@@ -828,6 +860,10 @@ $legalLinks = array_filter([
     <?php endif; ?>
 
     <jdoc:include type="modules" name="debug" style="none" />
+
+    <?php if ($customJs !== '' && $this->params->get('customJsPosition', 'body') !== 'head') : ?>
+        <script><?php echo $customJs; ?></script>
+    <?php endif; ?>
 </body>
 
 </html>

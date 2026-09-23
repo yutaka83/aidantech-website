@@ -224,6 +224,30 @@
 					<option value="1">JYES</option>
 				</field>
 			</fieldset>
+			<fieldset name="customcode" label="Kod Tersuai">
+				<field name="customCodeNote" type="note" class="alert alert-warning"
+					label="Kod ini dimuatkan pada setiap halaman"
+					description="Kandungan dua medan di bawah dikeluarkan ke halaman apa adanya, tanpa penapisan. Hadkan kebenaran &quot;Edit&quot; bagi com_templates kepada Super User sahaja. Untuk perubahan yang lebih besar, gunakan fail user.css / user.js di bawah supaya kod itu kekal dalam kawalan versi." />
+
+				<field name="customCss" type="textarea" rows="12" filter="raw" default="" label="CSS tersuai"
+					description="Dimuatkan selepas lkim3.css, jadi ia mengatasi gaya templat tanpa perlu !important. Jangan sertakan tag &lt;style&gt;." />
+
+				<field name="customJs" type="textarea" rows="12" filter="raw" default="" label="JavaScript tersuai"
+					description="Jangan sertakan tag &lt;script&gt;, dan elakkan rentetan yang mengandungi &lt;/script&gt;." />
+
+				<field name="customJsPosition" type="list" default="body" label="Kedudukan JavaScript tersuai"
+					description="&quot;Hujung body&quot; berjalan selepas halaman dilukis dan selamat untuk kebanyakan kod. Pilih &quot;head&quot; hanya untuk kod yang mesti berjalan lebih awal, seperti tag pengukuran.">
+					<option value="body">Hujung body</option>
+					<option value="head">Dalam head</option>
+				</field>
+
+				<field name="useUserFiles" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
+					label="Muatkan user.css / user.js"
+					description="Jika ada, muatkan media/templates/site/lkim3/css/user.css dan js/user.js. Fail yang tiada diabaikan senyap.">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
 		</fields>
 	</config>
 </extension>
