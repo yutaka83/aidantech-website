@@ -66,6 +66,8 @@
 	--footer-text: #aebfcf;
 	--footer-pattern-opacity: 0.07;
 
+	--sticky-menu-bg: var(--navy-950);
+
 	--lkim-text-scale: 1;
 }
 
@@ -662,6 +664,51 @@ body.lkim3 .lang-switch a:hover {
 .hero-nav-row {
 	position: relative;
 	padding: 18px 0 16px;
+}
+
+/*
+ * Sticky menu. A zero-height sentinel sits immediately above the nav row, so an
+ * IntersectionObserver can tell the moment the nav would leave the top of the
+ * window and the body picks up .lk3-menu-stuck. Only above the drawer
+ * breakpoint: below it the menu lives behind the hamburger in the header card,
+ * and a fixed bar would just be an empty strip.
+ */
+/*
+ * The sentinel needs real area — an IntersectionObserver never reports on a
+ * zero-area target, so a 0-height marker silently never fires. One pixel, with
+ * a matching negative margin, leaves the layout exactly where it was.
+ */
+.lk3-sticky-sentinel {
+	height: 1px;
+	margin-bottom: -1px;
+	pointer-events: none;
+}
+
+@media (min-width: 901px) {
+	body.lk3-menu-stuck .hero-nav-row {
+		position: fixed;
+		inset-inline: 0;
+		top: 0;
+		z-index: 96;
+		padding: 12px 0;
+		background: var(--sticky-menu-bg);
+		box-shadow: var(--shadow-pop);
+		animation: lk3-menu-drop 0.22s ease;
+	}
+
+	body.lk3-menu-stuck .hero-nav-divider {
+		display: none;
+	}
+
+	@keyframes lk3-menu-drop {
+		from {
+			transform: translateY(-100%);
+		}
+
+		to {
+			transform: translateY(0);
+		}
+	}
 }
 
 .hero-nav-divider {

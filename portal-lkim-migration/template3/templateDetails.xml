@@ -319,6 +319,25 @@
 				<field name="legalDisclaimer" type="text" default="/pk-penafian" filter="string" label="Disclaimer link" />
 			</fieldset>
 			<fieldset name="advanced" label="JGLOBAL_FIELDSET_ADVANCED">
+				<field name="stickyMenu" type="radio" layout="joomla.form.field.radio.switcher" default="0" filter="integer"
+					label="Sticky menu"
+					description="Once the navigation scrolls off the top, it re-attaches to the top of the window on its own solid bar. Only on screens wide enough to show the full menu — below that the hamburger belongs to the header, so use Portal &gt; Sticky header instead."
+					showon="stickyHeader:0">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<!--
+					Deliberately not behind a showon. A colour picker that is hidden when the
+					form is saved comes back #ffffff, and white here makes the white menu text
+					invisible — the one value this field must never silently become.
+				-->
+				<field name="stickyMenuBg" type="color" format="hex" default="#001322" label="Sticky menu background"
+					description="Applies when Sticky menu is on. Needs enough contrast against the white menu text and the orange active item." />
+				<field name="stickyMenuNote" type="note" class="alert alert-info"
+					label="Sticky menu is off while the whole header is sticky"
+					description="Portal &gt; Sticky header already keeps the navigation in view, so the two settings are mutually exclusive."
+					showon="stickyHeader:1" />
+
 				<field name="backTop" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="TPL_CASSIOPEIA_BACKTOTOP_LABEL">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>

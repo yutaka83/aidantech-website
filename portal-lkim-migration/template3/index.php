@@ -52,6 +52,14 @@ $root   = Uri::root(true);
 
 $direction = $this->direction === 'rtl' ? 'rtl' : 'ltr';
 
+// Header behaviour is settled here because the theme-token block below needs it
+// as well as the markup further down. A sticky header already keeps the
+// navigation in view, so the two settings are mutually exclusive.
+$stickyHeader = $this->params->get('stickyHeader') ? ' is-sticky' : '';
+$stickyMenu   = !$this->params->get('stickyHeader') && $this->params->get('stickyMenu', 0)
+    ? ' has-sticky-menu'
+    : '';
+
 $wa->usePreset('template.cassiopeia.' . $direction)
     ->useStyle('template.active.language')
     ->useStyle('template.lkim3.' . $direction)
@@ -113,6 +121,7 @@ $tokens = [
 
     '--header-card-bg'     => $this->params->get('headerCardBg'),
     '--header-card-radius' => $this->params->get('headerCardRadius'),
+    '--sticky-menu-bg'     => $stickyMenu ? $this->params->get('stickyMenuBg') : '',
 
     '--hero-min'        => $this->params->get('heroMin'),
     '--hero-focus'      => $this->params->get('heroFocus'),
@@ -293,8 +302,7 @@ $a = static fn($v): string => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8')
 $logoFile = $this->params->get('logoFile', 'media/templates/site/lkim3/images/logo.png');
 $jataFile = $this->params->get('jataFile');
 
-$wrapper      = $this->params->get('fluidContainer') ? 'wrapper-fluid' : 'wrapper-static';
-$stickyHeader = $this->params->get('stickyHeader') ? ' is-sticky' : '';
+$wrapper = $this->params->get('fluidContainer') ? 'wrapper-fluid' : 'wrapper-static';
 
 $hasClass = '';
 
@@ -466,6 +474,7 @@ $legalLinks = array_filter([
     . ($itemid ? ' itemid-' . $itemid : '')
     . ($pageclass ? ' ' . $pageclass : '')
     . ($isHome ? ' is-home' : ' is-inner')
+    . $stickyMenu
     . $hasClass
     . ($this->direction == 'rtl' ? ' rtl' : '');
 ?>">

@@ -238,6 +238,46 @@
 		window.addEventListener('scroll', update, { passive: true });
 	}
 
+	/* ── Sticky menu ─────────────────────────────────────────────────────── */
+
+	function initStickyMenu() {
+		if (!document.body.classList.contains('has-sticky-menu')) return;
+
+		var nav = document.querySelector('.hero-nav-row');
+		if (!nav || !nav.parentNode) return;
+
+		// A 1px marker left in the flow where the nav started (the stylesheet
+		// cancels that pixel with a negative margin). Measuring the marker
+		// rather than the nav keeps the threshold stable: the nav leaves the
+		// flow when it sticks, the marker never does.
+		var sentinel = document.createElement('div');
+		sentinel.className = 'lk3-sticky-sentinel';
+		nav.parentNode.insertBefore(sentinel, nav);
+
+		var threshold = 0;
+
+		function measure() {
+			threshold = sentinel.getBoundingClientRect().top + window.scrollY;
+		}
+
+		function update() {
+			document.body.classList.toggle('lk3-menu-stuck', window.scrollY > threshold);
+		}
+
+		measure();
+		update();
+
+		window.addEventListener('scroll', update, { passive: true });
+		window.addEventListener(
+			'resize',
+			function () {
+				measure();
+				update();
+			},
+			{ passive: true }
+		);
+	}
+
 	/* ── Agency carousel ─────────────────────────────────────────────────── */
 
 	function initAgencies() {
@@ -332,6 +372,7 @@
 		initPopovers();
 		initNav();
 		initStickyHeader();
+		initStickyMenu();
 		initAgencies();
 		initBackToTop();
 		initTables();
