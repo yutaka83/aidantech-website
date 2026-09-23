@@ -80,8 +80,21 @@ extension:install --path=<zip>` installs it.
 > `templates/` — delete `templates/<name>` and `media/templates/site/<name>`
 > first, or it reports only "Unable to install extension".
 
-`tpl_lkim3` differs from its siblings in two ways worth knowing before editing
-it. Each homepage band (audience gateways, services, gallery, news, agencies)
+`tpl_lkim3` is styled entirely from the template style, in the way Gantry and
+Helix templates are, because agency servers routinely forbid writing to files
+under the document root. `media/.../lkim3.css` defines every colour, font,
+radius, width and spacing value as a CSS custom property, and `index.php`
+writes a second `:root` block into the page from the style parameters. That
+block loads after the stylesheet, so it wins on order — Colours, Typography and
+Layout on the style can recolour and re-space the whole portal without touching
+a file. An empty parameter is skipped, so the stylesheet's own value stands,
+and the manifest defaults are kept identical to the stylesheet (there is a
+check for this in the commit that introduced them) so saving a style never
+changes the design by itself. Token values containing `;`, `{`, `}` or a
+comment are dropped rather than written into the declaration block.
+
+`tpl_lkim3` also differs from its siblings in two ways worth knowing before
+editing it. Each homepage band (audience gateways, services, gallery, news, agencies)
 and the main navigation take their content either from the LKIM-3 design or
 from a module position, chosen per band in the template style; the design is
 the default so a fresh install matches the mockup. And the mega menu is drawn

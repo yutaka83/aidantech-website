@@ -181,6 +181,104 @@
 				<field name="ctaLink" type="text" default="/pk-maklum-balas" filter="string" label="&quot;Submit a complaint&quot; link" />
 				<field name="ctaLink2" type="text" default="/pk-maklum-balas" filter="string" label="&quot;Check complaint status&quot; link" />
 			</fieldset>
+			<fieldset name="colours" label="Colours">
+				<field name="themeNote" type="note" class="alert alert-info"
+					label="These settings override the stylesheet"
+					description="Every value here is written into the page as a CSS variable block that loads after lkim3.css, so the template can be recoloured entirely from this screen — no write access to the template files is needed. Clear a field to fall back to the stylesheet's own value." />
+
+				<field name="cPrimary" type="color" format="hex" default="#0a3059" label="Primary"
+					description="Carries the header panels, the feature card, buttons on dark panels and most headings." />
+				<field name="cPrimaryDark" type="color" format="hex" default="#001322" label="Primary — darkest"
+					description="Mega menu panel, footer background and heading text." />
+				<field name="cPrimaryDeep" type="color" format="hex" default="#04203a" label="Primary — deep" />
+				<field name="cPrimaryMid" type="color" format="hex" default="#123f6e" label="Primary — mid" />
+				<field name="cPrimaryLight" type="color" format="hex" default="#1c4f86" label="Primary — light" />
+
+				<field name="cAccent" type="color" format="hex" default="#f0913f" label="Accent"
+					description="Primary buttons, section markers and footer link hovers." />
+				<field name="cAccentDark" type="color" format="hex" default="#dd7822" label="Accent — hover" />
+				<field name="cAccentSoft" type="color" format="hex" default="#fdead8" label="Accent — tint" />
+
+				<field name="cSecondary" type="color" format="hex" default="#149e93" label="Secondary"
+					description="Checklist ticks, mega menu bullets and card hover borders." />
+				<field name="cSecondaryDark" type="color" format="hex" default="#0f7f76" label="Secondary — deep"
+					description="Section eyebrows and &quot;read more&quot; links." />
+				<field name="cSecondarySoft" type="color" format="hex" default="#e0f5f2" label="Secondary — tint" />
+
+				<field name="cHeroAccent" type="color" format="hex" default="#e6aa4d" label="Hero accent"
+					description="The highlighted words in the hero heading, the active nav item and the hero's primary button." />
+				<field name="cHeroAccentDark" type="color" format="hex" default="#c98f39" label="Hero accent — hover" />
+				<field name="cHeroButtonText" type="color" format="hex" default="#0b164e" label="Hero button text" />
+
+				<field name="cSurface" type="color" format="hex" default="#f6f8fa" label="Surface — page bands"
+					description="Background of the news band and the agency logo tiles." />
+				<field name="cSurfaceAlt" type="color" format="hex" default="#eef2f6" label="Surface — controls"
+					description="The government identification bar and the header icon buttons." />
+				<field name="cLine" type="color" format="hex" default="#e2e8ee" label="Borders" />
+
+				<field name="cText" type="color" format="hex" default="#0d1c2b" label="Body text" />
+				<field name="cTextMuted" type="color" format="hex" default="#33475a" label="Text — muted" />
+				<field name="cTextSubtle" type="color" format="hex" default="#5f7488" label="Text — subtle"
+					description="Section intros, card descriptions and dates." />
+				<field name="cContentLink" type="color" format="hex" default="#123f6e" label="Links in article text" />
+				<field name="cFocusRing" type="color" format="hex" default="#f0913f" label="Keyboard focus ring"
+					description="Keep this at a strong contrast against both light and dark backgrounds — it is an accessibility requirement, not decoration." />
+
+				<field name="cFooterBg" type="color" format="hex" default="#001322" label="Footer background" />
+				<field name="cFooterText" type="color" format="hex" default="#aebfcf" label="Footer text" />
+				<field name="footerPattern" type="text" default="0.07" filter="string" label="Footer pattern opacity"
+					description="0 hides the watermark pattern behind the footer, 1 shows it at full strength." />
+			</fieldset>
+
+			<fieldset name="typography" label="Typography">
+				<field name="fontSource" type="list" default="google" label="Font source"
+					description="&quot;System fonts&quot; makes no external request, which some agency networks require. The families below are then ignored in favour of the visitor's own UI font.">
+					<option value="google">Google Fonts</option>
+					<option value="local">Already available (self-hosted or installed)</option>
+					<option value="system">System fonts only</option>
+				</field>
+				<field name="fontHeading" type="text" default="Manrope" filter="string" label="Heading font family"
+					description="Family name as the font provider spells it, for example Manrope or Poppins." showon="fontSource!:system" />
+				<field name="fontHeadingWeights" type="text" default="600;700;800" filter="string" label="Heading weights"
+					description="Semicolon-separated, for the Google Fonts request." showon="fontSource:google" />
+				<field name="fontBody" type="text" default="Inter" filter="string" label="Body font family" showon="fontSource!:system" />
+				<field name="fontBodyWeights" type="text" default="400;500;600;700" filter="string" label="Body weights" showon="fontSource:google" />
+				<field name="fontFallback" type="text" default="system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif"
+					filter="string" label="Fallback stack"
+					description="Used while the web font loads, and instead of it if the request fails." />
+				<field name="baseSize" type="text" default="1rem" filter="string" label="Base text size"
+					description="Any CSS length. The accessibility controls scale up from whatever is set here." />
+			</fieldset>
+
+			<fieldset name="layout" label="Layout">
+				<field name="wrapWidth" type="text" default="1220px" filter="string" label="Content width"
+					description="Maximum width of the centred column. Ignored while Portal &gt; Content width is set to Full width." />
+				<field name="sectionPad" type="text" default="50px" filter="string" label="Space above and below each band" />
+				<field name="radiusLg" type="text" default="22px" filter="string" label="Corner radius — large"
+					description="Feature card, complaints banner." />
+				<field name="radiusMd" type="text" default="14px" filter="string" label="Corner radius — medium"
+									description="Service cards, news cards, gateway cards, gallery items." />
+				<field name="radiusSm" type="text" default="8px" filter="string" label="Corner radius — small" />
+				<field name="cardShadow" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
+					label="Card shadows">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field name="headerCardBg" type="color" format="hex" default="#ffffff" label="Header panel background" />
+				<field name="headerCardRadius" type="text" default="18px" filter="string" label="Header panel corner radius" />
+				<field name="headerCardShadow" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
+					label="Header panel shadow">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field name="heroMin" type="text" default="600px" filter="string" label="Hero minimum height" />
+				<field name="heroFocus" type="text" default="78% center" filter="string" label="Hero image focal point"
+					description="A CSS object-position value. &quot;78% center&quot; keeps the right of the photo in view; use &quot;center&quot; to centre it, or &quot;30% top&quot; to favour the upper left." />
+				<field name="heroShade" type="text" default="0.78" filter="string" label="Hero image shading"
+					description="0 leaves the photo untouched, 1 is fully shaded. The hero text needs enough shading behind it to stay readable — check the contrast after changing this." />
+			</fieldset>
 			<fieldset name="splask" label="SPLaSK / MyGovEA">
 				<field name="showGovBanner" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
 					label="Government portal identification bar"

@@ -60,6 +60,117 @@ $wa->usePreset('template.cassiopeia.' . $direction)
 $wa->registerStyle('template.active', '', [], [], ['template.cassiopeia.' . $direction]);
 $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
 
+/* ── Theme tokens ────────────────────────────────────────────────────────── */
+
+/**
+ * lkim3.css is written entirely against CSS custom properties, so the style can
+ * restyle it by redefining those properties. This block goes out after the
+ * stylesheet and wins on order, which means an agency whose server forbids
+ * writing to template files can still recolour and re-space the whole portal
+ * from Template Styles alone.
+ *
+ * An empty parameter is left out, so the stylesheet's own value stands.
+ */
+$tokens = [
+    '--navy-800'        => $this->params->get('cPrimary'),
+    '--navy-950'        => $this->params->get('cPrimaryDark'),
+    '--navy-900'        => $this->params->get('cPrimaryDeep'),
+    '--navy-700'        => $this->params->get('cPrimaryMid'),
+    '--navy-600'        => $this->params->get('cPrimaryLight'),
+
+    '--orange-500'      => $this->params->get('cAccent'),
+    '--orange-600'      => $this->params->get('cAccentDark'),
+    '--orange-100'      => $this->params->get('cAccentSoft'),
+
+    '--teal-500'        => $this->params->get('cSecondary'),
+    '--teal-600'        => $this->params->get('cSecondaryDark'),
+    '--teal-100'        => $this->params->get('cSecondarySoft'),
+
+    '--hero-orange'      => $this->params->get('cHeroAccent'),
+    '--hero-orange-dark' => $this->params->get('cHeroAccentDark'),
+    '--hero-navy'        => $this->params->get('cHeroButtonText'),
+
+    '--sand-50'         => $this->params->get('cSurface'),
+    '--sand-100'        => $this->params->get('cSurfaceAlt'),
+    '--line'            => $this->params->get('cLine'),
+
+    '--ink-900'         => $this->params->get('cText'),
+    '--ink-700'         => $this->params->get('cTextMuted'),
+    '--ink-500'         => $this->params->get('cTextSubtle'),
+    '--content-link'    => $this->params->get('cContentLink'),
+    '--focus-ring'      => $this->params->get('cFocusRing'),
+
+    '--footer-bg'               => $this->params->get('cFooterBg'),
+    '--footer-text'             => $this->params->get('cFooterText'),
+    '--footer-pattern-opacity'  => $this->params->get('footerPattern'),
+
+    '--base-size'       => $this->params->get('baseSize'),
+    '--wrap'            => $this->params->get('wrapWidth'),
+    '--section-pad'     => $this->params->get('sectionPad'),
+    '--radius-lg'       => $this->params->get('radiusLg'),
+    '--radius-md'       => $this->params->get('radiusMd'),
+    '--radius-sm'       => $this->params->get('radiusSm'),
+
+    '--header-card-bg'     => $this->params->get('headerCardBg'),
+    '--header-card-radius' => $this->params->get('headerCardRadius'),
+
+    '--hero-min'        => $this->params->get('heroMin'),
+    '--hero-focus'      => $this->params->get('heroFocus'),
+    '--hero-shade'      => $this->params->get('heroShade'),
+];
+
+// The shadow switches pick between the design's shadow and none, rather than
+// asking an editor to write a box-shadow by hand.
+if (!$this->params->get('cardShadow', 1)) {
+    $tokens['--shadow-card'] = 'none';
+    $tokens['--shadow-pop']  = 'none';
+}
+
+if (!$this->params->get('headerCardShadow', 1)) {
+    $tokens['--header-card-shadow'] = 'none';
+}
+
+/* Fonts. The families are named by the editor, so they are quoted here. */
+$fontSource = $this->params->get('fontSource', 'google');
+$fallback   = $this->params->get('fontFallback') ?: 'system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif';
+$headFamily = trim((string) $this->params->get('fontHeading', 'Manrope'));
+$bodyFamily = trim((string) $this->params->get('fontBody', 'Inter'));
+
+if ($fontSource === 'system') {
+    $tokens['--font-head'] = $fallback;
+    $tokens['--font-body'] = $fallback;
+} else {
+    if ($headFamily !== '') {
+        $tokens['--font-head'] = '"' . str_replace('"', '', $headFamily) . '", ' . $fallback;
+    }
+
+    if ($bodyFamily !== '') {
+        $tokens['--font-body'] = '"' . str_replace('"', '', $bodyFamily) . '", ' . $fallback;
+    }
+}
+
+$declarations = [];
+
+foreach ($tokens as $token => $value) {
+    $value = trim((string) $value);
+
+    // A value may not carry ; } or a comment out of the declaration block.
+    if ($value === '' || preg_match('#[;}{]|/\*#', $value)) {
+        continue;
+    }
+
+    $declarations[] = "\t" . $token . ': ' . $value . ';';
+}
+
+if ($declarations) {
+    $wa->addInlineStyle(
+        ":root {\n" . implode("\n", $declarations) . "\n}",
+        ['name' => 'template.lkim3.tokens'],
+        [],
+        ['template.lkim3.' . $direction]
+    );
+}
+
 /* ── Custom code ─────────────────────────────────────────────────────────── */
 
 // user.css / user.js are not shipped. Joomla skips an asset whose file does not
@@ -92,15 +203,36 @@ if ($customJs !== '' && $this->params->get('customJsPosition', 'body') === 'head
     );
 }
 
-// Manrope for headings, Inter for body — the pairing the design is drawn in.
-$this->getPreloadManager()->preconnect('https://fonts.googleapis.com/', ['crossorigin' => 'anonymous']);
-$this->getPreloadManager()->preconnect('https://fonts.gstatic.com/', ['crossorigin' => 'anonymous']);
-$wa->registerAndUseStyle(
-    'fontscheme.lkim3',
-    'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap',
-    [],
-    ['rel' => 'lazy-stylesheet', 'crossorigin' => 'anonymous']
-);
+// Manrope for headings and Inter for body are what the design is drawn in, but
+// both families come from the style, and an agency network that blocks external
+// requests can switch the source to "system" and lose nothing but the faces.
+if ($fontSource === 'google') {
+    $families = [];
+
+    foreach ([[$bodyFamily, $this->params->get('fontBodyWeights', '400;500;600;700')],
+              [$headFamily, $this->params->get('fontHeadingWeights', '600;700;800')]] as [$family, $weights]) {
+        $family = trim((string) $family);
+
+        if ($family === '') {
+            continue;
+        }
+
+        $weights    = preg_replace('/[^0-9;]/', '', (string) $weights);
+        $families[] = 'family=' . rawurlencode($family)
+            . ($weights !== '' ? ':wght@' . $weights : '');
+    }
+
+    if ($families) {
+        $this->getPreloadManager()->preconnect('https://fonts.googleapis.com/', ['crossorigin' => 'anonymous']);
+        $this->getPreloadManager()->preconnect('https://fonts.gstatic.com/', ['crossorigin' => 'anonymous']);
+        $wa->registerAndUseStyle(
+            'fontscheme.lkim3',
+            'https://fonts.googleapis.com/css2?' . implode('&', $families) . '&display=swap',
+            [],
+            ['rel' => 'lazy-stylesheet', 'crossorigin' => 'anonymous']
+        );
+    }
+}
 
 $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
 
