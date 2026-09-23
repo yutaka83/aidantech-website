@@ -69,9 +69,26 @@ Run in this order. Each step prints a summary and writes CSV reports to
 > change routes and invalidate it too. If in doubt, run steps 15–17 again;
 > all three are cheap and idempotent.
 
-`template/` and `template2/` hold the two site templates: `tpl_lkim` (the
-current default) and `tpl_lkim2` (the 2026 design). `php build-package.php
-template2 tpl_lkim2-1.0.0.zip` rebuilds the second one.
+`template/`, `template2/` and `template3/` hold the three site templates:
+`tpl_lkim` (the first pass), `tpl_lkim2` (the 2026 design, currently the
+default style) and `tpl_lkim3` (the LKIM-3 design, from the
+`ui-mockup.github.io/LKIM-3` mockup). `php build-package.php template3
+tpl_lkim3-1.0.0.zip` rebuilds the third one, and `php cli/joomla.php
+extension:install --path=<zip>` installs it.
+
+> The CLI installer refuses a template whose folder already exists in
+> `templates/` — delete `templates/<name>` and `media/templates/site/<name>`
+> first, or it reports only "Unable to install extension".
+
+`tpl_lkim3` differs from its siblings in two ways worth knowing before editing
+it. Each homepage band (audience gateways, services, gallery, news, agencies)
+and the main navigation take their content either from the LKIM-3 design or
+from a module position, chosen per band in the template style; the design is
+the default so a fresh install matches the mockup. And the mega menu is drawn
+by `megamenu.php` straight from a site menu rather than from the `menu`
+position, so installing it does not disturb the DJ-MegaMenu module the current
+default style relies on. `html/mod_menu/default.php` renders the same panel for
+anyone who switches the navigation back to a core menu module.
 
 `site-images/` holds images that generated module content points at; copy them
 into the site `images/` folder before running `build-modules.php`.
