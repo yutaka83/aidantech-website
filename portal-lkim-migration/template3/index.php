@@ -51,30 +51,47 @@ $siteTitle = $this->params->get('siteTitle') ?: $sitename;
 $splask = $this->params->get('splaskAttribute', 'data-splask') ?: 'data-splask';
 $root   = Uri::root(true);
 
-/* ── SPLaSK ──────────────────────────────────────────────────────────────── */
-
-$splaskId  = trim((string) $this->params->get('splaskId', ''));
-$splaskSrc = trim((string) $this->params->get('splaskScriptUrl', ''));
+/* ── SPLaSK analytics ────────────────────────────────────────────────────── */
 
 /**
- * The address is not hardcoded. JDN issues it with the agency's ID, it has
- * changed before, and guessing it would put a broken third-party script on
- * every page of a government portal — so the template embeds what the style
- * says and nothing otherwise.
+ * JDN's SPLaSK code is a Matomo tracker: the queue has to exist and be filled
+ * before matomo.js loads, which is why this is an inline declaration in the
+ * head rather than a plain script tag. The snippet is JDN's own, with the two
+ * values that differ per site taken from the style.
+ *
+ * Both are written into JavaScript through json_encode, so a stray quote in
+ * either is a harmless string rather than a broken page.
  */
-if ($splaskId !== '' && $splaskSrc !== '') {
-    $splaskSrc = str_ireplace('{id}', rawurlencode($splaskId), $splaskSrc);
+// The host default is repeated here rather than left to the manifest: a style
+// saved before this field existed has no value for it, and the whole point is
+// that entering the site ID alone is enough.
+$splaskId   = trim((string) $this->params->get('splaskId', ''));
+$splaskHost = trim((string) $this->params->get('splaskHost', '')) ?: 'https://splask-analytics.jdn.gov.my/';
 
-    // https only, and nothing that could break out of the attribute.
-    $splaskSrc = preg_match('#^https://[^\s"\'<>]+$#i', $splaskSrc) ? $splaskSrc : '';
-} else {
-    $splaskSrc = '';
-}
+// Matomo site IDs are integers, and the host has to be an https origin.
+if ($splaskId !== '' && preg_match('/^\d+$/', $splaskId) && preg_match('#^https://[a-z0-9.-]+(?::\d+)?(/[a-z0-9._/-]*)?$#i', $splaskHost)) {
+    $splaskHost = rtrim($splaskHost, '/') . '/';
 
-$splaskInHead = $splaskSrc !== '' && $this->params->get('splaskScriptPosition', 'head') === 'head';
+    $this->addScriptDeclaration(
+        "/* SPLaSK analytics (Matomo) */\n"
+        . "var _paq = window._paq = window._paq || [];\n"
+        . ($this->params->get('splaskCookies', 1) ? '' : "_paq.push(['disableCookies']);\n")
+        . "_paq.push(['trackPageView']);\n"
+        . "_paq.push(['enableLinkTracking']);\n"
+        . "(function () {\n"
+        . "    var u = " . json_encode($splaskHost, JSON_UNESCAPED_SLASHES) . ";\n"
+        . "    _paq.push(['setTrackerUrl', u + 'matomo.php']);\n"
+        . "    _paq.push(['setSiteId', " . json_encode($splaskId) . "]);\n"
+        . "    var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];\n"
+        . "    g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);\n"
+        . "})();"
+    );
 
-if ($splaskInHead) {
-    $this->addScript($splaskSrc, ['version' => false], ['defer' => true]);
+    // matomo.js comes from another origin on every page, so let the browser
+    // open that connection while it is still parsing the head. No crossorigin:
+    // the tracker is fetched as an ordinary script, and a CORS preconnect would
+    // open a connection the real request cannot reuse.
+    $this->getPreloadManager()->preconnect($splaskHost);
 }
 
 $direction = $this->direction === 'rtl' ? 'rtl' : 'ltr';
@@ -527,7 +544,7 @@ $legalLinks = array_filter([
     . $stickyMenu
     . $hasClass
     . ($this->direction == 'rtl' ? ' rtl' : '');
-?>"<?php echo $splaskId !== '' ? ' ' . $splask . '-id="' . $a($splaskId) . '"' : ''; ?>>
+?>">
 
     <nav class="lkim-skiplinks" aria-label="<?php echo Text::_('TPL_LKIM_SKIPLINKS'); ?>">
         <a class="lkim-skiplink" href="#main-content"><?php echo Text::_('TPL_LKIM_SKIP_TO_CONTENT'); ?></a>
@@ -905,10 +922,6 @@ $legalLinks = array_filter([
     <?php endif; ?>
 
     <jdoc:include type="modules" name="debug" style="none" />
-
-    <?php if ($splaskSrc !== '' && !$splaskInHead) : ?>
-        <script src="<?php echo $a($splaskSrc); ?>" defer></script>
-    <?php endif; ?>
 
     <?php if ($customJs !== '' && $this->params->get('customJsPosition', 'body') !== 'head') : ?>
         <script><?php echo $customJs; ?></script>
