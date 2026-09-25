@@ -51,6 +51,32 @@ $siteTitle = $this->params->get('siteTitle') ?: $sitename;
 $splask = $this->params->get('splaskAttribute', 'data-splask') ?: 'data-splask';
 $root   = Uri::root(true);
 
+/* ── SPLaSK ──────────────────────────────────────────────────────────────── */
+
+$splaskId  = trim((string) $this->params->get('splaskId', ''));
+$splaskSrc = trim((string) $this->params->get('splaskScriptUrl', ''));
+
+/**
+ * The address is not hardcoded. JDN issues it with the agency's ID, it has
+ * changed before, and guessing it would put a broken third-party script on
+ * every page of a government portal — so the template embeds what the style
+ * says and nothing otherwise.
+ */
+if ($splaskId !== '' && $splaskSrc !== '') {
+    $splaskSrc = str_ireplace('{id}', rawurlencode($splaskId), $splaskSrc);
+
+    // https only, and nothing that could break out of the attribute.
+    $splaskSrc = preg_match('#^https://[^\s"\'<>]+$#i', $splaskSrc) ? $splaskSrc : '';
+} else {
+    $splaskSrc = '';
+}
+
+$splaskInHead = $splaskSrc !== '' && $this->params->get('splaskScriptPosition', 'head') === 'head';
+
+if ($splaskInHead) {
+    $this->addScript($splaskSrc, ['version' => false], ['defer' => true]);
+}
+
 $direction = $this->direction === 'rtl' ? 'rtl' : 'ltr';
 
 // Header behaviour is settled here because the theme-token block below needs it
@@ -501,7 +527,7 @@ $legalLinks = array_filter([
     . $stickyMenu
     . $hasClass
     . ($this->direction == 'rtl' ? ' rtl' : '');
-?>">
+?>"<?php echo $splaskId !== '' ? ' ' . $splask . '-id="' . $a($splaskId) . '"' : ''; ?>>
 
     <nav class="lkim-skiplinks" aria-label="<?php echo Text::_('TPL_LKIM_SKIPLINKS'); ?>">
         <a class="lkim-skiplink" href="#main-content"><?php echo Text::_('TPL_LKIM_SKIP_TO_CONTENT'); ?></a>
@@ -879,6 +905,10 @@ $legalLinks = array_filter([
     <?php endif; ?>
 
     <jdoc:include type="modules" name="debug" style="none" />
+
+    <?php if ($splaskSrc !== '' && !$splaskInHead) : ?>
+        <script src="<?php echo $a($splaskSrc); ?>" defer></script>
+    <?php endif; ?>
 
     <?php if ($customJs !== '' && $this->params->get('customJsPosition', 'body') !== 'head') : ?>
         <script><?php echo $customJs; ?></script>

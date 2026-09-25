@@ -294,6 +294,16 @@
 					<option value="1">JYES</option>
 				</field>
 				<field name="splaskAttribute" type="text" default="data-splask" label="SPLaSK marker attribute" description="The HTML attribute name used to mark SPLaSK elements. Change it to whatever the current circular specifies if that differs."/>
+
+				<field name="splaskId" type="text" default="" filter="string" label="SPLaSK ID"
+					description="The agency identifier issued on the JDN / MAMPU SPLaSK portal. It is published on every page as a marker attribute, and fills {id} in the script address below." />
+				<field name="splaskScriptUrl" type="text" default="" filter="string" label="SPLaSK script address"
+					description="Copy this from the SPLaSK portal alongside the ID, and write {id} where the ID belongs — for example https://splask.example.gov.my/track.js?id={id}. The script is embedded only once both fields are filled, and only for an https address; the template does not guess the address, because a wrong one would be a broken third-party script on every page." />
+				<field name="splaskScriptPosition" type="list" default="head" label="SPLaSK script position"
+					showon="splaskScriptUrl!:" >
+					<option value="head">In head</option>
+					<option value="body">End of body</option>
+				</field>
 				<field name="showFooterContact" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="&quot;Contact us&quot; column in the footer" description="The built-in address column, which carries the SPLaSK markers. Turn it off if a footer module already lists the same address.">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
