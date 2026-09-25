@@ -12,7 +12,7 @@
 	--a11y-letter: normal;
 	--a11y-word: normal;
 	--a11y-accent: var(--teal-600, #0f7f76);
-	--a11y-panel-w: 360px;
+	--a11y-panel-w: 480px;
 }
 
 /* ── Launcher ────────────────────────────────────────────────────────────── */
@@ -106,7 +106,7 @@
 	align-items: center;
 	justify-content: space-between;
 	gap: 0.75rem;
-	padding: 1rem 1.1rem;
+	padding: 0.7rem 0.9rem;
 	background: var(--a11y-accent);
 	color: #fff;
 }
@@ -141,148 +141,133 @@
 
 .a11y-body {
 	overflow-y: auto;
-	padding: 1rem 1.1rem 2rem;
+	padding: 0.8rem 0.9rem 0.9rem;
 	flex: 1;
 }
 
 .a11y-group + .a11y-group {
-	margin-top: 1.4rem;
+	margin-top: 0.7rem;
 }
 
 .a11y-group > h3 {
-	font-size: 0.72rem;
+	font-size: 0.66rem;
 	letter-spacing: 0.06em;
 	text-transform: uppercase;
 	color: var(--ink-500, #5f7488);
-	margin: 0 0 0.6rem;
+	margin: 0 0 0.4rem;
 }
 
-/* ── Profile tiles ───────────────────────────────────────────────────────── */
+/* ── Tiles ───────────────────────────────────────────────────────────────── */
 
-.a11y-profiles {
+/*
+ * Profiles, colour modes and tools are all the same tile, in one auto-filling
+ * grid. A row of labelled switches pushed the panel past two screens; icons in
+ * a grid put the whole thing in view, which for a panel a visitor may be
+ * opening precisely because reading is hard is the point of it.
+ */
+.a11y-grid {
 	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 0.5rem;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-.a11y-profile {
-	width: 100%;
-	min-height: 5.1rem;
-	border: 1px solid var(--line, #e2e8ee);
-	border-radius: 12px;
-	background: #fff;
-	color: inherit;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 0.3rem;
-	padding: 0.5rem 0.25rem;
-	font: inherit;
-	font-size: 0.72rem;
-	line-height: 1.2;
-	text-align: center;
-	cursor: pointer;
-}
-
-.a11y-profile svg {
-	width: 1.5rem;
-	height: 1.5rem;
-	color: var(--a11y-accent);
-}
-
-.a11y-profile:hover {
-	border-color: var(--a11y-accent);
-}
-
-.a11y-profile[aria-pressed="true"] {
-	border-color: var(--a11y-accent);
-	background: var(--teal-100, #e0f5f2);
-	font-weight: 700;
-}
-
-/* ── Toggles and steppers ────────────────────────────────────────────────── */
-
-.a11y-tools {
-	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(4.6rem, 1fr));
 	gap: 0.4rem;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-.a11y-toggle {
+.a11y-tile {
 	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 0.6rem;
-	padding: 0.6rem 0.75rem;
+	height: 100%;
+	min-height: 3.6rem;
 	border: 1px solid var(--line, #e2e8ee);
-	border-radius: 10px;
+	border-radius: 11px;
 	background: #fff;
 	color: inherit;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 0.22rem;
+	padding: 0.4rem 0.2rem;
 	font: inherit;
-	font-size: 0.84rem;
-	text-align: start;
+	font-size: 0.68rem;
+	line-height: 1.15;
+	text-align: center;
 	cursor: pointer;
+	hyphens: auto;
 }
 
-.a11y-toggle:hover {
+.a11y-tile svg {
+	width: 1.3rem;
+	height: 1.3rem;
+	flex: none;
+	color: var(--a11y-accent);
+}
+
+.a11y-tile:hover {
 	border-color: var(--a11y-accent);
 }
 
-.a11y-toggle[aria-pressed="true"] {
+/* Pressed state carries no text: aria-pressed is what a screen reader reads. */
+.a11y-tile[aria-pressed="true"] {
 	border-color: var(--a11y-accent);
 	background: var(--teal-100, #e0f5f2);
-	font-weight: 600;
+	font-weight: 700;
 }
 
-.a11y-toggle .a11y-state {
-	font-size: 0.72rem;
-	color: var(--ink-500, #5f7488);
-	flex: none;
-}
-
-.a11y-toggle[aria-pressed="true"] .a11y-state {
+.a11y-tile[aria-pressed="true"] svg {
 	color: var(--teal-600, #0f7f76);
+}
+
+/* ── Steppers ────────────────────────────────────────────────────────────── */
+
+.a11y-grid-steps {
+	grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
 }
 
 .a11y-step {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	justify-content: space-between;
-	gap: 0.5rem;
-	padding: 0.5rem 0.6rem;
+	gap: 0.2rem;
+	padding: 0.4rem 0.3rem;
 	border: 1px solid var(--line, #e2e8ee);
-	border-radius: 10px;
+	border-radius: 11px;
+	min-height: 3.6rem;
+	justify-content: center;
+}
+
+.a11y-step svg {
+	width: 1.15rem;
+	height: 1.15rem;
+	color: var(--a11y-accent);
 }
 
 .a11y-step-label {
-	font-size: 0.84rem;
+	font-size: 0.66rem;
+	line-height: 1.15;
+	text-align: center;
 }
 
 .a11y-step-controls {
 	display: flex;
 	align-items: center;
-	gap: 0.3rem;
+	gap: 0.2rem;
 	flex: none;
 }
 
 .a11y-step button {
-	width: 1.9rem;
-	height: 1.9rem;
+	width: 1.5rem;
+	height: 1.5rem;
 	border: 1px solid var(--line, #e2e8ee);
-	border-radius: 8px;
+	border-radius: 7px;
 	background: var(--sand-50, #f6f8fa);
 	color: inherit;
 	font: inherit;
+	font-size: 0.8rem;
 	font-weight: 700;
 	cursor: pointer;
 	line-height: 1;
+	padding: 0;
 }
 
 .a11y-step button:hover {
@@ -292,20 +277,23 @@
 }
 
 .a11y-step output {
-	min-width: 3.1rem;
+	min-width: 2.6rem;
 	text-align: center;
-	font-size: 0.78rem;
+	font-size: 0.7rem;
 	font-variant-numeric: tabular-nums;
 }
 
 .a11y-foot {
-	margin-top: 1.4rem;
-	display: grid;
-	gap: 0.5rem;
+	margin-top: 0.85rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.6rem;
+	flex-wrap: wrap;
 }
 
 .a11y-reset {
-	padding: 0.65rem 1rem;
+	padding: 0.5rem 1rem;
 	border: 1px solid var(--line, #e2e8ee);
 	border-radius: 100px;
 	background: #fff;
@@ -329,9 +317,10 @@
 	text-decoration: underline;
 }
 
-@media (max-width: 420px) {
-	.a11y-profiles {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+@media (max-width: 480px) {
+	.a11y-grid,
+	.a11y-grid-steps {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
 }
 

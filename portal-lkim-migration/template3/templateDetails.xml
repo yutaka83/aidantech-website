@@ -294,6 +294,7 @@
 					<option value="left">Left</option>
 					<option value="right">Right</option>
 				</field>
+				<field name="a11yWidth" type="text" default="480px" filter="string" label="Panel width" showon="a11yPanel:1" description="Any CSS length. The tiles fill the width, so a wider panel means more per row and fewer rows to scroll — worth raising if visitors are on short screens."/>
 
 				<field name="a11yStatement" type="text" default="" filter="string" label="Accessibility statement link" showon="a11yPanel:1" description="Linked at the foot of the panel. Required by MyGovEA, and the place to say how to request a transcript or an alternative format."/>
 

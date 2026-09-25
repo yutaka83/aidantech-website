@@ -194,6 +194,7 @@ $tokens = [
     '--header-card-bg'     => $this->params->get('headerCardBg'),
     '--header-card-radius' => $this->params->get('headerCardRadius'),
     '--sticky-menu-bg'     => $stickyMenu ? $this->params->get('stickyMenuBg') : '',
+    '--a11y-panel-w'       => $this->params->get('a11yPanel', 1) ? $this->params->get('a11yWidth') : '',
 
     '--hero-min'        => $this->params->get('heroMin'),
     '--hero-focus'      => $this->params->get('heroFocus'),

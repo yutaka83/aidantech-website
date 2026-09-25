@@ -64,6 +64,14 @@ $toolIcons = [
     'targets'  => $icon('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/>'),
 ];
 
+$filterIcons = [
+    'contrast' => $icon('<circle cx="12" cy="12" r="9"/><path d="M12 3v18a9 9 0 0 0 0-18Z" fill="currentColor" stroke="none"/>'),
+    'invert'   => $icon('<circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor" stroke="none"/><path d="M12 3v18"/>'),
+    'mono'     => $icon('<circle cx="12" cy="12" r="9"/><path d="M5 17.5 17.5 5M8 20.5 20.5 8M3.5 14 14 3.5"/>'),
+    'lowsat'   => $icon('<path d="M12 3.5c3.5 4 6 7 6 9.7A6 6 0 0 1 6 13.2c0-2.7 2.5-5.7 6-9.7Z"/>'),
+    'highsat'  => $icon('<path d="M12 3.5c3.5 4 6 7 6 9.7A6 6 0 0 1 6 13.2c0-2.7 2.5-5.7 6-9.7Z" fill="currentColor" stroke="none"/><path d="M12 3.5c3.5 4 6 7 6 9.7A6 6 0 0 1 6 13.2c0-2.7 2.5-5.7 6-9.7Z"/>'),
+];
+
 $filters = ['invert', 'mono', 'lowsat', 'highsat'];
 
 $side      = $this->params->get('a11yPosition', 'left') === 'right' ? 'right' : 'left';
@@ -93,11 +101,11 @@ $statement = trim((string) $this->params->get('a11yStatement', ''));
         <?php if ($a11yProfiles) : ?>
             <div class="a11y-group">
                 <h3><?php echo Text::_('TPL_LKIM3_A11Y_PROFILES'); ?></h3>
-                <ul class="a11y-profiles">
+                <ul class="a11y-grid">
                     <?php foreach ($a11yProfiles as $key) : ?>
                         <?php if (!isset($profileIcons[$key])) { continue; } ?>
                         <li>
-                            <button type="button" class="a11y-profile" data-a11y-profile="<?php echo $a($key); ?>" aria-pressed="false">
+                            <button type="button" class="a11y-tile" data-a11y-profile="<?php echo $a($key); ?>" aria-pressed="false">
                                 <?php echo $profileIcons[$key]; ?>
                                 <span><?php echo Text::_('TPL_LKIM3_A11Y_P_' . strtoupper($key)); ?></span>
                             </button>
@@ -109,9 +117,10 @@ $statement = trim((string) $this->params->get('a11yStatement', ''));
 
         <div class="a11y-group">
             <h3><?php echo Text::_('TPL_LKIM3_A11Y_TEXT'); ?></h3>
-            <ul class="a11y-tools">
+            <ul class="a11y-grid a11y-grid-steps">
                 <?php foreach (['scale' => 'TPL_LKIM3_A11Y_SIZE', 'line' => 'TPL_LKIM3_A11Y_LINE', 'letter' => 'TPL_LKIM3_A11Y_LETTER'] as $key => $label) : ?>
                     <li class="a11y-step">
+                        <?php echo $toolIcons[$key]; ?>
                         <span class="a11y-step-label"><?php echo Text::_($label); ?></span>
                         <span class="a11y-step-controls">
                             <button type="button" data-a11y-step="<?php echo $key; ?>:down"
@@ -127,17 +136,17 @@ $statement = trim((string) $this->params->get('a11yStatement', ''));
 
         <div class="a11y-group">
             <h3><?php echo Text::_('TPL_LKIM3_A11Y_COLOUR'); ?></h3>
-            <ul class="a11y-tools">
+            <ul class="a11y-grid">
                 <li>
-                    <button type="button" class="a11y-toggle" data-a11y-toggle="contrast" aria-pressed="false"
-                        data-on="<?php echo $a(Text::_('JYES')); ?>" data-off="<?php echo $a(Text::_('JNO')); ?>">
+                    <button type="button" class="a11y-tile" data-a11y-toggle="contrast" aria-pressed="false">
+                        <?php echo $filterIcons['contrast']; ?>
                         <span><?php echo Text::_('TPL_LKIM_CONTRAST'); ?></span>
-                        <span class="a11y-state"><?php echo Text::_('JNO'); ?></span>
                     </button>
                 </li>
                 <?php foreach ($filters as $f) : ?>
                     <li>
-                        <button type="button" class="a11y-toggle" data-a11y-filter-btn="<?php echo $f; ?>" aria-pressed="false">
+                        <button type="button" class="a11y-tile" data-a11y-filter-btn="<?php echo $f; ?>" aria-pressed="false">
+                            <?php echo $filterIcons[$f]; ?>
                             <span><?php echo Text::_('TPL_LKIM3_A11Y_F_' . strtoupper($f)); ?></span>
                         </button>
                     </li>
@@ -148,14 +157,13 @@ $statement = trim((string) $this->params->get('a11yStatement', ''));
         <?php if ($a11yTools) : ?>
             <div class="a11y-group">
                 <h3><?php echo Text::_('TPL_LKIM3_A11Y_NAV'); ?></h3>
-                <ul class="a11y-tools">
+                <ul class="a11y-grid">
                     <?php foreach ($a11yTools as $key) : ?>
                         <?php if (!isset($toolIcons[$key])) { continue; } ?>
                         <li>
-                            <button type="button" class="a11y-toggle" data-a11y-toggle="<?php echo $a($key); ?>" aria-pressed="false"
-                                data-on="<?php echo $a(Text::_('JYES')); ?>" data-off="<?php echo $a(Text::_('JNO')); ?>">
+                            <button type="button" class="a11y-tile" data-a11y-toggle="<?php echo $a($key); ?>" aria-pressed="false">
+                                <?php echo $toolIcons[$key]; ?>
                                 <span><?php echo Text::_('TPL_LKIM3_A11Y_T_' . strtoupper($key)); ?></span>
-                                <span class="a11y-state"><?php echo Text::_('JNO'); ?></span>
                             </button>
                         </li>
                     <?php endforeach; ?>
