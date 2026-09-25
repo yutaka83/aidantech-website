@@ -376,6 +376,83 @@ html[data-a11y-headings="on"] body :is(h1, h2, h3, h4, h5, h6):not(.a11y-panel *
 	outline-offset: 4px;
 }
 
+/*
+ * High contrast.
+ *
+ * Implemented here rather than left to the template. The panel sets
+ * data-lkim-contrast on <html>, and a template that has never heard of this
+ * plugin has no rules for it — which is exactly what happened when the panel
+ * moved out of tpl_lkim3 and onto a Helix template: the switch lit up and the
+ * page did not change.
+ *
+ * A forced black-on-white-text palette rather than a nudge to the existing one,
+ * because the existing one is unknown. It is blunt by design; everything is
+ * !important because it has to beat whatever the template asserts.
+ */
+html[data-lkim-contrast="on"] body,
+html[data-lkim-contrast="on"] body * {
+	background-color: #000 !important;
+	background-image: none !important;
+	color: #fff !important;
+	border-color: #fff !important;
+	text-shadow: none !important;
+	box-shadow: none !important;
+}
+
+html[data-lkim-contrast="on"] body a {
+	color: #ff0 !important;
+	text-decoration: underline !important;
+}
+
+html[data-lkim-contrast="on"] body :is(button, input, select, textarea) {
+	border: 1px solid #fff !important;
+}
+
+/* Photographs stay, but lift them off the black so edges remain findable. */
+html[data-lkim-contrast="on"] body :is(img, video) {
+	outline: 1px solid #fff;
+	background: #000 !important;
+}
+
+html[data-lkim-contrast="on"] body :is(svg, svg *) {
+	fill: currentColor !important;
+	stroke: currentColor !important;
+	background: none !important;
+}
+
+/*
+ * The panel itself is exempt, or its own controls become unreadable at the
+ * moment they are most needed. These come after the block above and carry an
+ * extra class, so they win on both order and specificity.
+ */
+html[data-lkim-contrast="on"] .a11y-panel,
+html[data-lkim-contrast="on"] .a11y-panel * {
+	background-color: #fff !important;
+	color: #000 !important;
+	border-color: #000 !important;
+}
+
+html[data-lkim-contrast="on"] .a11y-panel :is(.a11y-head, .a11y-head *) {
+	background-color: #000 !important;
+	color: #fff !important;
+}
+
+html[data-lkim-contrast="on"] .a11y-panel .a11y-tile[aria-pressed="true"] {
+	background-color: #000 !important;
+	color: #fff !important;
+}
+
+html[data-lkim-contrast="on"] .a11y-panel a {
+	color: #00006b !important;
+}
+
+html[data-lkim-contrast="on"] .a11y-launcher,
+html[data-lkim-contrast="on"] .a11y-launcher * {
+	background-color: #000 !important;
+	color: #fff !important;
+	border: 2px solid #fff !important;
+}
+
 /* Colour filters. Media is inverted back so photographs stay readable. */
 html[data-a11y-filter="invert"] {
 	filter: invert(1) hue-rotate(180deg);
