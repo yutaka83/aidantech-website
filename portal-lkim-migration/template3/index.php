@@ -51,64 +51,6 @@ $siteTitle = $this->params->get('siteTitle') ?: $sitename;
 $splask = $this->params->get('splaskAttribute', 'data-splask') ?: 'data-splask';
 $root   = Uri::root(true);
 
-/* ── Maintenance mode ────────────────────────────────────────────────────── */
-
-/**
- * Anyone signed in still gets the site, so staff can check the work before the
- * switch goes off again. A guest gets the maintenance page and a 503.
- *
- * This runs before any markup: the component has already executed by the time a
- * template is reached, but none of its output reaches the visitor.
- */
-if ($this->params->get('maintenance', 0) && $app->getIdentity()->guest) {
-    require __DIR__ . '/maintenance.php';
-
-    return;
-}
-
-/* ── SPLaSK analytics ────────────────────────────────────────────────────── */
-
-/**
- * JDN's SPLaSK code is a Matomo tracker: the queue has to exist and be filled
- * before matomo.js loads, which is why this is an inline declaration in the
- * head rather than a plain script tag. The snippet is JDN's own, with the two
- * values that differ per site taken from the style.
- *
- * Both are written into JavaScript through json_encode, so a stray quote in
- * either is a harmless string rather than a broken page.
- */
-// The host default is repeated here rather than left to the manifest: a style
-// saved before this field existed has no value for it, and the whole point is
-// that entering the site ID alone is enough.
-$splaskId   = trim((string) $this->params->get('splaskId', ''));
-$splaskHost = trim((string) $this->params->get('splaskHost', '')) ?: 'https://splask-analytics.jdn.gov.my/';
-
-// Matomo site IDs are integers, and the host has to be an https origin.
-if ($splaskId !== '' && preg_match('/^\d+$/', $splaskId) && preg_match('#^https://[a-z0-9.-]+(?::\d+)?(/[a-z0-9._/-]*)?$#i', $splaskHost)) {
-    $splaskHost = rtrim($splaskHost, '/') . '/';
-
-    $this->addScriptDeclaration(
-        "/* SPLaSK analytics (Matomo) */\n"
-        . "var _paq = window._paq = window._paq || [];\n"
-        . ($this->params->get('splaskCookies', 1) ? '' : "_paq.push(['disableCookies']);\n")
-        . "_paq.push(['trackPageView']);\n"
-        . "_paq.push(['enableLinkTracking']);\n"
-        . "(function () {\n"
-        . "    var u = " . json_encode($splaskHost, JSON_UNESCAPED_SLASHES) . ";\n"
-        . "    _paq.push(['setTrackerUrl', u + 'matomo.php']);\n"
-        . "    _paq.push(['setSiteId', " . json_encode($splaskId) . "]);\n"
-        . "    var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];\n"
-        . "    g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);\n"
-        . "})();"
-    );
-
-    // matomo.js comes from another origin on every page, so let the browser
-    // open that connection while it is still parsing the head. No crossorigin:
-    // the tracker is fetched as an ordinary script, and a CORS preconnect would
-    // open a connection the real request cannot reuse.
-    $this->getPreloadManager()->preconnect($splaskHost);
-}
-
 $direction = $this->direction === 'rtl' ? 'rtl' : 'ltr';
 
 // Header behaviour is settled here because the theme-token block below needs it
@@ -300,6 +242,64 @@ if ($fontSource === 'google') {
             ['rel' => 'lazy-stylesheet', 'crossorigin' => 'anonymous']
         );
     }
+}
+
+/* ── Maintenance mode ────────────────────────────────────────────────────── */
+
+/**
+ * Anyone signed in still gets the site, so staff can check the work before the
+ * switch goes off again. A guest gets the maintenance page and a 503.
+ *
+ * This runs before any markup: the component has already executed by the time a
+ * template is reached, but none of its output reaches the visitor.
+ */
+if ($this->params->get('maintenance', 0) && $app->getIdentity()->guest) {
+    require __DIR__ . '/maintenance.php';
+
+    return;
+}
+
+/* ── SPLaSK analytics ────────────────────────────────────────────────────── */
+
+/**
+ * JDN's SPLaSK code is a Matomo tracker: the queue has to exist and be filled
+ * before matomo.js loads, which is why this is an inline declaration in the
+ * head rather than a plain script tag. The snippet is JDN's own, with the two
+ * values that differ per site taken from the style.
+ *
+ * Both are written into JavaScript through json_encode, so a stray quote in
+ * either is a harmless string rather than a broken page.
+ */
+// The host default is repeated here rather than left to the manifest: a style
+// saved before this field existed has no value for it, and the whole point is
+// that entering the site ID alone is enough.
+$splaskId   = trim((string) $this->params->get('splaskId', ''));
+$splaskHost = trim((string) $this->params->get('splaskHost', '')) ?: 'https://splask-analytics.jdn.gov.my/';
+
+// Matomo site IDs are integers, and the host has to be an https origin.
+if ($splaskId !== '' && preg_match('/^\d+$/', $splaskId) && preg_match('#^https://[a-z0-9.-]+(?::\d+)?(/[a-z0-9._/-]*)?$#i', $splaskHost)) {
+    $splaskHost = rtrim($splaskHost, '/') . '/';
+
+    $this->addScriptDeclaration(
+        "/* SPLaSK analytics (Matomo) */\n"
+        . "var _paq = window._paq = window._paq || [];\n"
+        . ($this->params->get('splaskCookies', 1) ? '' : "_paq.push(['disableCookies']);\n")
+        . "_paq.push(['trackPageView']);\n"
+        . "_paq.push(['enableLinkTracking']);\n"
+        . "(function () {\n"
+        . "    var u = " . json_encode($splaskHost, JSON_UNESCAPED_SLASHES) . ";\n"
+        . "    _paq.push(['setTrackerUrl', u + 'matomo.php']);\n"
+        . "    _paq.push(['setSiteId', " . json_encode($splaskId) . "]);\n"
+        . "    var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];\n"
+        . "    g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);\n"
+        . "})();"
+    );
+
+    // matomo.js comes from another origin on every page, so let the browser
+    // open that connection while it is still parsing the head. No crossorigin:
+    // the tracker is fetched as an ordinary script, and a CORS preconnect would
+    // open a connection the real request cannot reuse.
+    $this->getPreloadManager()->preconnect($splaskHost);
 }
 
 $this->setMetaData('viewport', 'width=device-width, initial-scale=1');

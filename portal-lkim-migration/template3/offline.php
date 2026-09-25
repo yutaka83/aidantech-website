@@ -24,8 +24,23 @@ use Joomla\CMS\Uri\Uri;
 
 $app  = Factory::getApplication();
 $root = Uri::root(true);
-$logo = $this->params->get('logoFile', 'media/templates/site/lkim3/images/logo.png');
-$a    = static fn($v): string => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8');
+$logo  = $this->params->get('logoFile', 'media/templates/site/lkim3/images/logo.png');
+$image = trim((string) $this->params->get('maintenanceImage', ''));
+$a     = static fn($v): string => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8');
+
+/** A media field can carry Joomla's #joomlaImage adapter fragment; drop it. */
+$src = static function (string $path) use ($root): string {
+    $path = explode('#', $path, 2)[0];
+
+    return preg_match('#^(https?:)?//|^data:#i', $path)
+        ? $path
+        : $root . '/' . ltrim($path, '/');
+};
+
+// index.php sets this after the point where maintenance.php returns, and
+// offline.php is reached without index.php at all — so both set it here, or a
+// phone renders the page at 980px and zooms out.
+$this->setMetaData('viewport', 'width=device-width, initial-scale=1');
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
@@ -40,7 +55,12 @@ $a    = static fn($v): string => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-
     <main class="lk3-maint">
         <div class="lk3-maint-card">
             <?php if ($logo) : ?>
-                <img class="lk3-maint-logo" src="<?php echo $a($root . '/' . ltrim($logo, '/')); ?>" alt="" decoding="async">
+                <img class="lk3-maint-logo" src="<?php echo $a($src($logo)); ?>" alt="" decoding="async">
+            <?php endif; ?>
+
+            <?php if ($image !== '') : ?>
+                <?php // alt="" on purpose: the message below carries the meaning. ?>
+                <img class="lk3-maint-image" src="<?php echo $a($src($image)); ?>" alt="" decoding="async">
             <?php endif; ?>
 
             <p class="lk3-maint-eyebrow"><?php echo Text::_('TPL_LKIM3_MAINT_EYEBROW'); ?></p>

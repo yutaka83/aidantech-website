@@ -338,6 +338,15 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
+				<!--
+					Deliberately without a showon: offline.php uses this image too, and that
+					page is reached through Global Configuration rather than the switch above,
+					so hiding the field while maintenance is off would hide a setting that is
+					still in use.
+				-->
+				<field name="maintenanceImage" type="media" schemes="http,https,data,file" validate="url" relative="true"
+					default="" label="Maintenance image"
+					description="Shown on both the maintenance page and Joomla's own Site Offline page, beneath the logo. It is treated as decorative, so keep any wording in the message below rather than baked into the picture where a screen reader cannot reach it." />
 				<field name="maintenanceHeading" type="text" default="" filter="string" label="Maintenance heading"
 					showon="maintenance:1" description="Leave empty for the default from the language file." />
 				<field name="maintenanceMessage" type="textarea" rows="4" default="" filter="string"
