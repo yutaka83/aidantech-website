@@ -23,6 +23,7 @@ use Joomla\CMS\Language\Text;
 /** @var array  $profiles */
 /** @var array  $tools */
 /** @var string $side */
+/** @var string $edge */
 /** @var bool   $launcher */
 /** @var string $statement */
 
@@ -83,7 +84,7 @@ $filters = ['invert', 'mono', 'lowsat', 'highsat'];
 
 ?>
 <?php if ($launcher) : ?>
-    <button type="button" class="a11y-launcher is-<?php echo $side; ?>" aria-expanded="false" aria-controls="a11y-panel"
+    <button type="button" class="a11y-launcher is-<?php echo $side; ?> is-<?php echo $edge; ?>" aria-expanded="false" aria-controls="a11y-panel"
         aria-label="<?php echo $a(Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_TOOLS')); ?>" title="<?php echo $a(Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_TOOLS')); ?>">
         <?php echo $markAccess; ?>
     </button>

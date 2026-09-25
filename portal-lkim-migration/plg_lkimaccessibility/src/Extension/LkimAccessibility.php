@@ -103,6 +103,15 @@ final class LkimAccessibility extends CMSPlugin implements SubscriberInterface
             $overrides[] = '--a11y-panel-w: ' . $width . ';';
         }
 
+        // Distance from the top or bottom edge only. The side distance is left
+        // to the stylesheet, so pushing the button below a floating header does
+        // not also drag it in from the side.
+        $offset = trim((string) $this->params->get('launcherOffset', ''));
+
+        if ($offset !== '' && preg_match('/^[0-9.]+(px|rem|em|vh|vw|%)$/', $offset)) {
+            $overrides[] = '--a11y-launcher-y: ' . $offset . ';';
+        }
+
         if ($accent !== '' && preg_match('/^#[0-9a-f]{3,8}$/i', $accent)) {
             $overrides[] = '--a11y-accent: ' . $accent . ';';
         }
@@ -169,6 +178,7 @@ final class LkimAccessibility extends CMSPlugin implements SubscriberInterface
         $tools    = $this->listParam('tools', ['font', 'align', 'links', 'headings', 'cursor', 'motion', 'images', 'read', 'guide', 'mask', 'media', 'targets']);
 
         $side      = $this->params->get('position', 'left') === 'right' ? 'right' : 'left';
+        $edge      = $this->params->get('launcherY', 'top') === 'bottom' ? 'bottom' : 'top';
         $launcher  = (bool) $this->params->get('launcher', 1);
         $statement = trim((string) $this->params->get('statement', ''));
 

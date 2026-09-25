@@ -26,14 +26,9 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-				<field name="note" type="note" class="alert alert-info"
-					label="PLG_SYSTEM_LKIMACCESSIBILITY_NOTE_LABEL"
-					description="PLG_SYSTEM_LKIMACCESSIBILITY_NOTE_DESC" />
+				<field name="note" type="note" class="alert alert-info" label="PLG_SYSTEM_LKIMACCESSIBILITY_NOTE_LABEL" description="PLG_SYSTEM_LKIMACCESSIBILITY_NOTE_DESC"/>
 
-				<field name="profiles" type="checkboxes" multiple="true" layout="joomla.form.field.checkboxes"
-					default="blind,lowvision,colorblind,dyslexia,adhd,epilepsy,motor,deaf,elderly"
-					label="PLG_SYSTEM_LKIMACCESSIBILITY_PROFILES_LABEL"
-					description="PLG_SYSTEM_LKIMACCESSIBILITY_PROFILES_DESC">
+				<field name="profiles" type="checkboxes" multiple="true" layout="joomla.form.field.checkboxes" default="blind,lowvision,colorblind,dyslexia,adhd,epilepsy,motor,deaf,elderly" label="PLG_SYSTEM_LKIMACCESSIBILITY_PROFILES_LABEL" description="PLG_SYSTEM_LKIMACCESSIBILITY_PROFILES_DESC">
 					<option value="blind">PLG_SYSTEM_LKIMACCESSIBILITY_OPT_BLIND</option>
 					<option value="lowvision">PLG_SYSTEM_LKIMACCESSIBILITY_OPT_LOWVISION</option>
 					<option value="colorblind">PLG_SYSTEM_LKIMACCESSIBILITY_OPT_COLORBLIND</option>
@@ -45,9 +40,7 @@
 					<option value="elderly">PLG_SYSTEM_LKIMACCESSIBILITY_OPT_ELDERLY</option>
 				</field>
 
-				<field name="tools" type="checkboxes" multiple="true" layout="joomla.form.field.checkboxes"
-					default="font,align,links,headings,cursor,motion,images,read,guide,mask,media,targets"
-					label="PLG_SYSTEM_LKIMACCESSIBILITY_TOOLS_LABEL">
+				<field name="tools" type="checkboxes" multiple="true" layout="joomla.form.field.checkboxes" default="font,align,links,headings,cursor,motion,images,read,guide,mask,media,targets" label="PLG_SYSTEM_LKIMACCESSIBILITY_TOOLS_LABEL">
 					<option value="font">PLG_SYSTEM_LKIMACCESSIBILITY_T_FONT</option>
 					<option value="align">PLG_SYSTEM_LKIMACCESSIBILITY_T_ALIGN</option>
 					<option value="links">PLG_SYSTEM_LKIMACCESSIBILITY_T_LINKS</option>
@@ -62,15 +55,11 @@
 					<option value="targets">PLG_SYSTEM_LKIMACCESSIBILITY_T_TARGETS</option>
 				</field>
 
-				<field name="statement" type="text" default="" filter="string"
-					label="PLG_SYSTEM_LKIMACCESSIBILITY_STATEMENT_LABEL"
-					description="PLG_SYSTEM_LKIMACCESSIBILITY_STATEMENT_DESC" />
+				<field name="statement" type="text" default="" filter="string" label="PLG_SYSTEM_LKIMACCESSIBILITY_STATEMENT_LABEL" description="PLG_SYSTEM_LKIMACCESSIBILITY_STATEMENT_DESC"/>
 			</fieldset>
 
 			<fieldset name="appearance" label="PLG_SYSTEM_LKIMACCESSIBILITY_APPEARANCE">
-				<field name="launcher" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
-					label="PLG_SYSTEM_LKIMACCESSIBILITY_LAUNCHER_LABEL"
-					description="PLG_SYSTEM_LKIMACCESSIBILITY_LAUNCHER_DESC">
+				<field name="launcher" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="PLG_SYSTEM_LKIMACCESSIBILITY_LAUNCHER_LABEL" description="PLG_SYSTEM_LKIMACCESSIBILITY_LAUNCHER_DESC">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
@@ -78,11 +67,13 @@
 					<option value="left">JGLOBAL_LEFT</option>
 					<option value="right">JGLOBAL_RIGHT</option>
 				</field>
-				<field name="width" type="text" default="480px" filter="string"
-					label="PLG_SYSTEM_LKIMACCESSIBILITY_WIDTH_LABEL"
-					description="PLG_SYSTEM_LKIMACCESSIBILITY_WIDTH_DESC" />
-				<field name="accent" type="color" format="hex" default="" label="PLG_SYSTEM_LKIMACCESSIBILITY_ACCENT_LABEL"
-					description="PLG_SYSTEM_LKIMACCESSIBILITY_ACCENT_DESC" />
+				<field name="launcherY" type="list" default="top" label="PLG_SYSTEM_LKIMACCESSIBILITY_LAUNCHERY_LABEL" description="PLG_SYSTEM_LKIMACCESSIBILITY_LAUNCHERY_DESC" showon="launcher:1">
+					<option value="top">JGLOBAL_TOP</option>
+					<option value="bottom">JGLOBAL_BOTTOM</option>
+				</field>
+				<field name="launcherOffset" type="text" default="1.25rem" filter="string" label="PLG_SYSTEM_LKIMACCESSIBILITY_OFFSET_LABEL" description="PLG_SYSTEM_LKIMACCESSIBILITY_OFFSET_DESC" showon="launcher:1"/>
+				<field name="width" type="text" default="480px" filter="string" label="PLG_SYSTEM_LKIMACCESSIBILITY_WIDTH_LABEL" description="PLG_SYSTEM_LKIMACCESSIBILITY_WIDTH_DESC"/>
+				<field name="accent" type="color" format="hex" default="" label="PLG_SYSTEM_LKIMACCESSIBILITY_ACCENT_LABEL" description="PLG_SYSTEM_LKIMACCESSIBILITY_ACCENT_DESC"/>
 			</fieldset>
 		</fields>
 	</config>
