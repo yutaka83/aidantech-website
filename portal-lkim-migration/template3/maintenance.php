@@ -72,16 +72,27 @@ $this->setMetaData('robots', 'noindex, nofollow');
     <jdoc:include type="styles" />
 </head>
 
-<body class="site lkim lkim3 lk3-maintenance">
+<body class="site lkim lkim3 lk3-maintenance<?php echo $image !== '' ? ' is-image-only' : ''; ?>">
+    <?php if ($image !== '') : ?>
+        <?php
+        /*
+         * An image on its own, edge to edge. No logo, no card, no wording —
+         * an agency that has had a notice designed wants that notice, not the
+         * template's arrangement of it around one.
+         *
+         * The alt is the heading rather than empty here: this picture is the
+         * whole page, so it is the only thing a screen reader or a visitor on
+         * a failed image load has to go on.
+         */
+        ?>
+        <main class="lk3-maint-only">
+            <img src="<?php echo $a($src($image)); ?>" alt="<?php echo $a($heading); ?>" decoding="async">
+        </main>
+    <?php else : ?>
     <main class="lk3-maint">
         <div class="lk3-maint-card">
             <?php if ($logo) : ?>
                 <img class="lk3-maint-logo" src="<?php echo $a($src($logo)); ?>" alt="" decoding="async">
-            <?php endif; ?>
-
-            <?php if ($image !== '') : ?>
-                <?php // alt="" on purpose: the heading and message carry the meaning. ?>
-                <img class="lk3-maint-image" src="<?php echo $a($src($image)); ?>" alt="" decoding="async">
             <?php endif; ?>
 
             <p class="lk3-maint-eyebrow"><?php echo Text::_('TPL_LKIM3_MAINT_EYEBROW'); ?></p>
@@ -107,6 +118,7 @@ $this->setMetaData('robots', 'noindex, nofollow');
             <?php endif; ?>
         </div>
     </main>
+    <?php endif; ?>
 </body>
 
 </html>

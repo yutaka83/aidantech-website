@@ -2013,7 +2013,12 @@ body.lkim3 .lkim-backtotop {
 	transition: opacity 0.2s ease;
 }
 
-.lkim-backtotop.is-visible {
+/*
+ * Prefixed to match the rule above it. Without body.lkim3 this is (0,2,0) and
+ * loses to the (0,2,1) base rule, so opacity stayed 0 and the button never
+ * appeared however far you scrolled.
+ */
+body.lkim3 .lkim-backtotop.is-visible {
 	opacity: 1;
 	pointer-events: auto;
 }
@@ -2301,6 +2306,25 @@ body.lkim3 .lkim-backtotop:hover {
 }
 
 /* ── Maintenance and offline pages ───────────────────────────────────────── */
+
+/* Image-only maintenance: the notice is the page, edge to edge. */
+body.lk3-maintenance.is-image-only {
+	display: block;
+	padding: 0;
+	background: var(--navy-950);
+}
+
+.lk3-maint-only {
+	display: block;
+	min-height: 100vh;
+}
+
+.lk3-maint-only img {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+}
 
 body.lk3-maintenance {
 	min-height: 100vh;
