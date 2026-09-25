@@ -26,6 +26,7 @@ use Joomla\CMS\Language\Text;
 /** @var string $edge */
 /** @var bool   $launcher */
 /** @var string $statement */
+/** @var bool   $speech */
 
 $a = static fn($v): string => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8');
 $e = static fn($v): string => htmlspecialchars((string) $v, ENT_COMPAT, 'UTF-8');
@@ -69,6 +70,9 @@ $toolIcons = [
     'guide'    => $icon('<path d="M3 12h18"/><path d="M6 8h12M6 16h12" opacity=".45"/>'),
     'mask'     => $icon('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M3 14h18"/>'),
     'media'    => $icon('<rect x="2" y="6" width="14" height="12" rx="2"/><path d="m22 8-6 4 6 4Z"/><path d="M5 15h6"/>'),
+    'speech'   => $icon('<path d="M11 5 6 9H3v6h3l5 4Z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M19 6.5a8 8 0 0 1 0 11"/>'),
+    'speak'    => $icon('<rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3.5M9 21.5h6"/>'),
+    'rate'     => $icon('<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>'),
     'targets'  => $icon('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/>'),
 ];
 
@@ -173,6 +177,49 @@ $filters = ['invert', 'mono', 'lowsat', 'highsat'];
                             </button>
                         </li>
                     <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+
+        <?php
+        /*
+         * Its own group rather than another entry in the tools list. A site that
+         * saved its tool selection before this existed would never show a new
+         * entry in that list, and reading aloud is too central to arrive only
+         * for whoever happens to re-save the plugin.
+         *
+         * The group is dropped entirely when the browser has no speech
+         * synthesis — data-a11y-speechless is set by the script on such a
+         * browser, and the stylesheet hides it.
+         */
+        ?>
+        <?php if ($speech) : ?>
+            <div class="a11y-group a11y-group-speech">
+                <h3><?php echo Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_SOUND'); ?></h3>
+                <ul class="a11y-grid">
+                    <li>
+                        <button type="button" class="a11y-tile" data-a11y-speak aria-pressed="false">
+                            <?php echo $toolIcons['speak']; ?>
+                            <span><?php echo Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_T_SPEAK'); ?></span>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="a11y-tile" data-a11y-toggle="speech" aria-pressed="false">
+                            <?php echo $toolIcons['speech']; ?>
+                            <span><?php echo Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_T_SPEECH'); ?></span>
+                        </button>
+                    </li>
+                    <li class="a11y-step">
+                        <?php echo $toolIcons['rate']; ?>
+                        <span class="a11y-step-label"><?php echo Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_RATE'); ?></span>
+                        <span class="a11y-step-controls">
+                            <button type="button" data-a11y-step="rate:down"
+                                aria-label="<?php echo $a(Text::sprintf('PLG_SYSTEM_LKIMACCESSIBILITY_DECREASE', Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_RATE'))); ?>">&minus;</button>
+                            <output data-a11y-out="rate">1.0x</output>
+                            <button type="button" data-a11y-step="rate:up"
+                                aria-label="<?php echo $a(Text::sprintf('PLG_SYSTEM_LKIMACCESSIBILITY_INCREASE', Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_RATE'))); ?>">+</button>
+                        </span>
+                    </li>
                 </ul>
             </div>
         <?php endif; ?>

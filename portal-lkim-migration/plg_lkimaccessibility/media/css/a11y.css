@@ -585,3 +585,29 @@ html[data-a11y-targets="on"] body :focus-visible {
 		display: none !important;
 	}
 }
+
+/* ── Reading aloud ───────────────────────────────────────────────────────── */
+
+/*
+ * The block currently being spoken. Marked with an outline and a tint rather
+ * than a colour swap, so it stays legible under every colour mode above —
+ * including high contrast, where it picks up the forced palette's own colours.
+ */
+.a11y-speaking {
+	outline: 3px solid var(--orange-500, #f0913f) !important;
+	outline-offset: 3px;
+	background-color: var(--orange-100, #fdead8) !important;
+}
+
+/*
+ * Click-to-read gives every readable block a pointer, so it is obvious the
+ * page has changed mode and what will respond to a click.
+ */
+html[data-a11y-speech="on"] body :is(p, li, h1, h2, h3, h4, h5, h6, td, th, dd, dt, figcaption, blockquote) {
+	cursor: pointer;
+}
+
+/* A browser with no speech synthesis gets no controls for it. */
+html[data-a11y-speechless] .a11y-group-speech {
+	display: none;
+}

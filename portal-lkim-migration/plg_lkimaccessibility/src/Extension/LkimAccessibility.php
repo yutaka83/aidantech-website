@@ -180,6 +180,7 @@ final class LkimAccessibility extends CMSPlugin implements SubscriberInterface
         $side      = $this->params->get('position', 'left') === 'right' ? 'right' : 'left';
         $edge      = $this->params->get('launcherY', 'top') === 'bottom' ? 'bottom' : 'top';
         $launcher  = (bool) $this->params->get('launcher', 1);
+        $speech    = (bool) $this->params->get('speech', 1);
         $statement = trim((string) $this->params->get('statement', ''));
 
         if ($statement !== '' && !preg_match('#^(https?:)?//|^mailto:#i', $statement)) {
