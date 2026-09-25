@@ -2299,3 +2299,96 @@ body.lkim3 .lkim-backtotop:hover {
 		min-width: 0;
 	}
 }
+
+/* ── Maintenance and offline pages ───────────────────────────────────────── */
+
+body.lk3-maintenance {
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+	padding: 2rem 1rem;
+	background: linear-gradient(160deg, var(--navy-950) 0%, var(--navy-800) 55%, var(--navy-600) 100%);
+}
+
+.lk3-maint {
+	width: 100%;
+	max-width: 34rem;
+}
+
+.lk3-maint-card {
+	background: #fff;
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-pop);
+	padding: 2.5rem 2rem;
+	text-align: center;
+}
+
+.lk3-maint-logo {
+	height: 3.5rem;
+	width: auto;
+	margin: 0 auto 1.25rem;
+}
+
+.lk3-maint-eyebrow {
+	margin: 0 0 0.5rem;
+	font-family: var(--font-head);
+	font-weight: 700;
+	font-size: 0.78rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--teal-600);
+}
+
+body.lk3-maintenance h1 {
+	font-size: clamp(1.4rem, 3.4vw, 1.9rem);
+	margin: 0 0 0.85rem;
+}
+
+.lk3-maint-lead {
+	margin: 0;
+	color: var(--ink-700);
+	line-height: 1.65;
+}
+
+.lk3-maint-until,
+.lk3-maint-contact {
+	margin: 1rem 0 0;
+	font-size: 0.9rem;
+	color: var(--ink-500);
+}
+
+.lk3-maint-until strong,
+.lk3-maint-contact strong,
+.lk3-maint-contact a {
+	color: var(--navy-800);
+}
+
+.lk3-maint-login {
+	margin-top: 1.75rem;
+	text-align: start;
+	display: grid;
+	gap: 0.75rem;
+}
+
+.lk3-maint-field {
+	display: grid;
+	gap: 0.3rem;
+}
+
+.lk3-maint-field label {
+	font-size: 0.82rem;
+	font-weight: 600;
+	color: var(--ink-700);
+}
+
+.lk3-maint-field input {
+	width: 100%;
+	border: 1px solid var(--line);
+	border-radius: var(--radius-sm);
+	padding: 0.6rem 0.75rem;
+	font: inherit;
+}
+
+.lk3-maint-login .btn {
+	justify-content: center;
+}

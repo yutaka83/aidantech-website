@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="plugin" group="system" method="upgrade">
+	<name>PLG_SYSTEM_LKIMACCESSIBILITY</name>
+	<version>1.0.0</version>
+	<creationDate>2026-09</creationDate>
+	<author>Aidan Technologies</author>
+	<authorEmail>hidayati@aidan.my</authorEmail>
+	<copyright>(C) 2026 Lembaga Kemajuan Ikan Malaysia</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<description>PLG_SYSTEM_LKIMACCESSIBILITY_XML_DESCRIPTION</description>
+	<namespace path="src">Aidan\Plugin\System\LkimAccessibility</namespace>
+	<files>
+		<folder plugin="lkimaccessibility">services</folder>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+	</files>
+	<media destination="plg_system_lkimaccessibility" folder="media">
+		<folder>css</folder>
+		<folder>js</folder>
+	</media>
+	<languages>
+		<language tag="en-GB">language/en-GB/plg_system_lkimaccessibility.ini</language>
+		<language tag="en-GB">language/en-GB/plg_system_lkimaccessibility.sys.ini</language>
+		<language tag="ms-MY">language/ms-MY/plg_system_lkimaccessibility.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="note" type="note" class="alert alert-info"
+					label="PLG_SYSTEM_LKIMACCESSIBILITY_NOTE_LABEL"
+					description="PLG_SYSTEM_LKIMACCESSIBILITY_NOTE_DESC" />
+
+				<field name="profiles" type="checkboxes" multiple="true" layout="joomla.form.field.checkboxes"
+					default="blind,lowvision,colorblind,dyslexia,adhd,epilepsy,motor,deaf,elderly"
+					label="PLG_SYSTEM_LKIMACCESSIBILITY_PROFILES_LABEL"
+					description="PLG_SYSTEM_LKIMACCESSIBILITY_PROFILES_DESC">
+					<option value="blind">PLG_SYSTEM_LKIMACCESSIBILITY_OPT_BLIND</option>
+					<option value="lowvision">PLG_SYSTEM_LKIMACCESSIBILITY_OPT_LOWVISION</option>
+					<option value="colorblind">PLG_SYSTEM_LKIMACCESSIBILITY_OPT_COLORBLIND</option>
+					<option value="dyslexia">PLG_SYSTEM_LKIMACCESSIBILITY_OPT_DYSLEXIA</option>
+					<option value="adhd">PLG_SYSTEM_LKIMACCESSIBILITY_OPT_ADHD</option>
+					<option value="epilepsy">PLG_SYSTEM_LKIMACCESSIBILITY_OPT_EPILEPSY</option>
+					<option value="motor">PLG_SYSTEM_LKIMACCESSIBILITY_OPT_MOTOR</option>
+					<option value="deaf">PLG_SYSTEM_LKIMACCESSIBILITY_OPT_DEAF</option>
+					<option value="elderly">PLG_SYSTEM_LKIMACCESSIBILITY_OPT_ELDERLY</option>
+				</field>
+
+				<field name="tools" type="checkboxes" multiple="true" layout="joomla.form.field.checkboxes"
+					default="font,align,links,headings,cursor,motion,images,read,guide,mask,media,targets"
+					label="PLG_SYSTEM_LKIMACCESSIBILITY_TOOLS_LABEL">
+					<option value="font">PLG_SYSTEM_LKIMACCESSIBILITY_T_FONT</option>
+					<option value="align">PLG_SYSTEM_LKIMACCESSIBILITY_T_ALIGN</option>
+					<option value="links">PLG_SYSTEM_LKIMACCESSIBILITY_T_LINKS</option>
+					<option value="headings">PLG_SYSTEM_LKIMACCESSIBILITY_T_HEADINGS</option>
+					<option value="cursor">PLG_SYSTEM_LKIMACCESSIBILITY_T_CURSOR</option>
+					<option value="motion">PLG_SYSTEM_LKIMACCESSIBILITY_T_MOTION</option>
+					<option value="images">PLG_SYSTEM_LKIMACCESSIBILITY_T_IMAGES</option>
+					<option value="read">PLG_SYSTEM_LKIMACCESSIBILITY_T_READ</option>
+					<option value="guide">PLG_SYSTEM_LKIMACCESSIBILITY_T_GUIDE</option>
+					<option value="mask">PLG_SYSTEM_LKIMACCESSIBILITY_T_MASK</option>
+					<option value="media">PLG_SYSTEM_LKIMACCESSIBILITY_T_MEDIA</option>
+					<option value="targets">PLG_SYSTEM_LKIMACCESSIBILITY_T_TARGETS</option>
+				</field>
+
+				<field name="statement" type="text" default="" filter="string"
+					label="PLG_SYSTEM_LKIMACCESSIBILITY_STATEMENT_LABEL"
+					description="PLG_SYSTEM_LKIMACCESSIBILITY_STATEMENT_DESC" />
+			</fieldset>
+
+			<fieldset name="appearance" label="PLG_SYSTEM_LKIMACCESSIBILITY_APPEARANCE">
+				<field name="launcher" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
+					label="PLG_SYSTEM_LKIMACCESSIBILITY_LAUNCHER_LABEL"
+					description="PLG_SYSTEM_LKIMACCESSIBILITY_LAUNCHER_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="position" type="list" default="left" label="PLG_SYSTEM_LKIMACCESSIBILITY_POSITION_LABEL">
+					<option value="left">JGLOBAL_LEFT</option>
+					<option value="right">JGLOBAL_RIGHT</option>
+				</field>
+				<field name="width" type="text" default="480px" filter="string"
+					label="PLG_SYSTEM_LKIMACCESSIBILITY_WIDTH_LABEL"
+					description="PLG_SYSTEM_LKIMACCESSIBILITY_WIDTH_DESC" />
+				<field name="accent" type="color" format="hex" default="" label="PLG_SYSTEM_LKIMACCESSIBILITY_ACCENT_LABEL"
+					description="PLG_SYSTEM_LKIMACCESSIBILITY_ACCENT_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

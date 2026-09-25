@@ -1,26 +1,33 @@
 <?php
 
 /**
- * @package     Joomla.Site
- * @subpackage  Templates.lkim3
+ * @package     Joomla.Plugin
+ * @subpackage  System.lkimaccessibility
  *
  * The accessibility panel: disability profiles on top, individual adjustments
  * below.
  *
  * A profile is only a named set of the adjustments underneath it, so choosing
  * one and then changing a single tool behaves the way a visitor expects. Which
- * profiles and tools appear is set on the style, because an agency that cannot
+ * profiles and tools appear is a plugin setting, because an agency that cannot
  * honour a promise — captions, say — is better off not making it.
  *
- * Included from index.php, which supplies $a, $e and $this.
+ * Rendered by the plugin, which supplies $profiles, $tools, $side, $launcher
+ * and $statement.
  */
 
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 
-/** @var array $a11yProfiles */
-/** @var array $a11yTools */
+/** @var array  $profiles */
+/** @var array  $tools */
+/** @var string $side */
+/** @var bool   $launcher */
+/** @var string $statement */
+
+$a = static fn($v): string => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8');
+$e = static fn($v): string => htmlspecialchars((string) $v, ENT_COMPAT, 'UTF-8');
 
 $icon = static function (string $path, string $extra = ''): string {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" '
@@ -74,12 +81,10 @@ $filterIcons = [
 
 $filters = ['invert', 'mono', 'lowsat', 'highsat'];
 
-$side      = $this->params->get('a11yPosition', 'left') === 'right' ? 'right' : 'left';
-$statement = trim((string) $this->params->get('a11yStatement', ''));
 ?>
-<?php if ($this->params->get('a11yLauncher', 1)) : ?>
+<?php if ($launcher) : ?>
     <button type="button" class="a11y-launcher is-<?php echo $side; ?>" aria-expanded="false" aria-controls="a11y-panel"
-        aria-label="<?php echo $a(Text::_('TPL_LKIM3_A11Y_TOOLS')); ?>" title="<?php echo $a(Text::_('TPL_LKIM3_A11Y_TOOLS')); ?>">
+        aria-label="<?php echo $a(Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_TOOLS')); ?>" title="<?php echo $a(Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_TOOLS')); ?>">
         <?php echo $markAccess; ?>
     </button>
 <?php endif; ?>
@@ -87,27 +92,27 @@ $statement = trim((string) $this->params->get('a11yStatement', ''));
 <div class="a11y-backdrop" hidden></div>
 
 <aside class="a11y-panel is-<?php echo $side; ?>" id="a11y-panel"
-    aria-label="<?php echo $a(Text::_('TPL_LKIM3_A11Y_TOOLS')); ?>"
-    data-media-note="<?php echo $a(Text::_('TPL_LKIM3_A11Y_MEDIA_NOTE')); ?>">
+    aria-label="<?php echo $a(Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_TOOLS')); ?>"
+    data-media-note="<?php echo $a(Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_MEDIA_NOTE')); ?>">
 
     <div class="a11y-head">
-        <h2><?php echo Text::_('TPL_LKIM3_A11Y_TOOLS'); ?></h2>
-        <button type="button" class="a11y-close" aria-label="<?php echo $a(Text::_('TPL_LKIM3_A11Y_CLOSE')); ?>">
+        <h2><?php echo Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_TOOLS'); ?></h2>
+        <button type="button" class="a11y-close" aria-label="<?php echo $a(Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_CLOSE')); ?>">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18" /></svg>
         </button>
     </div>
 
     <div class="a11y-body">
-        <?php if ($a11yProfiles) : ?>
+        <?php if ($profiles) : ?>
             <div class="a11y-group">
-                <h3><?php echo Text::_('TPL_LKIM3_A11Y_PROFILES'); ?></h3>
+                <h3><?php echo Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_PROFILES'); ?></h3>
                 <ul class="a11y-grid">
-                    <?php foreach ($a11yProfiles as $key) : ?>
+                    <?php foreach ($profiles as $key) : ?>
                         <?php if (!isset($profileIcons[$key])) { continue; } ?>
                         <li>
                             <button type="button" class="a11y-tile" data-a11y-profile="<?php echo $a($key); ?>" aria-pressed="false">
                                 <?php echo $profileIcons[$key]; ?>
-                                <span><?php echo Text::_('TPL_LKIM3_A11Y_P_' . strtoupper($key)); ?></span>
+                                <span><?php echo Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_P_' . strtoupper($key)); ?></span>
                             </button>
                         </li>
                     <?php endforeach; ?>
@@ -116,18 +121,18 @@ $statement = trim((string) $this->params->get('a11yStatement', ''));
         <?php endif; ?>
 
         <div class="a11y-group">
-            <h3><?php echo Text::_('TPL_LKIM3_A11Y_TEXT'); ?></h3>
+            <h3><?php echo Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_TEXT'); ?></h3>
             <ul class="a11y-grid a11y-grid-steps">
-                <?php foreach (['scale' => 'TPL_LKIM3_A11Y_SIZE', 'line' => 'TPL_LKIM3_A11Y_LINE', 'letter' => 'TPL_LKIM3_A11Y_LETTER'] as $key => $label) : ?>
+                <?php foreach (['scale' => 'PLG_SYSTEM_LKIMACCESSIBILITY_SIZE', 'line' => 'PLG_SYSTEM_LKIMACCESSIBILITY_LINE', 'letter' => 'PLG_SYSTEM_LKIMACCESSIBILITY_LETTER'] as $key => $label) : ?>
                     <li class="a11y-step">
                         <?php echo $toolIcons[$key]; ?>
                         <span class="a11y-step-label"><?php echo Text::_($label); ?></span>
                         <span class="a11y-step-controls">
                             <button type="button" data-a11y-step="<?php echo $key; ?>:down"
-                                aria-label="<?php echo $a(Text::sprintf('TPL_LKIM3_A11Y_DECREASE', Text::_($label))); ?>">&minus;</button>
+                                aria-label="<?php echo $a(Text::sprintf('PLG_SYSTEM_LKIMACCESSIBILITY_DECREASE', Text::_($label))); ?>">&minus;</button>
                             <output data-a11y-out="<?php echo $key; ?>">100%</output>
                             <button type="button" data-a11y-step="<?php echo $key; ?>:up"
-                                aria-label="<?php echo $a(Text::sprintf('TPL_LKIM3_A11Y_INCREASE', Text::_($label))); ?>">+</button>
+                                aria-label="<?php echo $a(Text::sprintf('PLG_SYSTEM_LKIMACCESSIBILITY_INCREASE', Text::_($label))); ?>">+</button>
                         </span>
                     </li>
                 <?php endforeach; ?>
@@ -135,35 +140,35 @@ $statement = trim((string) $this->params->get('a11yStatement', ''));
         </div>
 
         <div class="a11y-group">
-            <h3><?php echo Text::_('TPL_LKIM3_A11Y_COLOUR'); ?></h3>
+            <h3><?php echo Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_COLOUR'); ?></h3>
             <ul class="a11y-grid">
                 <li>
                     <button type="button" class="a11y-tile" data-a11y-toggle="contrast" aria-pressed="false">
                         <?php echo $filterIcons['contrast']; ?>
-                        <span><?php echo Text::_('TPL_LKIM_CONTRAST'); ?></span>
+                        <span><?php echo Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_CONTRAST'); ?></span>
                     </button>
                 </li>
                 <?php foreach ($filters as $f) : ?>
                     <li>
                         <button type="button" class="a11y-tile" data-a11y-filter-btn="<?php echo $f; ?>" aria-pressed="false">
                             <?php echo $filterIcons[$f]; ?>
-                            <span><?php echo Text::_('TPL_LKIM3_A11Y_F_' . strtoupper($f)); ?></span>
+                            <span><?php echo Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_F_' . strtoupper($f)); ?></span>
                         </button>
                     </li>
                 <?php endforeach; ?>
             </ul>
         </div>
 
-        <?php if ($a11yTools) : ?>
+        <?php if ($tools) : ?>
             <div class="a11y-group">
-                <h3><?php echo Text::_('TPL_LKIM3_A11Y_NAV'); ?></h3>
+                <h3><?php echo Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_NAV'); ?></h3>
                 <ul class="a11y-grid">
-                    <?php foreach ($a11yTools as $key) : ?>
+                    <?php foreach ($tools as $key) : ?>
                         <?php if (!isset($toolIcons[$key])) { continue; } ?>
                         <li>
                             <button type="button" class="a11y-tile" data-a11y-toggle="<?php echo $a($key); ?>" aria-pressed="false">
                                 <?php echo $toolIcons[$key]; ?>
-                                <span><?php echo Text::_('TPL_LKIM3_A11Y_T_' . strtoupper($key)); ?></span>
+                                <span><?php echo Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_T_' . strtoupper($key)); ?></span>
                             </button>
                         </li>
                     <?php endforeach; ?>
@@ -172,9 +177,9 @@ $statement = trim((string) $this->params->get('a11yStatement', ''));
         <?php endif; ?>
 
         <div class="a11y-foot">
-            <button type="button" class="a11y-reset" data-a11y-reset><?php echo Text::_('TPL_LKIM3_A11Y_RESET'); ?></button>
+            <button type="button" class="a11y-reset" data-a11y-reset><?php echo Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_RESET'); ?></button>
             <?php if ($statement !== '') : ?>
-                <a class="a11y-statement" href="<?php echo $a($link($statement)); ?>"><?php echo Text::_('TPL_LKIM3_A11Y_STATEMENT'); ?></a>
+                <a class="a11y-statement" href="<?php echo $a($statement); ?>"><?php echo Text::_('PLG_SYSTEM_LKIMACCESSIBILITY_STATEMENT'); ?></a>
             <?php endif; ?>
         </div>
     </div>

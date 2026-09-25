@@ -115,6 +115,14 @@ file and the template still renders. Each row can also override its band's
 eyebrow, heading, intro and link, with empty meaning "keep the design's
 wording", so retitling a band does not mean editing a language file.
 
+The template has two ways to take the site down, and they are not the same
+thing. **Advanced → Maintenance mode** shows a branded page and answers 503 with
+a `Retry-After`, while anyone logged in still gets the site — that is the one to
+use while working, because staff can check the result before switching it off.
+Joomla's own **Site Offline**, in Global Configuration, takes everything down
+including the login form; `offline.php` brands that page, and `maintenance.php`
+is the template's own.
+
 `tpl_lkim3` also differs from its siblings in two ways worth knowing before
 editing it. Each homepage band (audience gateways, services, gallery, news, agencies)
 and the main navigation take their content either from the LKIM-3 design or
@@ -124,6 +132,18 @@ by `megamenu.php` straight from a site menu rather than from the `menu`
 position, so installing it does not disturb the DJ-MegaMenu module the current
 default style relies on. `html/mod_menu/default.php` renders the same panel for
 anyone who switches the navigation back to a core menu module.
+
+`plg_lkimaccessibility/` is the accessibility panel — nine disability profiles
+and a dozen individual adjustments — as a system plugin rather than part of a
+template. It started inside `tpl_lkim3`, which put all of it on an already long
+template-style form and tied a site-wide facility to one template; as a plugin
+it applies to whatever template is in use and survives a template change. `php
+build-package.php plg_lkimaccessibility plg_system_lkimaccessibility-1.0.0.zip`
+builds it. It ships its own floating launcher, and its script also binds to any
+control carrying `data-lkim-a11y`, which is the hook if a template wants its own
+button. It stays off 5xx responses, because a stripped-down maintenance render
+may leave out the scripts block and a launcher whose script never loads is
+worse than no launcher.
 
 `site-images/` holds images that generated module content points at; copy them
 into the site `images/` folder before running `build-modules.php`.

@@ -9,3 +9,4 @@ tpl_lkim*.zip
 
 # Generated against the local hostname; regenerate per environment.
 sitemap.xml
+plg_system_*.zip

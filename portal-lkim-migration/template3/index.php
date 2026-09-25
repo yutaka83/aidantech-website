@@ -51,32 +51,19 @@ $siteTitle = $this->params->get('siteTitle') ?: $sitename;
 $splask = $this->params->get('splaskAttribute', 'data-splask') ?: 'data-splask';
 $root   = Uri::root(true);
 
-/* ── Accessibility panel ─────────────────────────────────────────────────── */
+/* ── Maintenance mode ────────────────────────────────────────────────────── */
 
-$a11yOn = (bool) $this->params->get('a11yPanel', 1);
+/**
+ * Anyone signed in still gets the site, so staff can check the work before the
+ * switch goes off again. A guest gets the maintenance page and a 503.
+ *
+ * This runs before any markup: the component has already executed by the time a
+ * template is reached, but none of its output reaches the visitor.
+ */
+if ($this->params->get('maintenance', 0) && $app->getIdentity()->guest) {
+    require __DIR__ . '/maintenance.php';
 
-// An agency can drop a profile or a tool it cannot honour, so read the style
-// rather than assuming the full set.
-$a11yList = static function ($value, array $fallback): array {
-    if ($value === null || $value === '') {
-        return $fallback;
-    }
-
-    $items = \is_array($value) ? $value : explode(',', (string) $value);
-
-    return array_values(array_filter(array_map('trim', $items)));
-};
-
-$a11yProfiles = $a11yOn
-    ? $a11yList($this->params->get('a11yProfiles'), ['blind', 'lowvision', 'colorblind', 'dyslexia', 'adhd', 'epilepsy', 'motor', 'deaf', 'elderly'])
-    : [];
-
-$a11yTools = $a11yOn
-    ? $a11yList($this->params->get('a11yTools'), ['font', 'align', 'links', 'headings', 'cursor', 'motion', 'images', 'read', 'guide', 'mask', 'media', 'targets'])
-    : [];
-
-if ($a11yOn) {
-    $wa->useStyle('template.lkim3.a11y')->useScript('template.lkim3.a11y');
+    return;
 }
 
 /* ── SPLaSK analytics ────────────────────────────────────────────────────── */
@@ -194,7 +181,6 @@ $tokens = [
     '--header-card-bg'     => $this->params->get('headerCardBg'),
     '--header-card-radius' => $this->params->get('headerCardRadius'),
     '--sticky-menu-bg'     => $stickyMenu ? $this->params->get('stickyMenuBg') : '',
-    '--a11y-panel-w'       => $this->params->get('a11yPanel', 1) ? $this->params->get('a11yWidth') : '',
 
     '--hero-min'        => $this->params->get('heroMin'),
     '--hero-focus'      => $this->params->get('heroFocus'),
@@ -661,14 +647,16 @@ $legalLinks = array_filter([
                             </div>
                         <?php endif; ?>
 
-                        <?php // Only when the panel exists — this button has nothing else to open. ?>
-                        <?php if ($a11yOn && $this->params->get('showAccessBar', 1)) : ?>
-                            <button class="icon-btn" type="button" data-lkim-a11y aria-expanded="false" aria-controls="a11y-panel"
-                                aria-label="<?php echo $a(Text::_('TPL_LKIM3_A11Y_TOOLS')); ?>" title="<?php echo $a(Text::_('TPL_LKIM3_A11Y_TOOLS')); ?>"
-                                <?php echo $splask; ?>="text-resize" <?php echo $splask; ?>-contrast="high-contrast">
-                                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.7" /><circle cx="12" cy="6.1" r="1.9" fill="currentColor" /><path d="M4.6 9.2c2.4.9 4.8 1.35 7.4 1.35s5-.45 7.4-1.35M12 10.6V15m0 0 3.1 5.4M12 15l-3.1 5.4" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" /></svg>
-                            </button>
-                        <?php endif; ?>
+                        <?php
+                        /*
+                         * No accessibility control here. plg_system_lkimaccessibility
+                         * owns the panel and ships its own floating launcher, so the
+                         * template does not need a second entry point — and a button
+                         * rendered while the plugin is disabled would do nothing. The
+                         * plugin's script does bind to [data-lkim-a11y], so a control
+                         * added here later would open it.
+                         */
+                        ?>
 
                         <?php if ($this->countModules('search', true)) : ?>
                             <div class="lk3-pop-wrap">
@@ -937,10 +925,6 @@ $legalLinks = array_filter([
         <a href="#top" class="lkim-backtotop" aria-label="<?php echo $a(Text::_('TPL_LKIM_BACKTOTOP')); ?>">
             <span aria-hidden="true">&uarr;</span>
         </a>
-    <?php endif; ?>
-
-    <?php if ($a11yOn) : ?>
-        <?php require __DIR__ . '/a11y.php'; ?>
     <?php endif; ?>
 
     <jdoc:include type="modules" name="debug" style="none" />
