@@ -8,8 +8,10 @@
 	<copyright>(C) 2026 Lembaga Kemajuan Ikan Malaysia</copyright>
 	<license>GNU General Public License version 2 or later</license>
 	<description>PLG_SYSTEM_LKIMACCESSIBILITY_XML_DESCRIPTION</description>
+	<scriptfile>script.php</scriptfile>
 	<namespace path="src">Aidan\Plugin\System\LkimAccessibility</namespace>
 	<files>
+		<filename>script.php</filename>
 		<folder plugin="lkimaccessibility">services</folder>
 		<folder>src</folder>
 		<folder>tmpl</folder>
