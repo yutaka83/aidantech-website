@@ -40,6 +40,8 @@ $src = static function (string $path) use ($root): string {
 // index.php sets this after the point where maintenance.php returns, and
 // offline.php is reached without index.php at all — so both set it here, or a
 // phone renders the page at 980px and zooms out.
+require __DIR__ . '/favicon.php';
+
 $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
 ?>
 <!DOCTYPE html>

@@ -15,6 +15,7 @@
 		<filename>index.php</filename>
 		<filename>script.php</filename>
 		<filename>megamenu.php</filename>
+		<filename>favicon.php</filename>
 		<filename>maintenance.php</filename>
 		<filename>offline.php</filename>
 		<filename>joomla.asset.json</filename>
@@ -76,6 +77,7 @@
 			<fieldset name="basic" label="Portal">
 				<field name="logoFile" type="media" schemes="http,https,data,file" validate="url" relative="true" default="media/templates/site/lkim3/images/logo.png" label="Portal logo"/>
 				<field name="jataFile" type="media" schemes="http,https,data,file" validate="url" relative="true" default="" label="Jata Negara / ministry crest"/>
+				<field name="faviconFile" type="media" schemes="http,https,data,file" validate="url" relative="true" types="images" default="" label="Favicon" description="The small icon a browser shows on the tab and in bookmarks. A square PNG or SVG of at least 180px works everywhere; an .ico still does too. Leave empty and the browser falls back to whatever favicon.ico sits in the site root."/>
 				<field name="siteTitle" type="text" default="Lembaga Kemajuan Ikan Malaysia" label="Portal title" filter="string"/>
 				<field name="siteDescription" type="text" default="Kementerian Pertanian dan Keterjaminan Makanan" label="Tagline" filter="string"/>
 				<field name="fluidContainer" type="radio" layout="joomla.form.field.radio.switcher" default="0" label="Content width">
@@ -330,11 +332,9 @@
 					<option value="1">JYES</option>
 				</field>
 
-				<field name="maintenanceSpacer" type="spacer" hr="true" />
+				<field name="maintenanceSpacer" type="spacer" hr="true"/>
 
-				<field name="maintenance" type="radio" layout="joomla.form.field.radio.switcher" default="0" filter="integer"
-					label="Maintenance mode"
-					description="Shows a maintenance page to the public and answers 503, so search engines treat the outage as temporary rather than dropping the pages. Anyone logged in still sees the site, which is how you check your work before turning this off.">
+				<field name="maintenance" type="radio" layout="joomla.form.field.radio.switcher" default="0" filter="integer" label="Maintenance mode" description="Shows a maintenance page to the public and answers 503, so search engines treat the outage as temporary rather than dropping the pages. Anyone logged in still sees the site, which is how you check your work before turning this off.">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
@@ -344,21 +344,12 @@
 					so hiding the field while maintenance is off would hide a setting that is
 					still in use.
 				-->
-				<field name="maintenanceImage" type="media" schemes="http,https,data,file" validate="url" relative="true"
-					default="" label="Maintenance image"
-					description="Shown on both the maintenance page and Joomla's own Site Offline page, beneath the logo. It is treated as decorative, so keep any wording in the message below rather than baked into the picture where a screen reader cannot reach it." />
-				<field name="maintenanceHeading" type="text" default="" filter="string" label="Maintenance heading"
-					showon="maintenance:1" description="Leave empty for the default from the language file." />
-				<field name="maintenanceMessage" type="textarea" rows="4" default="" filter="string"
-					label="Maintenance message" showon="maintenance:1" />
-				<field name="maintenanceUntil" type="text" default="" filter="string" label="Expected back"
-					showon="maintenance:1"
-					description="Shown to visitors, and sent as the Retry-After header when it is a date and time a machine can read, for example 2026-09-30 22:00." />
-				<field name="maintenanceContact" type="text" default="" filter="string" label="Contact line"
-					showon="maintenance:1" description="An email address or phone number for anyone who needs the service urgently." />
-				<field name="maintenanceNote" type="note" class="alert alert-info"
-					label="This is the template's own switch"
-					description="It brands the page and keeps the site reachable for logged-in staff. Joomla's own Site Offline setting, in Global Configuration, takes the site down for everyone including the login page — use that one for a hard outage. The template styles that page too, through offline.php." />
+				<field name="maintenanceImage" type="media" schemes="http,https,data,file" validate="url" relative="true" default="" label="Maintenance image" description="Shown on both the maintenance page and Joomla's own Site Offline page, beneath the logo. It is treated as decorative, so keep any wording in the message below rather than baked into the picture where a screen reader cannot reach it."/>
+				<field name="maintenanceHeading" type="text" default="" filter="string" label="Maintenance heading" showon="maintenance:1" description="Leave empty for the default from the language file."/>
+				<field name="maintenanceMessage" type="textarea" rows="4" default="" filter="string" label="Maintenance message" showon="maintenance:1"/>
+				<field name="maintenanceUntil" type="text" default="" filter="string" label="Expected back" showon="maintenance:1" description="Shown to visitors, and sent as the Retry-After header when it is a date and time a machine can read, for example 2026-09-30 22:00."/>
+				<field name="maintenanceContact" type="text" default="" filter="string" label="Contact line" showon="maintenance:1" description="An email address or phone number for anyone who needs the service urgently."/>
+				<field name="maintenanceNote" type="note" class="alert alert-info" label="This is the template's own switch" description="It brands the page and keeps the site reachable for logged-in staff. Joomla's own Site Offline setting, in Global Configuration, takes the site down for everyone including the login page — use that one for a hard outage. The template styles that page too, through offline.php."/>
 			</fieldset>
 			<fieldset name="customcode" label="Custom Code">
 				<field name="customCodeNote" type="note" class="alert alert-warning" label="This code runs on every page" description="Both fields below are written to the page exactly as entered, with no filtering. Keep &quot;Edit&quot; permission on com_templates with Super Users only. For anything substantial, use the user.css / user.js files below so the code stays under version control."/>

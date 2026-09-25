@@ -69,6 +69,8 @@ $wa->usePreset('template.cassiopeia.' . $direction)
 $wa->registerStyle('template.active', '', [], [], ['template.cassiopeia.' . $direction]);
 $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
 
+require __DIR__ . '/favicon.php';
+
 /* ── Theme tokens ────────────────────────────────────────────────────────── */
 
 /**
