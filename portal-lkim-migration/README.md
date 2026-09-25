@@ -93,6 +93,18 @@ check for this in the commit that introduced them) so saving a style never
 changes the design by itself. Token values containing `;`, `{`, `}` or a
 comment are dropped rather than written into the declaration block.
 
+The page body between the hero and the footer is a list the style owns, on the
+**Layout** tab: which bands appear, in what order, and how each is spaced,
+coloured and sized. Each row renders `sections/<type>.php`, and two of those
+types are the escape hatch for bands the design does not ship — `modules`
+renders a named module position inside the design's own heading and spacing
+(there are six free `section-a`…`section-f` positions for this), and `html`
+takes markup straight from the style. So a new band does not mean editing
+`index.php`. Leave the list untouched and `$defaultSections` in `index.php`
+supplies the design's own order; keep the two in step when either changes. A
+section whose source turns out to be empty takes its band away with it, so an
+unpopulated module position does not leave a coloured empty strip.
+
 `tpl_lkim3` also differs from its siblings in two ways worth knowing before
 editing it. Each homepage band (audience gateways, services, gallery, news, agencies)
 and the main navigation take their content either from the LKIM-3 design or

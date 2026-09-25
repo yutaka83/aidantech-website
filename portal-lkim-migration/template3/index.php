@@ -28,6 +28,7 @@ use Joomla\CMS\Uri\Uri;
 use Joomla\Component\Content\Site\Helper\RouteHelper;
 use Joomla\Database\DatabaseInterface;
 use Joomla\Database\ParameterType;
+use Joomla\Registry\Registry;
 
 /** @var Joomla\CMS\Document\HtmlDocument $this */
 
@@ -422,6 +423,39 @@ if ($isHome && $this->params->get('showNews', 1) && !$fromModules('srcNews', 'an
 $newsAccents  = ['acc-orange', 'acc-teal', 'acc-navy'];
 $newsFallback = ['news-1.jpg', 'news-2.jpg', 'news-3.jpg'];
 
+/**
+ * The page body is a list of sections the style owns. An unset parameter means
+ * the style has never been saved, so fall back to the design's own order rather
+ * than rendering an empty page — and keep these defaults in step with the
+ * layout list in templateDetails.xml.
+ */
+$defaultSections = [
+    ['type' => 'gateways', 'spacing' => 'none'],
+    ['type' => 'services', 'anchor' => 'perkhidmatan'],
+    ['type' => 'gallery',  'anchor' => 'media'],
+    ['type' => 'news',     'background' => 'surface'],
+    ['type' => 'content'],
+    ['type' => 'cta',      'anchor' => 'aduan'],
+    ['type' => 'agencies'],
+];
+
+$rows     = $this->params->get('sections');
+$rows     = $rows ? (array) $rows : $defaultSections;
+$sections = [];
+
+foreach ($rows as $row) {
+    $sections[] = new Registry($row);
+}
+
+// An interior page still needs its content even if someone removes every row.
+if (!$isHome) {
+    $hasContent = array_filter($sections, fn($s) => (string) $s->get('type') === 'content');
+
+    if (!$hasContent) {
+        $sections[] = new Registry(['type' => 'content']);
+    }
+}
+
 /* ── Inline SVG used repeatedly ──────────────────────────────────────────── */
 
 $svgArrow   = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
@@ -666,243 +700,97 @@ $legalLinks = array_filter([
         <?php endif; ?>
     </div>
 
-    <?php if ($isHome && $this->params->get('showGateways', 1)) : ?>
-        <div class="wrap quicklinks">
-            <?php if ($fromModules('srcGateways', 'quicklinks')) : ?>
-                <jdoc:include type="modules" name="quicklinks" style="none" />
+
+    <?php
+    /**
+     * The page body between the hero and the footer is a list of sections the
+     * style owns: which ones, in what order, and how each is spaced and
+     * coloured. Anything the design does not ship can be added as a "modules"
+     * or "html" row, which is how a new band gets built without editing this
+     * file.
+     *
+     * Each row renders sections/<type>.php. Most of those emit inner content
+     * only and take the standard band wrapper below; the two that cannot —
+     * the gateway cards, which overlap the hero, and the page content, which
+     * is the document's <main> — carry their own and are listed in $selfWrap.
+     */
+    $selfWrap = ['gateways' => true, 'content' => true];
+
+    $backgrounds = [
+        'surface'     => 'lk3-bg-surface',
+        'surface-alt' => 'lk3-bg-surface-alt',
+        'primary'     => 'lk3-bg-primary',
+    ];
+
+    $spacings = ['tight' => 'tight', 'none' => 'lk3-pad-none'];
+
+    foreach ($sections as $section) {
+        $type = preg_replace('/[^a-z]/', '', (string) $section->get('type', ''));
+        $file = __DIR__ . '/sections/' . $type . '.php';
+
+        if ($type === '' || !$section->get('enabled', 1) || !is_file($file)) {
+            continue;
+        }
+
+        // Only the page content belongs on an interior page; the rest of the
+        // list describes the home page.
+        if (!$isHome && $type !== 'content') {
+            continue;
+        }
+
+        $background = (string) $section->get('background', 'none');
+        $classes    = ['lk3-s-' . $type];
+
+        if (isset($backgrounds[$background])) {
+            $classes[] = $backgrounds[$background];
+        }
+
+        if (isset($spacings[(string) $section->get('spacing', 'normal')])) {
+            $classes[] = $spacings[(string) $section->get('spacing', 'normal')];
+        }
+
+        if ($extra = trim((string) $section->get('cssClass', ''))) {
+            $classes[] = preg_replace('/[^a-zA-Z0-9 _-]/', '', $extra);
+        }
+
+        $secClass = $a(implode(' ', array_filter($classes)));
+
+        $anchor = preg_replace('/[^a-zA-Z0-9_-]/', '', (string) $section->get('anchor', ''));
+        $secId  = $anchor !== '' ? ' id="' . $anchor . '"' : '';
+
+        // A custom background is free text so it can be a gradient as well as a
+        // colour; anything that could break out of the attribute is dropped.
+        $custom   = trim((string) $section->get('bgCustom', ''));
+        $secStyle = $background === 'custom' && $custom !== '' && !preg_match('/[;"<>]/', $custom)
+            ? ' style="background:' . $a($custom) . '"'
+            : '';
+
+        if (isset($selfWrap[$type])) {
+            require $file;
+            continue;
+        }
+
+        // Buffer first: a section whose source turns out to be empty — a module
+        // position with nothing published in it, say — should take its band
+        // away with it rather than leave a padded, coloured, empty strip.
+        ob_start();
+        require $file;
+        $body = ob_get_clean();
+
+        if (trim($body) === '') {
+            continue;
+        }
+        ?>
+        <section class="section <?php echo $secClass; ?>"<?php echo $secId . $secStyle; ?>>
+            <?php if ((string) $section->get('width', 'contained') === 'full') : ?>
+                <?php echo $body; ?>
             <?php else : ?>
-                <div class="grid3">
-                    <?php foreach ($gateways as [$tone, $label, $href]) : ?>
-                        <a href="<?php echo $a($link($href)); ?>" class="qcard <?php echo $tone; ?>">
-                            <span class="qc-label"><?php echo str_replace('|', '<br>', $e(Text::_($label))); ?></span>
-                            <span class="qc-foot">
-                                <span><?php echo $e(Text::_($label . '_DESC')); ?></span>
-                                <span class="arrow-chip"><?php echo $svgArrowNe; ?></span>
-                            </span>
-                        </a>
-                    <?php endforeach; ?>
-                </div>
+                <div class="wrap"><?php echo $body; ?></div>
             <?php endif; ?>
-        </div>
-    <?php endif; ?>
-
-    <?php if ($isHome && $this->params->get('showServices', 1)) : ?>
-        <section class="section" id="perkhidmatan">
-            <div class="wrap">
-                <div class="section-head">
-                    <div>
-                        <div class="mark"><span aria-hidden="true"></span><small><?php echo Text::_('TPL_LKIM3_SVC_EYEBROW'); ?></small></div>
-                        <h2><?php echo Text::_('TPL_LKIM3_SVC_TITLE'); ?></h2>
-                        <p><?php echo Text::_('TPL_LKIM3_SVC_LEAD'); ?></p>
-                    </div>
-                    <a href="<?php echo $a($link($this->params->get('servicesMoreLink'))); ?>" class="link-more">
-                        <?php echo Text::_('TPL_LKIM3_SVC_MORE'); ?><?php echo $svgArrow; ?>
-                    </a>
-                </div>
-
-                <?php if ($fromModules('srcServices', 'services')) : ?>
-                    <div class="services-modules">
-                        <jdoc:include type="modules" name="services" style="lkimsection" />
-                    </div>
-                <?php else : ?>
-                    <div class="services-grid">
-                        <div class="service-feature">
-                            <span class="sf-icon"><img src="<?php echo $a($img('icons/bantuan-sarahidup.png')); ?>" alt="" loading="lazy" decoding="async"></span>
-                            <h3><?php echo Text::_('TPL_LKIM3_SVC_FEATURE'); ?></h3>
-                            <p><?php echo Text::_('TPL_LKIM3_SVC_FEATURE_DESC'); ?></p>
-                            <ul class="checks">
-                                <li><?php echo $svgCheck . Text::_('TPL_LKIM3_SVC_FEATURE_CHECK1'); ?></li>
-                                <li><?php echo $svgCheck . Text::_('TPL_LKIM3_SVC_FEATURE_CHECK2'); ?></li>
-                            </ul>
-                            <a href="<?php echo $a($link($this->params->get('featureLink'))); ?>" class="btn btn-primary btn-sm">
-                                <?php echo Text::_('TPL_LKIM3_SVC_FEATURE_CTA'); ?><?php echo $svgArrow; ?>
-                            </a>
-                        </div>
-
-                        <?php foreach ($serviceCards as [$icon, $label, $href]) : ?>
-                            <div class="service-card">
-                                <span class="sc-icon"><img src="<?php echo $a($img('icons/' . $icon)); ?>" alt="" loading="lazy" decoding="async"></span>
-                                <h3><?php echo Text::_($label); ?></h3>
-                                <p><?php echo Text::_($label . '_DESC'); ?></p>
-                                <a href="<?php echo $a($link($href)); ?>" class="sc-link">
-                                    <?php echo Text::_($label . '_CTA'); ?><?php echo $svgArrow; ?>
-                                </a>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
-            </div>
         </section>
-    <?php endif; ?>
-
-    <?php if ($isHome && $this->params->get('showGallery', 1)) : ?>
-        <section class="section tight" id="media">
-            <div class="wrap">
-                <div class="section-head">
-                    <div>
-                        <div class="mark"><span aria-hidden="true"></span><small><?php echo Text::_('TPL_LKIM3_GAL_EYEBROW'); ?></small></div>
-                        <h2><?php echo Text::_('TPL_LKIM3_GAL_TITLE'); ?></h2>
-                    </div>
-                    <?php if ($socials) : ?>
-                        <div class="gallery-tabs">
-                            <?php foreach ($socials as $key => $url) : ?>
-                                <a href="<?php echo $a($url); ?>" rel="noopener noreferrer" target="_blank"
-                                    aria-label="<?php echo $a($socialLabel[$key]); ?>" title="<?php echo $a($socialLabel[$key]); ?>">
-                                    <?php echo $svgSocial[$key]; ?>
-                                </a>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endif; ?>
-                </div>
-
-                <?php if ($fromModules('srcGallery', 'highlights')) : ?>
-                    <jdoc:include type="modules" name="highlights" style="none" />
-                <?php else : ?>
-                    <div class="gallery-strip">
-                        <?php foreach ($gallery as [$file, $label]) : ?>
-                            <figure class="g-item">
-                                <img src="<?php echo $a($img($file)); ?>" alt="<?php echo $a(Text::_($label)); ?>" loading="lazy" decoding="async">
-                                <figcaption class="g-caption"><?php echo Text::_($label); ?></figcaption>
-                            </figure>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
-            </div>
-        </section>
-    <?php endif; ?>
-
-    <?php if ($isHome && $this->params->get('showNews', 1) && ($news || $fromModules('srcNews', 'announcements'))) : ?>
-        <section class="section lk3-news-band">
-            <div class="wrap">
-                <div class="section-head">
-                    <div>
-                        <div class="mark"><span aria-hidden="true"></span><small><?php echo Text::_('TPL_LKIM3_NEWS_EYEBROW'); ?></small></div>
-                        <h2><?php echo Text::_('TPL_LKIM3_NEWS_TITLE'); ?></h2>
-                        <p><?php echo Text::_('TPL_LKIM3_NEWS_LEAD'); ?></p>
-                    </div>
-                    <a href="<?php echo $a($link($this->params->get('newsMoreLink'))); ?>" class="link-more">
-                        <?php echo Text::_('TPL_LKIM3_NEWS_MORE'); ?><?php echo $svgArrow; ?>
-                    </a>
-                </div>
-
-                <?php if ($fromModules('srcNews', 'announcements')) : ?>
-                    <jdoc:include type="modules" name="announcements" style="none" />
-                <?php else : ?>
-                    <div class="news-grid">
-                        <?php foreach ($news as $i => $row) : ?>
-                            <?php
-                            $images = json_decode((string) $row->images);
-                            $thumb  = $images->image_intro ?? $images->image_fulltext ?? '';
-                            $thumb  = $thumb ? $asset(HTMLHelper::cleanImageURL($thumb)->url) : $img($newsFallback[$i % 3]);
-                            $route  = RouteHelper::getArticleRoute($row->id . ':' . $row->alias, $row->catid . ':' . $row->category_alias);
-                            ?>
-                            <article class="news-card <?php echo $newsAccents[$i % 3]; ?>">
-                                <div class="news-thumb">
-                                    <span class="news-tag"><?php echo $e($row->category_title); ?></span>
-                                    <img src="<?php echo $a($thumb); ?>" alt="" loading="lazy" decoding="async">
-                                </div>
-                                <div class="news-body">
-                                    <div class="news-date">
-                                        <?php echo $svgDate; ?>
-                                        <time datetime="<?php echo HTMLHelper::_('date', $row->publish_up, 'Y-m-d'); ?>">
-                                            <?php echo HTMLHelper::_('date', $row->publish_up, Text::_('DATE_FORMAT_LC3')); ?>
-                                        </time>
-                                    </div>
-                                    <h3><a href="<?php echo $a($route); ?>"><?php echo $e($row->title); ?></a></h3>
-                                    <a href="<?php echo $a($route); ?>" class="read">
-                                        <?php echo Text::_('TPL_LKIM3_READ_MORE'); ?><?php echo $svgArrow; ?>
-                                    </a>
-                                </div>
-                            </article>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
-            </div>
-        </section>
-    <?php endif; ?>
-
-    <main id="main-content" class="lkim-main">
-        <div class="wrap lkim-layout<?php echo $hasClass; ?>">
-
-            <?php if ($this->countModules('sidebar-left', true)) : ?>
-                <aside class="lkim-sidebar lkim-sidebar-left">
-                    <jdoc:include type="modules" name="sidebar-left" style="lkimcard" />
-                </aside>
-            <?php endif; ?>
-
-            <div class="lkim-content">
-                <jdoc:include type="modules" name="top-a" style="lkimcard" />
-                <jdoc:include type="modules" name="main-top" style="lkimcard" />
-                <jdoc:include type="message" />
-                <jdoc:include type="component" />
-                <jdoc:include type="modules" name="main-bottom" style="lkimcard" />
-                <jdoc:include type="modules" name="bottom-a" style="lkimcard" />
-            </div>
-
-            <?php if ($this->countModules('sidebar-right', true)) : ?>
-                <aside class="lkim-sidebar lkim-sidebar-right">
-                    <jdoc:include type="modules" name="sidebar-right" style="lkimcard" />
-                </aside>
-            <?php endif; ?>
-        </div>
-    </main>
-
-    <?php if ($isHome && $this->params->get('showCta', 1)) : ?>
-        <section class="section tight" id="aduan">
-            <div class="wrap">
-                <div class="cta-banner">
-                    <div class="cta-content">
-                        <div class="mark"><span aria-hidden="true"></span><small><?php echo Text::_('TPL_LKIM3_CTA_EYEBROW'); ?></small></div>
-                        <h2><?php echo Text::_('TPL_LKIM3_CTA_TITLE'); ?></h2>
-                        <p><?php echo Text::_('TPL_LKIM3_CTA_LEAD'); ?></p>
-                    </div>
-                    <div class="cta-actions">
-                        <a href="<?php echo $a($link($this->params->get('ctaLink'))); ?>" class="btn btn-primary">
-                            <?php echo Text::_('TPL_LKIM3_CTA_BTN1'); ?><?php echo $svgArrow; ?>
-                        </a>
-                        <a href="<?php echo $a($link($this->params->get('ctaLink2'))); ?>" class="btn btn-ghost">
-                            <?php echo Text::_('TPL_LKIM3_CTA_BTN2'); ?>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    <?php endif; ?>
-
-    <?php if ($isHome && $this->params->get('showAgencies', 1)) : ?>
-        <section class="section tight" aria-label="<?php echo $a(Text::_('TPL_LKIM_AGENCIES')); ?>">
-            <div class="wrap">
-                <div class="section-head">
-                    <div>
-                        <div class="mark"><span aria-hidden="true"></span><small><?php echo Text::_('TPL_LKIM3_AGENCY_EYEBROW'); ?></small></div>
-                        <h2><?php echo Text::_('TPL_LKIM_AGENCIES'); ?></h2>
-                    </div>
-                </div>
-
-                <?php if ($fromModules('srcAgencies', 'agencies')) : ?>
-                    <jdoc:include type="modules" name="agencies" style="none" />
-                <?php else : ?>
-                    <div class="agency-carousel">
-                        <button class="agency-nav prev" type="button" data-lkim-agency="prev" aria-label="<?php echo $a(Text::_('TPL_LKIM3_PREV')); ?>">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" /></svg>
-                        </button>
-                        <div class="agency-track" data-lkim-agency-track>
-                            <?php for ($pass = 0; $pass < 3; $pass++) : ?>
-                                <?php foreach ($agencyLogos as [$file, $label]) : ?>
-                                    <div class="agency-logo-item"<?php echo $pass ? ' aria-hidden="true"' : ''; ?>>
-                                        <img src="<?php echo $a($img('agencies/' . $file)); ?>" alt="<?php echo $pass ? '' : $a($label); ?>" loading="lazy" decoding="async">
-                                    </div>
-                                <?php endforeach; ?>
-                            <?php endfor; ?>
-                        </div>
-                        <button class="agency-nav next" type="button" data-lkim-agency="next" aria-label="<?php echo $a(Text::_('TPL_LKIM3_NEXT')); ?>">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6" /></svg>
-                        </button>
-                    </div>
-                <?php endif; ?>
-            </div>
-        </section>
-    <?php endif; ?>
+        <?php
+    }
+    ?>
 
     <footer class="site-footer" id="site-footer">
         <div class="wrap footer-top">

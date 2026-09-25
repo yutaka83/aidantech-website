@@ -1128,6 +1128,54 @@ body.lkim3 .section {
 	padding: var(--section-pad) 0;
 }
 
+/*
+ * Band modifiers set from the style's layout list. Backgrounds reuse the theme
+ * tokens so recolouring the palette carries them along.
+ */
+body.lkim3 .section.tight {
+	padding: calc(var(--section-pad) * 0.55) 0;
+}
+
+body.lkim3 .section.lk3-pad-none {
+	padding: 0;
+}
+
+.lk3-bg-surface {
+	background: var(--sand-50);
+}
+
+.lk3-bg-surface-alt {
+	background: var(--sand-100);
+}
+
+.lk3-bg-primary {
+	background: var(--navy-900);
+	color: #fff;
+}
+
+.lk3-bg-primary h2,
+.lk3-bg-primary h3,
+.lk3-bg-primary h4 {
+	color: #fff;
+}
+
+.lk3-bg-primary .section-head p {
+	color: #c3d3e0;
+}
+
+.lk3-bg-primary .link-more {
+	color: var(--hero-orange);
+}
+
+/* Free HTML entered on a section row, so an editor's markup inherits the design. */
+.lk3-free > :first-child {
+	margin-top: 0;
+}
+
+.lk3-free > :last-child {
+	margin-bottom: 0;
+}
+
 .section-head {
 	display: flex;
 	justify-content: space-between;
@@ -1406,10 +1454,6 @@ body.lkim3 .gallery-tabs button {
 }
 
 /* ── News ────────────────────────────────────────────────────────────────── */
-
-.lk3-news-band {
-	background: var(--sand-50);
-}
 
 .news-grid {
 	display: grid;
