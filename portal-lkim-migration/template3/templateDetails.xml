@@ -15,6 +15,7 @@
 		<filename>index.php</filename>
 		<filename>script.php</filename>
 		<filename>megamenu.php</filename>
+		<filename>a11y.php</filename>
 		<filename>joomla.asset.json</filename>
 		<filename>templateDetails.xml</filename>
 		<folder>html</folder>
@@ -276,12 +277,59 @@
 				<field name="heroFocus" type="text" default="78% center" filter="string" label="Hero image focal point" description="A CSS object-position value. &quot;78% center&quot; keeps the right of the photo in view; use &quot;center&quot; to centre it, or &quot;30% top&quot; to favour the upper left."/>
 				<field name="heroShade" type="text" default="0.78" filter="string" label="Hero image shading" description="0 leaves the photo untouched, 1 is fully shaded. The hero text needs enough shading behind it to stay readable — check the contrast after changing this."/>
 			</fieldset>
+			<fieldset name="accessibility" label="Accessibility">
+				<field name="a11yNote" type="note" class="alert alert-info" label="Adjustments a visitor makes for themselves" description="This panel does not replace accessible markup — it lets a visitor adjust what the page already gets right. Offer only what the portal can honour: the hearing profile, for instance, flags media and points at the accessibility statement, because a template cannot caption a video it did not author."/>
+
+				<field name="a11yPanel" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="Accessibility panel" description="Replaces the small text-size and contrast popover in the header with a full panel. The header icon still opens it.">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field name="a11yLauncher" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="Floating button" showon="a11yPanel:1" description="The round accessibility button that sits above the page on every screen. With this off, the panel opens only from the header icon.">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field name="a11yPosition" type="list" default="left" label="Panel side" showon="a11yPanel:1">
+					<option value="left">Left</option>
+					<option value="right">Right</option>
+				</field>
+
+				<field name="a11yStatement" type="text" default="" filter="string" label="Accessibility statement link" showon="a11yPanel:1" description="Linked at the foot of the panel. Required by MyGovEA, and the place to say how to request a transcript or an alternative format."/>
+
+				<field name="a11yProfiles" type="checkboxes" multiple="true" layout="joomla.form.field.checkboxes" default="blind,lowvision,colorblind,dyslexia,adhd,epilepsy,motor,deaf,elderly" label="Disability profiles" showon="a11yPanel:1" description="One tap sets several adjustments at once. Each is only a named set of the tools below, so a visitor can pick one and still change any single setting.">
+					<option value="blind">Blind — screen reader friendly</option>
+					<option value="lowvision">Low vision</option>
+					<option value="colorblind">Colour blind</option>
+					<option value="dyslexia">Dyslexia</option>
+					<option value="adhd">ADHD</option>
+					<option value="epilepsy">Epilepsy — seizure safe</option>
+					<option value="motor">Motor impairment</option>
+					<option value="deaf">Deaf or hard of hearing</option>
+					<option value="elderly">Older visitors</option>
+				</field>
+
+				<field name="a11yTools" type="checkboxes" multiple="true" layout="joomla.form.field.checkboxes" default="font,align,links,headings,cursor,motion,images,read,guide,mask,media,targets" label="Individual adjustments" showon="a11yPanel:1">
+					<option value="font">Readable font</option>
+					<option value="align">Align text left</option>
+					<option value="links">Highlight links</option>
+					<option value="headings">Highlight headings</option>
+					<option value="cursor">Large cursor</option>
+					<option value="motion">Stop animation</option>
+					<option value="images">Hide images</option>
+					<option value="read">Read mode</option>
+					<option value="guide">Reading guide</option>
+					<option value="mask">Reading mask</option>
+					<option value="media">Flag audio and video</option>
+					<option value="targets">Larger click targets</option>
+				</field>
+			</fieldset>
 			<fieldset name="splask" label="SPLaSK / MyGovEA">
 				<field name="showGovBanner" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="Government portal identification bar" description="The &quot;Portal Rasmi Kerajaan Malaysia&quot; bar, with the official JDN / MyGovEA wording.">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="showAccessBar" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="Accessibility controls (text size + contrast)" description="Shown in the header behind the accessibility icon.">
+				<field name="showAccessBar" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="Accessibility button in the header" description="Opens the accessibility panel from the header as well as from the floating button. Needs the panel itself, on the Accessibility tab.">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
@@ -295,14 +343,9 @@
 				</field>
 				<field name="splaskAttribute" type="text" default="data-splask" label="SPLaSK marker attribute" description="The HTML attribute name used to mark SPLaSK elements. Change it to whatever the current circular specifies if that differs."/>
 
-				<field name="splaskId" type="text" default="" filter="string" label="SPLaSK site ID"
-					description="The numeric site ID JDN issues for this portal — the value that goes into setSiteId in the SPLaSK snippet. Fill this in and the tracking code is embedded on every page; leave it empty and nothing is." />
-				<field name="splaskHost" type="text" default="https://splask-analytics.jdn.gov.my/" filter="string"
-					label="SPLaSK analytics host"
-					description="The Matomo instance the SPLaSK snippet reports to. Change it only if JDN issues a different address." />
-				<field name="splaskCookies" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer"
-					label="Allow analytics cookies" showon="splaskId!:"
-					description="Off adds disableCookies to the tracker, so visits are counted without storing anything on the visitor's device. Useful where a cookie banner is being avoided — confirm with JDN that cookieless counting is acceptable before turning this off.">
+				<field name="splaskId" type="text" default="" filter="string" label="SPLaSK site ID" description="The numeric site ID JDN issues for this portal — the value that goes into setSiteId in the SPLaSK snippet. Fill this in and the tracking code is embedded on every page; leave it empty and nothing is."/>
+				<field name="splaskHost" type="text" default="https://splask-analytics.jdn.gov.my/" filter="string" label="SPLaSK analytics host" description="The Matomo instance the SPLaSK snippet reports to. Change it only if JDN issues a different address."/>
+				<field name="splaskCookies" type="radio" layout="joomla.form.field.radio.switcher" default="1" filter="integer" label="Allow analytics cookies" showon="splaskId!:" description="Off adds disableCookies to the tracker, so visits are counted without storing anything on the visitor's device. Useful where a cookie banner is being avoided — confirm with JDN that cookieless counting is acceptable before turning this off.">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>

@@ -2,16 +2,15 @@
  * Portal Rasmi LKIM — LKIM-3 front-end behaviour.
  *
  * Dependency-free and small. The layout, mega menu (on pointer devices) and all
- * links work without JS; this adds the accessibility controls, the header
- * popovers, the mobile drawer, touch support for the mega menu, the agency
- * carousel, back-to-top and the visitor count.
+ * links work without JS; this adds the search popover, the mobile drawer, touch
+ * support for the mega menu, the sticky menu, the agency carousel, back-to-top
+ * and the visitor count.
+ *
+ * The accessibility controls live in a11y.js, which loads alongside this.
  */
 (function () {
 	'use strict';
 
-	var STORE_SCALE = 'lkim.textScale';
-	var STORE_CONTRAST = 'lkim.contrast';
-	var SCALES = [0.875, 1, 1.125, 1.25];
 	var MOBILE = '(max-width: 900px)';
 
 	function store(key, value) {
@@ -28,69 +27,20 @@
 		return window.matchMedia(MOBILE).matches;
 	}
 
-	/* ── Text size ───────────────────────────────────────────────────────── */
-
-	function applyScale(scale) {
-		document.documentElement.style.setProperty('--lkim-text-scale', scale);
-		store(STORE_SCALE, String(scale));
-	}
-
-	function currentScale() {
-		var saved = parseFloat(store(STORE_SCALE));
-		return SCALES.indexOf(saved) === -1 ? 1 : saved;
-	}
-
-	function initTextSize() {
-		var buttons = document.querySelectorAll('[data-lkim-text]');
-		if (!buttons.length) return;
-
-		applyScale(currentScale());
-
-		buttons.forEach(function (btn) {
-			btn.addEventListener('click', function () {
-				var index = SCALES.indexOf(currentScale());
-				var mode = btn.getAttribute('data-lkim-text');
-
-				if (mode === 'reset') {
-					index = SCALES.indexOf(1);
-				} else if (mode === 'increase') {
-					index = Math.min(index + 1, SCALES.length - 1);
-				} else {
-					index = Math.max(index - 1, 0);
-				}
-
-				applyScale(SCALES[index]);
-			});
-		});
-	}
-
-	/* ── High contrast ───────────────────────────────────────────────────── */
-
-	function initContrast() {
-		var btn = document.querySelector('[data-lkim-contrast]');
-		var on = store(STORE_CONTRAST) === 'on';
-
-		function apply(state) {
-			document.documentElement.setAttribute('data-lkim-contrast', state ? 'on' : 'off');
-			if (btn) btn.setAttribute('aria-pressed', state ? 'true' : 'false');
-			store(STORE_CONTRAST, state ? 'on' : 'off');
-		}
-
-		apply(on);
-
-		if (btn) {
-			btn.addEventListener('click', function () {
-				apply(document.documentElement.getAttribute('data-lkim-contrast') !== 'on');
-			});
-		}
-	}
-
-	/* ── Header popovers (accessibility tools, search) ───────────────────── */
+	/*
+	 * ── Search popover ──────────────────────────────────────────────────────
+	 *
+	 * Search only. Text size and contrast moved to the accessibility panel
+	 * (a11y.js), and this must not reach it: the header's accessibility button
+	 * points at the panel through aria-controls, so while this still matched
+	 * [data-lkim-a11y] its outside-click handler was setting hidden on the
+	 * panel the moment anything else was clicked.
+	 */
 
 	function initPopovers() {
 		var pairs = [];
 
-		document.querySelectorAll('[data-lkim-a11y], [data-lkim-search]').forEach(function (btn) {
+		document.querySelectorAll('[data-lkim-search]').forEach(function (btn) {
 			var panel = document.getElementById(btn.getAttribute('aria-controls'));
 			if (panel) pairs.push({ btn: btn, panel: panel });
 		});
@@ -367,8 +317,6 @@
 	}
 
 	function init() {
-		initTextSize();
-		initContrast();
 		initPopovers();
 		initNav();
 		initStickyHeader();

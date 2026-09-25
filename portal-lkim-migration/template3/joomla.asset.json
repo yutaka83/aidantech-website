@@ -33,6 +33,27 @@
       }
     },
     {
+      "name": "template.lkim3.a11y",
+      "description": "The accessibility panel. Loaded only when the style turns it on.",
+      "type": "style",
+      "uri": "a11y.css",
+      "dependencies": [
+        "template.lkim3.ltr"
+      ]
+    },
+    {
+      "name": "template.lkim3.a11y",
+      "description": "Profiles, adjustments and the pointer-following reading aids.",
+      "type": "script",
+      "uri": "a11y.js",
+      "dependencies": [
+        "template.lkim3"
+      ],
+      "attributes": {
+        "defer": true
+      }
+    },
+    {
       "name": "template.lkim3.user.ltr",
       "description": "Optional site-specific CSS. The file is not shipped; Joomla skips an asset whose file is absent, so this costs nothing until someone creates it.",
       "type": "style",

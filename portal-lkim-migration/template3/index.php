@@ -51,6 +51,34 @@ $siteTitle = $this->params->get('siteTitle') ?: $sitename;
 $splask = $this->params->get('splaskAttribute', 'data-splask') ?: 'data-splask';
 $root   = Uri::root(true);
 
+/* ── Accessibility panel ─────────────────────────────────────────────────── */
+
+$a11yOn = (bool) $this->params->get('a11yPanel', 1);
+
+// An agency can drop a profile or a tool it cannot honour, so read the style
+// rather than assuming the full set.
+$a11yList = static function ($value, array $fallback): array {
+    if ($value === null || $value === '') {
+        return $fallback;
+    }
+
+    $items = \is_array($value) ? $value : explode(',', (string) $value);
+
+    return array_values(array_filter(array_map('trim', $items)));
+};
+
+$a11yProfiles = $a11yOn
+    ? $a11yList($this->params->get('a11yProfiles'), ['blind', 'lowvision', 'colorblind', 'dyslexia', 'adhd', 'epilepsy', 'motor', 'deaf', 'elderly'])
+    : [];
+
+$a11yTools = $a11yOn
+    ? $a11yList($this->params->get('a11yTools'), ['font', 'align', 'links', 'headings', 'cursor', 'motion', 'images', 'read', 'guide', 'mask', 'media', 'targets'])
+    : [];
+
+if ($a11yOn) {
+    $wa->useStyle('template.lkim3.a11y')->useScript('template.lkim3.a11y');
+}
+
 /* ── SPLaSK analytics ────────────────────────────────────────────────────── */
 
 /**
@@ -632,24 +660,13 @@ $legalLinks = array_filter([
                             </div>
                         <?php endif; ?>
 
-                        <?php if ($this->params->get('showAccessBar', 1)) : ?>
-                            <div class="lk3-pop-wrap">
-                                <button class="icon-btn" type="button" data-lkim-a11y aria-expanded="false" aria-controls="lk3-a11y"
-                                    aria-label="<?php echo $a(Text::_('TPL_LKIM3_A11Y_TOOLS')); ?>" title="<?php echo $a(Text::_('TPL_LKIM3_A11Y_TOOLS')); ?>">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="12" cy="4.5" r="1.6" fill="currentColor" stroke="none" /><path d="M4 8.5c2.6.9 5.2 1.4 8 1.4s5.4-.5 8-1.4M12 9.9V21m0-7 4 7M12 14l-4 7" /></svg>
-                                </button>
-                                <div class="lk3-pop" id="lk3-a11y" hidden>
-                                    <p class="lk3-pop-h"><?php echo Text::_('TPL_LKIM_TEXTSIZE'); ?></p>
-                                    <div class="lkim-textsize" role="group" aria-label="<?php echo $a(Text::_('TPL_LKIM_TEXTSIZE')); ?>" <?php echo $splask; ?>="text-resize">
-                                        <button type="button" class="lkim-tsbtn" data-lkim-text="decrease" aria-label="<?php echo $a(Text::_('TPL_LKIM_TEXTSIZE_SMALLER')); ?>">A&minus;</button>
-                                        <button type="button" class="lkim-tsbtn" data-lkim-text="reset" aria-label="<?php echo $a(Text::_('TPL_LKIM_TEXTSIZE_RESET')); ?>">A</button>
-                                        <button type="button" class="lkim-tsbtn" data-lkim-text="increase" aria-label="<?php echo $a(Text::_('TPL_LKIM_TEXTSIZE_LARGER')); ?>">A+</button>
-                                    </div>
-                                    <button type="button" class="lkim-tsbtn lkim-contrast" data-lkim-contrast aria-pressed="false" <?php echo $splask; ?>="high-contrast">
-                                        <?php echo Text::_('TPL_LKIM_CONTRAST'); ?>
-                                    </button>
-                                </div>
-                            </div>
+                        <?php // Only when the panel exists — this button has nothing else to open. ?>
+                        <?php if ($a11yOn && $this->params->get('showAccessBar', 1)) : ?>
+                            <button class="icon-btn" type="button" data-lkim-a11y aria-expanded="false" aria-controls="a11y-panel"
+                                aria-label="<?php echo $a(Text::_('TPL_LKIM3_A11Y_TOOLS')); ?>" title="<?php echo $a(Text::_('TPL_LKIM3_A11Y_TOOLS')); ?>"
+                                <?php echo $splask; ?>="text-resize" <?php echo $splask; ?>-contrast="high-contrast">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.7" /><circle cx="12" cy="6.1" r="1.9" fill="currentColor" /><path d="M4.6 9.2c2.4.9 4.8 1.35 7.4 1.35s5-.45 7.4-1.35M12 10.6V15m0 0 3.1 5.4M12 15l-3.1 5.4" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" /></svg>
+                            </button>
                         <?php endif; ?>
 
                         <?php if ($this->countModules('search', true)) : ?>
@@ -919,6 +936,10 @@ $legalLinks = array_filter([
         <a href="#top" class="lkim-backtotop" aria-label="<?php echo $a(Text::_('TPL_LKIM_BACKTOTOP')); ?>">
             <span aria-hidden="true">&uarr;</span>
         </a>
+    <?php endif; ?>
+
+    <?php if ($a11yOn) : ?>
+        <?php require __DIR__ . '/a11y.php'; ?>
     <?php endif; ?>
 
     <jdoc:include type="modules" name="debug" style="none" />

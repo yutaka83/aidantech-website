@@ -1,0 +1,173 @@
+<?php
+
+/**
+ * @package     Joomla.Site
+ * @subpackage  Templates.lkim3
+ *
+ * The accessibility panel: disability profiles on top, individual adjustments
+ * below.
+ *
+ * A profile is only a named set of the adjustments underneath it, so choosing
+ * one and then changing a single tool behaves the way a visitor expects. Which
+ * profiles and tools appear is set on the style, because an agency that cannot
+ * honour a promise — captions, say — is better off not making it.
+ *
+ * Included from index.php, which supplies $a, $e and $this.
+ */
+
+defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
+
+/** @var array $a11yProfiles */
+/** @var array $a11yTools */
+
+$icon = static function (string $path, string $extra = ''): string {
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" '
+        . 'stroke-linejoin="round" aria-hidden="true" focusable="false">' . $path . $extra . '</svg>';
+};
+
+// The universal accessibility mark: a figure with arms out, inside a ring.
+$markAccess = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
+    . '<circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.7"/>'
+    . '<circle cx="12" cy="6.1" r="1.9" fill="currentColor"/>'
+    . '<path d="M4.6 9.2c2.4.9 4.8 1.35 7.4 1.35s5-.45 7.4-1.35M12 10.6V15m0 0 3.1 5.4M12 15l-3.1 5.4" '
+    . 'fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></svg>';
+
+$profileIcons = [
+    'blind'      => $icon('<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><path d="m3 3 18 18"/>'),
+    'lowvision'  => $icon('<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>'),
+    'colorblind' => $icon('<circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/>'),
+    'dyslexia'   => $icon('<path d="M4 7h16M4 12h10M4 17h13"/><path d="M17 15.5c1.6.6 3 .2 3 1.2s-1.6 1.4-3 .8"/>'),
+    'adhd'       => $icon('<path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1m-8.6 8.6-2.1 2.1"/><circle cx="12" cy="12" r="3"/>'),
+    'epilepsy'   => $icon('<path d="M13 2 4.5 13H11l-1 9 8.5-11H12Z"/>'),
+    'motor'      => $icon('<path d="M7 11V5.5a1.5 1.5 0 0 1 3 0V11"/><path d="M10 11V4.5a1.5 1.5 0 0 1 3 0V11"/><path d="M13 11V6a1.5 1.5 0 0 1 3 0v6"/><path d="M16 9.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a7 7 0 0 1-5-2.1L4 16"/>'),
+    'deaf'       => $icon('<path d="M7 9a5 5 0 0 1 9.5-2.2"/><path d="M9 13a3 3 0 0 0 5 2.2c1.4-1.5 2-2.4 3.4-3.2"/><path d="M12 21a2.5 2.5 0 0 0 2.5-2.5"/><path d="m3 3 18 18"/>'),
+    'elderly'    => $icon('<circle cx="11" cy="5" r="2.2"/><path d="M11 7.2 9.4 13l2.6 2.4V21"/><path d="M9.4 13 7 21"/><path d="M17 8v13"/>'),
+];
+
+$toolIcons = [
+    'scale'    => $icon('<path d="M4 20 10.5 4h1L18 20M7 14h8"/>'),
+    'line'     => $icon('<path d="M4 6h16M4 12h16M4 18h16"/>'),
+    'letter'   => $icon('<path d="M5 18 9 6h1l4 12M6.5 14h6"/><path d="M19 6v12"/>'),
+    'font'     => $icon('<path d="M4 18 9 6h1l5 12M6 14h7"/><path d="M17 18h4"/>'),
+    'align'    => $icon('<path d="M4 6h16M4 12h10M4 18h13"/>'),
+    'links'    => $icon('<path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1L10.8 5"/><path d="M14 11a5 5 0 0 0-7.1 0l-2 2A5 5 0 0 0 12 20.1l1.1-1.1"/>'),
+    'headings' => $icon('<path d="M6 4v16M18 4v16M6 12h12"/>'),
+    'cursor'   => $icon('<path d="m5 3 14 8-6 1.5 3 7-3 1.5-3-7-5 4Z"/>'),
+    'motion'   => $icon('<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/>'),
+    'images'   => $icon('<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="m21 16-5-5-5 5-3-3-5 5"/>'),
+    'read'     => $icon('<path d="M3 5.5A15 15 0 0 1 12 8a15 15 0 0 1 9-2.5V19a15 15 0 0 0-9 2.5A15 15 0 0 0 3 19Z"/><path d="M12 8v13.5"/>'),
+    'guide'    => $icon('<path d="M3 12h18"/><path d="M6 8h12M6 16h12" opacity=".45"/>'),
+    'mask'     => $icon('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M3 14h18"/>'),
+    'media'    => $icon('<rect x="2" y="6" width="14" height="12" rx="2"/><path d="m22 8-6 4 6 4Z"/><path d="M5 15h6"/>'),
+    'targets'  => $icon('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/>'),
+];
+
+$filters = ['invert', 'mono', 'lowsat', 'highsat'];
+
+$side      = $this->params->get('a11yPosition', 'left') === 'right' ? 'right' : 'left';
+$statement = trim((string) $this->params->get('a11yStatement', ''));
+?>
+<?php if ($this->params->get('a11yLauncher', 1)) : ?>
+    <button type="button" class="a11y-launcher is-<?php echo $side; ?>" aria-expanded="false" aria-controls="a11y-panel"
+        aria-label="<?php echo $a(Text::_('TPL_LKIM3_A11Y_TOOLS')); ?>" title="<?php echo $a(Text::_('TPL_LKIM3_A11Y_TOOLS')); ?>">
+        <?php echo $markAccess; ?>
+    </button>
+<?php endif; ?>
+
+<div class="a11y-backdrop" hidden></div>
+
+<aside class="a11y-panel is-<?php echo $side; ?>" id="a11y-panel"
+    aria-label="<?php echo $a(Text::_('TPL_LKIM3_A11Y_TOOLS')); ?>"
+    data-media-note="<?php echo $a(Text::_('TPL_LKIM3_A11Y_MEDIA_NOTE')); ?>">
+
+    <div class="a11y-head">
+        <h2><?php echo Text::_('TPL_LKIM3_A11Y_TOOLS'); ?></h2>
+        <button type="button" class="a11y-close" aria-label="<?php echo $a(Text::_('TPL_LKIM3_A11Y_CLOSE')); ?>">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18" /></svg>
+        </button>
+    </div>
+
+    <div class="a11y-body">
+        <?php if ($a11yProfiles) : ?>
+            <div class="a11y-group">
+                <h3><?php echo Text::_('TPL_LKIM3_A11Y_PROFILES'); ?></h3>
+                <ul class="a11y-profiles">
+                    <?php foreach ($a11yProfiles as $key) : ?>
+                        <?php if (!isset($profileIcons[$key])) { continue; } ?>
+                        <li>
+                            <button type="button" class="a11y-profile" data-a11y-profile="<?php echo $a($key); ?>" aria-pressed="false">
+                                <?php echo $profileIcons[$key]; ?>
+                                <span><?php echo Text::_('TPL_LKIM3_A11Y_P_' . strtoupper($key)); ?></span>
+                            </button>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+
+        <div class="a11y-group">
+            <h3><?php echo Text::_('TPL_LKIM3_A11Y_TEXT'); ?></h3>
+            <ul class="a11y-tools">
+                <?php foreach (['scale' => 'TPL_LKIM3_A11Y_SIZE', 'line' => 'TPL_LKIM3_A11Y_LINE', 'letter' => 'TPL_LKIM3_A11Y_LETTER'] as $key => $label) : ?>
+                    <li class="a11y-step">
+                        <span class="a11y-step-label"><?php echo Text::_($label); ?></span>
+                        <span class="a11y-step-controls">
+                            <button type="button" data-a11y-step="<?php echo $key; ?>:down"
+                                aria-label="<?php echo $a(Text::sprintf('TPL_LKIM3_A11Y_DECREASE', Text::_($label))); ?>">&minus;</button>
+                            <output data-a11y-out="<?php echo $key; ?>">100%</output>
+                            <button type="button" data-a11y-step="<?php echo $key; ?>:up"
+                                aria-label="<?php echo $a(Text::sprintf('TPL_LKIM3_A11Y_INCREASE', Text::_($label))); ?>">+</button>
+                        </span>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+
+        <div class="a11y-group">
+            <h3><?php echo Text::_('TPL_LKIM3_A11Y_COLOUR'); ?></h3>
+            <ul class="a11y-tools">
+                <li>
+                    <button type="button" class="a11y-toggle" data-a11y-toggle="contrast" aria-pressed="false"
+                        data-on="<?php echo $a(Text::_('JYES')); ?>" data-off="<?php echo $a(Text::_('JNO')); ?>">
+                        <span><?php echo Text::_('TPL_LKIM_CONTRAST'); ?></span>
+                        <span class="a11y-state"><?php echo Text::_('JNO'); ?></span>
+                    </button>
+                </li>
+                <?php foreach ($filters as $f) : ?>
+                    <li>
+                        <button type="button" class="a11y-toggle" data-a11y-filter-btn="<?php echo $f; ?>" aria-pressed="false">
+                            <span><?php echo Text::_('TPL_LKIM3_A11Y_F_' . strtoupper($f)); ?></span>
+                        </button>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+
+        <?php if ($a11yTools) : ?>
+            <div class="a11y-group">
+                <h3><?php echo Text::_('TPL_LKIM3_A11Y_NAV'); ?></h3>
+                <ul class="a11y-tools">
+                    <?php foreach ($a11yTools as $key) : ?>
+                        <?php if (!isset($toolIcons[$key])) { continue; } ?>
+                        <li>
+                            <button type="button" class="a11y-toggle" data-a11y-toggle="<?php echo $a($key); ?>" aria-pressed="false"
+                                data-on="<?php echo $a(Text::_('JYES')); ?>" data-off="<?php echo $a(Text::_('JNO')); ?>">
+                                <span><?php echo Text::_('TPL_LKIM3_A11Y_T_' . strtoupper($key)); ?></span>
+                                <span class="a11y-state"><?php echo Text::_('JNO'); ?></span>
+                            </button>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+
+        <div class="a11y-foot">
+            <button type="button" class="a11y-reset" data-a11y-reset><?php echo Text::_('TPL_LKIM3_A11Y_RESET'); ?></button>
+            <?php if ($statement !== '') : ?>
+                <a class="a11y-statement" href="<?php echo $a($link($statement)); ?>"><?php echo Text::_('TPL_LKIM3_A11Y_STATEMENT'); ?></a>
+            <?php endif; ?>
+        </div>
+    </div>
+</aside>
