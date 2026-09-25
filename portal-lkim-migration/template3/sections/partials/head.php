@@ -1,9 +1,14 @@
 <?php
 
 /**
- * The design's section heading — eyebrow, title, intro and an optional link —
- * for the section types whose text comes from the row rather than the language
- * files. Renders nothing when the row sets no heading text.
+ * The design's section heading — eyebrow, title, intro and an optional link.
+ *
+ * A section's own row wins over the design's wording, so any band can be
+ * retitled from the Layout tab without touching the language files. A partial
+ * passes its own wording in $headDefaults before requiring this; leaving a row
+ * field empty falls back to that.
+ *
+ * Renders nothing when neither the row nor the caller supplies any text.
  *
  * @package  Templates.lkim3
  */
@@ -12,11 +17,22 @@ defined('_JEXEC') or die;
 
 /** @var Joomla\Registry\Registry $section */
 
-$eyebrow  = trim((string) $section->get('eyebrow', ''));
-$heading  = trim((string) $section->get('heading', ''));
-$lead     = trim((string) $section->get('lead', ''));
-$moreText = trim((string) $section->get('moreText', ''));
-$moreLink = trim((string) $section->get('moreLink', ''));
+$headFallback = $headDefaults ?? [];
+
+$headText = static function (string $key) use ($section, $headFallback): string {
+    $value = trim((string) $section->get($key, ''));
+
+    return $value !== '' ? $value : trim((string) ($headFallback[$key] ?? ''));
+};
+
+$eyebrow  = $headText('eyebrow');
+$heading  = $headText('heading');
+$lead     = $headText('lead');
+$moreText = $headText('moreText');
+$moreLink = $headText('moreLink');
+
+// Not left set for whichever partial requires this next.
+unset($headDefaults);
 
 if ($eyebrow === '' && $heading === '' && $lead === '') {
     return;

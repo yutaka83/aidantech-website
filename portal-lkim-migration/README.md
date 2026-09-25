@@ -105,6 +105,16 @@ supplies the design's own order; keep the two in step when either changes. A
 section whose source turns out to be empty takes its band away with it, so an
 unpopulated module position does not leave a coloured empty strip.
 
+A subform parameter has no manifest default — Joomla can only render rows a
+style has saved — so `script.php` seeds `sections/defaults.php` into every
+lkim3 style on install. The Layout tab therefore opens with the real page
+already in it rather than an empty list to rebuild from scratch. Seeding skips
+any style that already has a list, so reinstalls and updates are safe, and it
+never fails an install: if it cannot write, `index.php` falls back to the same
+file and the template still renders. Each row can also override its band's
+eyebrow, heading, intro and link, with empty meaning "keep the design's
+wording", so retitling a band does not mean editing a language file.
+
 `tpl_lkim3` also differs from its siblings in two ways worth knowing before
 editing it. Each homepage band (audience gateways, services, gallery, news, agencies)
 and the main navigation take their content either from the LKIM-3 design or

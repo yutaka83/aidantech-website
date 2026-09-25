@@ -10,8 +10,10 @@
 	<description>Portal Rasmi LKIM - reka bentuk LKIM-3. Child of Cassiopeia, styled to SPLaSK / MyGovEA expectations, with the mega menu, audience gateways, service grid, gallery strip and agency carousel homepage layout.</description>
 	<parent>cassiopeia</parent>
 	<inheritable>0</inheritable>
+	<scriptfile>script.php</scriptfile>
 	<files>
 		<filename>index.php</filename>
+		<filename>script.php</filename>
 		<filename>megamenu.php</filename>
 		<filename>joomla.asset.json</filename>
 		<filename>templateDetails.xml</filename>
@@ -171,11 +173,11 @@
 
 						<field name="html" type="textarea" rows="8" default="" filter="raw" label="HTML" description="Written to the page unfiltered. A Custom HTML module and a &quot;Module position&quot; row is the better home for anything an ordinary editor should maintain." showon="type:html"/>
 
-						<field name="eyebrow" type="text" default="" filter="string" label="Eyebrow" description="The small coloured label above the heading." showon="type:modules[OR]type:html"/>
-						<field name="heading" type="text" default="" filter="string" label="Heading" showon="type:modules[OR]type:html"/>
-						<field name="lead" type="textarea" rows="2" default="" filter="string" label="Intro text" showon="type:modules[OR]type:html"/>
-						<field name="moreText" type="text" default="" filter="string" label="Link text" showon="type:modules[OR]type:html"/>
-						<field name="moreLink" type="text" default="" filter="string" label="Link target" showon="type:modules[OR]type:html"/>
+						<field name="eyebrow" type="text" default="" filter="string" label="Eyebrow" description="Overrides the band’s own wording. Leave empty to keep the design’s text." showon="type!:gateways[AND]type!:content"/>
+						<field name="heading" type="text" default="" filter="string" label="Heading" showon="type!:gateways[AND]type!:content"/>
+						<field name="lead" type="textarea" rows="2" default="" filter="string" label="Intro text" showon="type!:gateways[AND]type!:content"/>
+						<field name="moreText" type="text" default="" filter="string" label="Link text" showon="type!:gateways[AND]type!:content"/>
+						<field name="moreLink" type="text" default="" filter="string" label="Link target" showon="type!:gateways[AND]type!:content"/>
 
 						<field name="background" type="list" default="none" label="Background">
 							<option value="none">Page background</option>

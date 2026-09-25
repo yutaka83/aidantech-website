@@ -9,17 +9,17 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+
+$headDefaults = [
+    'eyebrow'  => Text::_('TPL_LKIM3_SVC_EYEBROW'),
+    'heading'  => Text::_('TPL_LKIM3_SVC_TITLE'),
+    'lead'     => Text::_('TPL_LKIM3_SVC_LEAD'),
+    'moreText' => Text::_('TPL_LKIM3_SVC_MORE'),
+    'moreLink' => (string) $this->params->get('servicesMoreLink'),
+];
+
+require __DIR__ . '/partials/head.php';
 ?>
-<div class="section-head">
-    <div>
-        <div class="mark"><span aria-hidden="true"></span><small><?php echo Text::_('TPL_LKIM3_SVC_EYEBROW'); ?></small></div>
-        <h2><?php echo Text::_('TPL_LKIM3_SVC_TITLE'); ?></h2>
-        <p><?php echo Text::_('TPL_LKIM3_SVC_LEAD'); ?></p>
-    </div>
-    <a href="<?php echo $a($link($this->params->get('servicesMoreLink'))); ?>" class="link-more">
-        <?php echo Text::_('TPL_LKIM3_SVC_MORE'); ?><?php echo $svgArrow; ?>
-    </a>
-</div>
 
 <?php if ($fromModules('srcServices', 'services')) : ?>
     <div class="services-modules">

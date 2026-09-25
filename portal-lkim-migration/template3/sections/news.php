@@ -11,17 +11,17 @@ defined('_JEXEC') or die;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\Component\Content\Site\Helper\RouteHelper;
+
+$headDefaults = [
+    'eyebrow'  => Text::_('TPL_LKIM3_NEWS_EYEBROW'),
+    'heading'  => Text::_('TPL_LKIM3_NEWS_TITLE'),
+    'lead'     => Text::_('TPL_LKIM3_NEWS_LEAD'),
+    'moreText' => Text::_('TPL_LKIM3_NEWS_MORE'),
+    'moreLink' => (string) $this->params->get('newsMoreLink'),
+];
+
+require __DIR__ . '/partials/head.php';
 ?>
-<div class="section-head">
-    <div>
-        <div class="mark"><span aria-hidden="true"></span><small><?php echo Text::_('TPL_LKIM3_NEWS_EYEBROW'); ?></small></div>
-        <h2><?php echo Text::_('TPL_LKIM3_NEWS_TITLE'); ?></h2>
-        <p><?php echo Text::_('TPL_LKIM3_NEWS_LEAD'); ?></p>
-    </div>
-    <a href="<?php echo $a($link($this->params->get('newsMoreLink'))); ?>" class="link-more">
-        <?php echo Text::_('TPL_LKIM3_NEWS_MORE'); ?><?php echo $svgArrow; ?>
-    </a>
-</div>
 
 <?php if ($fromModules('srcNews', 'announcements')) : ?>
     <jdoc:include type="modules" name="announcements" style="none" />

@@ -424,23 +424,13 @@ $newsAccents  = ['acc-orange', 'acc-teal', 'acc-navy'];
 $newsFallback = ['news-1.jpg', 'news-2.jpg', 'news-3.jpg'];
 
 /**
- * The page body is a list of sections the style owns. An unset parameter means
- * the style has never been saved, so fall back to the design's own order rather
- * than rendering an empty page — and keep these defaults in step with the
- * layout list in templateDetails.xml.
+ * The page body is a list of sections the style owns. script.php seeds that
+ * list into every style on install, so this fallback only matters for a style
+ * created before the template was installed — or one whose list someone
+ * emptied. Both read the same file, so the two can never drift.
  */
-$defaultSections = [
-    ['type' => 'gateways', 'spacing' => 'none'],
-    ['type' => 'services', 'anchor' => 'perkhidmatan'],
-    ['type' => 'gallery',  'anchor' => 'media'],
-    ['type' => 'news',     'background' => 'surface'],
-    ['type' => 'content'],
-    ['type' => 'cta',      'anchor' => 'aduan'],
-    ['type' => 'agencies'],
-];
-
-$rows     = $this->params->get('sections');
-$rows     = $rows ? (array) $rows : $defaultSections;
+$rows = $this->params->get('sections');
+$rows = $rows ? (array) $rows : require __DIR__ . '/sections/defaults.php';
 $sections = [];
 
 foreach ($rows as $row) {

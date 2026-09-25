@@ -9,11 +9,20 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+
+// Its own head rather than partials/head.php, because the social icons sit
+// where the "more" link goes on every other band.
+$galEyebrow = trim((string) $section->get('eyebrow', '')) ?: Text::_('TPL_LKIM3_GAL_EYEBROW');
+$galHeading = trim((string) $section->get('heading', '')) ?: Text::_('TPL_LKIM3_GAL_TITLE');
+$galLead    = trim((string) $section->get('lead', ''));
 ?>
 <div class="section-head">
     <div>
-        <div class="mark"><span aria-hidden="true"></span><small><?php echo Text::_('TPL_LKIM3_GAL_EYEBROW'); ?></small></div>
-        <h2><?php echo Text::_('TPL_LKIM3_GAL_TITLE'); ?></h2>
+        <div class="mark"><span aria-hidden="true"></span><small><?php echo $e($galEyebrow); ?></small></div>
+        <h2><?php echo $e($galHeading); ?></h2>
+        <?php if ($galLead !== '') : ?>
+            <p><?php echo $e($galLead); ?></p>
+        <?php endif; ?>
     </div>
     <?php if ($socials) : ?>
         <div class="gallery-tabs">

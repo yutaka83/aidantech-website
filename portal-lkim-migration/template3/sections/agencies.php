@@ -9,13 +9,14 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+
+$headDefaults = [
+    'eyebrow' => Text::_('TPL_LKIM3_AGENCY_EYEBROW'),
+    'heading' => Text::_('TPL_LKIM_AGENCIES'),
+];
+
+require __DIR__ . '/partials/head.php';
 ?>
-<div class="section-head">
-    <div>
-        <div class="mark"><span aria-hidden="true"></span><small><?php echo Text::_('TPL_LKIM3_AGENCY_EYEBROW'); ?></small></div>
-        <h2><?php echo Text::_('TPL_LKIM_AGENCIES'); ?></h2>
-    </div>
-</div>
 
 <?php if ($fromModules('srcAgencies', 'agencies')) : ?>
     <jdoc:include type="modules" name="agencies" style="none" />
