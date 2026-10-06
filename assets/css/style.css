@@ -839,6 +839,7 @@ p {
   border-radius: 50%;
   overflow: hidden;
   background: var(--color-surface-soft);
+  border: 3px solid var(--color-border-strong);
   margin: 0 auto var(--space-4);
 }
 
